@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    android:orientation="vertical"
+    tools:context=".activity.PaymentActivity">
+
+    <include
+        android:id="@+id/tb"
+        layout="@layout/toolbar" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/banner_container"
+        android:layout_below="@id/tb"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_standard_new"
+                android:layout_marginTop="@dimen/spacing_middle"
+                android:layout_marginEnd="@dimen/spacing_standard_new">
+
+                <TextView
+                    android:id="@+id/lblQuickPay"
+                    style="@style/Heading"
+                    android:layout_width="match_parent"
+                    android:layout_toStartOf="@id/btnAddCard"
+                    android:layout_centerVertical="true"
+                    android:text="@string/lbl_quick_pay" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnAddCard"
+                    style="@style/MaterialButtonStyle.Stroked"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_36sdp"
+                    android:layout_alignParentEnd="true"
+                    android:padding="0dp"
+                    android:text="@string/lbl_add_card"
+                    android:textAppearance="@style/FontMedium"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/font_size_micro" />
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvCard"
+                style="@style/RecycleView"
+                android:paddingStart="@dimen/spacing_standard_new"
+                android:paddingTop="@dimen/spacing_standard_new"
+                android:paddingEnd="0dp" />
+
+            <TextView
+                android:id="@+id/tvPayWithCards"
+                style="@style/PaymentOption"
+                android:drawableStart="@drawable/ic_bank_card_line"
+                android:text="@string/lbl_pay_with_debit_credit_card" />
+
+            <TextView
+                android:id="@+id/tvNetBanking"
+                style="@style/PaymentOption"
+                android:visibility="gone"
+                android:drawableStart="@drawable/ic_earth_line"
+                android:text="@string/lbl_net_banking" />
+
+            <TextView
+                android:id="@+id/tvCash"
+                style="@style/PaymentOption"
+                android:drawableStart="@drawable/ic_bank_card_line"
+                android:text="@string/lbl_cash_on_delivery" />
+
+            <TextView
+                android:id="@+id/tvOther"
+                style="@style/PaymentOption"
+                android:visibility="gone"
+                android:layout_marginBottom="@dimen/spacing_middle"
+                android:drawableStart="@drawable/ic_wallet_line"
+                android:text="@string/lbl_other_wallet" />
+
+            <include layout="@layout/layout_paymentdetail" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+    <LinearLayout
+        android:id="@+id/banner_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <include layout="@layout/layout_ads" />
+
+    </LinearLayout>
+
+</RelativeLayout>

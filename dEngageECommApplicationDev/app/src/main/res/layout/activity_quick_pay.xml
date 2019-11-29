@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    android:orientation="vertical"
+    tools:context=".activity.QuickPayActivity">
+
+    <include
+        android:id="@+id/toolbar_lay" layout="@layout/toolbar" />
+
+
+    <RelativeLayout
+        android:id="@+id/rlAddCard"
+        android:layout_below="@id/toolbar_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_standard_new"
+        android:layout_marginTop="@dimen/spacing_middle"
+        android:layout_marginEnd="@dimen/spacing_standard_new">
+
+        <TextView
+            android:id="@+id/lblQuickPay"
+            style="@style/Heading"
+            android:layout_width="match_parent"
+            android:layout_toStartOf="@id/btnAddCard"
+            android:layout_centerVertical="true"
+            android:text="@string/lbl_quick_pay" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAddCard"
+            style="@style/MaterialButtonStyle.Stroked"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_36sdp"
+            android:layout_alignParentEnd="true"
+            android:padding="0dp"
+            android:text="@string/lbl_add_card"
+            android:textAppearance="@style/FontMedium"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/font_size_micro" />
+    </RelativeLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvCard"
+        android:layout_below="@id/rlAddCard"
+        style="@style/RecycleView"
+        android:paddingBottom="@dimen/_30sdp"
+        android:paddingTop="@dimen/spacing_standard_new" />
+
+    <LinearLayout
+        android:id="@+id/banner_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <include layout="@layout/layout_ads" />
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,92 @@
+[
+  {
+    "count": 16,
+    "description": "",
+    "id": 100,
+    "isSelected": false,
+    "menu_order": 0,
+    "name": "Men",
+    "parent": 0,
+    "slug": "men"
+  },
+  {
+    "count": 6,
+    "description": "",
+    "id": 101,
+    "isSelected": false,
+    "menu_order": 0,
+    "name": "Women",
+    "parent": 16,
+    "slug": "women"
+  },
+  {
+    "count": 1,
+    "description": "",
+    "id": 102,
+    "isSelected": false,
+    "menu_order": 0,
+    "name": "Kids",
+    "parent": 0,
+    "slug": "Kids"
+  },
+  {
+    "count": 14,
+    "description": "",
+    "id": 103,
+    "isSelected": false,
+    "menu_order": 0,
+    "name": "Bags",
+    "parent": 0,
+    "slug": "Bags"
+  },
+  {
+    "count": 14,
+    "description": "",
+    "id": 104,
+    "isSelected": false,
+    "menu_order": 0,
+    "name": "Watches",
+    "parent": 0,
+    "slug": "Watches"
+  },
+  {
+    "count": 4,
+    "description": "",
+    "id": 105,
+    "isSelected": false,
+    "menu_order": 0,
+    "name": "Decor",
+    "parent": 45,
+    "slug": "decor"
+  },
+  {
+    "count": 14,
+    "description": "",
+    "id": 106,
+    "isSelected": false,
+    "menu_order": 0,
+    "name": "Optics",
+    "parent": 0,
+    "slug": "Optics"
+  },
+  {
+    "count": 14,
+    "description": "",
+    "id": 107,
+    "isSelected": false,
+    "menu_order": 0,
+    "name": "Footwear",
+    "parent": 0,
+    "slug": "Footwear"
+  },
+  {
+    "count": 1,
+    "description": "",
+    "id": 20,
+    "isSelected": false,
+    "menu_order": 0,
+    "name": "Sport",
+    "parent": 0,
+    "slug": "Sport"
+  }
+]

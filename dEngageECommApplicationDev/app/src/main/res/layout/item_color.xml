@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.iqonic.shophop.models.Color" />
+
+        <variable
+            name="callback"
+            type="com.iqonic.shophop.base.BaseRecyclerAdapter.OnClickListener" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:onClick="@{(view) -> callback.onClick(view,model)}"
+            android:layout_margin="@dimen/spacing_standard">
+
+            <View
+                android:id="@+id/viewColor"
+                android:layout_width="@dimen/_10sdp"
+                android:layout_height="@dimen/_10sdp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/bg_circle_color" />
+
+            <ImageView
+                android:id="@+id/ivChecked"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_circle_color"
+                android:padding="@dimen/spacing_control"
+                android:src="@drawable/ic_check"
+                android:tint="@color/white"
+                android:contentDescription="@string/text_todo"
+                android:visibility="gone" />
+        </RelativeLayout>
+    </LinearLayout>
+</layout>

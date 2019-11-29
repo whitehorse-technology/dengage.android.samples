@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout >
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.iqonic.shophop.models.ProductModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:hnc="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical"
+        hnc:ignore="MissingPrefix">
+
+        <com.iqonic.shophop.utils.ExpandableTextView
+            android:id="@+id/txtDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_standard_new"
+            android:layout_marginTop="@dimen/spacing_standard_new"
+            android:layout_marginEnd="@dimen/spacing_standard_new"
+            app:hnc_defaultExpand="false"
+            app:hnc_moreLessGravity="right"
+            app:hnc_text="@string/text_description"
+            app:hnc_textSize="@dimen/font_size_micro"
+            hnc:hnc_maxLine="3"
+            hnc:hnc_moreLessShow="true"
+            hnc:hnc_moreLessTextColor="@color/textColorSecondary"
+            hnc:hnc_moreLessTextSize="font_size_small"
+            hnc:hnc_textColor="@color/textColorSecondary" />
+
+        <TextView
+            style="@style/Heading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_standard_new"
+            android:layout_marginTop="@dimen/spacing_standard"
+            android:layout_marginEnd="@dimen/spacing_standard_new"
+            android:text="@string/lbl_check_availability"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_standard_new"
+            android:layout_marginTop="@dimen/spacing_standard_new"
+            android:layout_marginEnd="@dimen/spacing_standard_new"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:id="@+id/llPinCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_rounded_border_edittext"
+                android:paddingTop="@dimen/spacing_control"
+                android:paddingBottom="@dimen/spacing_control">
+
+                <EditText
+                    android:id="@+id/edMobileNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:gravity="center_vertical"
+                    android:inputType="number"
+                    android:maxLength="6"
+                    android:autofillHints="@string/lbl_no"
+                    android:hint="@string/lbl_no"
+                    android:paddingStart="@dimen/spacing_middle"
+                    android:paddingEnd="@dimen/spacing_middle"
+                    android:text="@string/text_pin_code"
+                    android:focusable="false"
+                    android:textColor="@color/textColorPrimary"
+                    android:textSize="@dimen/font_size_small"
+                    hnc:ignore="UnusedAttribute" />
+
+                <View
+                    android:layout_width="0.5dp"
+                    android:layout_height="@dimen/spacing_mlarge"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:layout_marginBottom="@dimen/spacing_small"
+                    android:background="@color/view_color" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/spacing_standard"
+                    android:layout_marginEnd="@dimen/spacing_standard"
+                    android:textColor="@color/light_green"
+                    android:text="@string/lbl_available" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvLblDelivery"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/spacing_standard"
+                android:layout_marginEnd="@dimen/spacing_standard"
+                android:layout_toEndOf="@id/llPinCode"
+                android:text="@string/lbl_delivery_by"
+                android:textColor="@color/textColorSecondary"
+                android:textSize="@dimen/font_size_micro" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvLblDelivery"
+                android:layout_toEndOf="@id/llPinCode"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvDeliveryDate"
+                    style="@style/Heading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_standard"
+                    android:layout_marginEnd="@dimen/spacing_control"
+                    android:text="@string/text_25_jun_monday"
+                    android:textSize="@dimen/font_size_small" />
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="0.5dp"
+                    android:layout_height="@dimen/spacing_middle"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:layout_marginBottom="@dimen/spacing_small"
+                    android:background="@color/view_color" />
+
+                <TextView
+                    android:textAppearance="@style/FontSemiBold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_control"
+                    android:layout_marginEnd="@dimen/spacing_control_half"
+                    android:text="@string/lbl_free"
+                    android:textColor="@color/light_green"
+                    android:textSize="@dimen/font_size_small" />
+
+                <TextView
+                    android:id="@+id/tvFreePrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_control_half"
+                    android:layout_marginEnd="@dimen/spacing_control_half"
+                    android:text="@string/lbl_80"
+                    android:textColor="@color/textColorSecondary"
+                    android:textSize="@dimen/font_size_small" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tvcolor"
+            style="@style/Heading"
+            android:layout_marginStart="@dimen/spacing_standard_new"
+            android:layout_marginTop="@dimen/spacing_middle"
+            android:layout_marginEnd="@dimen/spacing_standard_new"
+            android:text="@string/lbl_colors" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvColors"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            android:paddingStart="@dimen/spacing_standard_new"
+            android:paddingEnd="@dimen/spacing_standard_new" />
+
+        <TextView
+            android:id="@+id/tvSize"
+            style="@style/Heading"
+            android:layout_marginStart="@dimen/spacing_standard_new"
+            android:layout_marginTop="@dimen/spacing_middle"
+            android:layout_marginEnd="@dimen/spacing_standard_new"
+            android:text="@string/lbl_size" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvSize"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            android:paddingStart="@dimen/spacing_standard_new"
+            android:paddingEnd="@dimen/spacing_standard_new" />
+    </LinearLayout>
+</layout>
