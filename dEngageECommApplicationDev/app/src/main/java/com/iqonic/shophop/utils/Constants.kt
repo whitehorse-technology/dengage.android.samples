@@ -16,10 +16,10 @@ object Constants {
 
     const val myPreferences = "MyPreferences"
     object AssetFiles{
-        const val PRODUCTS="https://showcase.dengage.com/android/products.json"
-        const val CATEGORYS="https://showcase.dengage.com/android/category.json"
-        const val REVIEWS="https://showcase.dengage.com/android/reviews.json"
-        const val ATTRIBUTES="https://showcase.dengage.com/android/attributes.json"
+        const val PRODUCTS="data/products.json"
+        const val CATEGORYS="data/category.json"
+        const val REVIEWS="data/reviews.json"
+        const val ATTRIBUTES="data/attributes.json"
 
     }
     object RequestCode {

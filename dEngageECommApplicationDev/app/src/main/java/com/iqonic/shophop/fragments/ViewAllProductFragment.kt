@@ -76,7 +76,7 @@ class ViewAllProductFragment : BaseFragment() {
             mListAdapter.clearData()
             mGridAdapter.clearData()
             list.forEach {
-                if (it.regular_price.toInt() in minPrice..maxPrice && catExist(
+                if (it.regular_price.toDouble() in minPrice..maxPrice && catExist(
                                 it,
                                 selectedCategory
                         ) && checkIfExist(it, map)

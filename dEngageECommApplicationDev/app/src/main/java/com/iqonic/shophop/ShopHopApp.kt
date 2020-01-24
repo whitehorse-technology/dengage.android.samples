@@ -4,11 +4,10 @@ import android.app.Dialog
 import android.content.Context
 import androidx.multidex.MultiDex
 import androidx.multidex.MultiDexApplication
+import com.dengage.sdk.DengageManager
 import com.iqonic.shophop.utils.SharedPrefUtils
+import com.segmentify.segmentifyandroidsdk.SegmentifyManager
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig
-import com.dengage.sdk.notification.dEngageMobileManager
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 
 class dEngageClass {
     companion object {
@@ -20,8 +19,12 @@ class dEngageClass {
 
 class ShopHopApp : MultiDexApplication() {
 
-    private val integrationKey = "vR8gUvtpaHfUoBQ9kYdMDYuclZmYnUEEiDpYfg0_p_l_Z5R_s_l_1H_s_l_7XB3cUzLbVQtI58igmaaz_s_l_QbuL4ssw5jS36FBPyyg5PxspAGDVjiObBsN12inghqMSDTFIADrV2CSQ5mv"
-    private var mobileManager = dEngageMobileManager.getInstance()
+
+    private var integrationKey = "_s_l_wQqEEnqUalNohrj8B28x11uwf5okHqxXlzFvpN_p_l_p7emc5WJIFw1sggDky3L2jk_p_l_S4visydAwHNK1tjyDMnWit5FI01C0DykqcEadt1xDbe9yIl1DZgZKuN8nTHUr7Xv"
+
+    private var segmentifyAppKey = "fb98df24-db87-485d-9180-98752bdef516"
+    private var segmentifyDataCenterUrl = "https://gandalf.segmentify.com"
+    private var segmentifysubDomain= "showcase.dengage.com"
 
     override fun onCreate() {
         super.onCreate()
@@ -31,10 +34,12 @@ class ShopHopApp : MultiDexApplication() {
         CalligraphyConfig.initDefault(CalligraphyConfig.Builder().setDefaultFontPath("fonts/Montserrat-Regular.ttf").setFontAttrId(R.attr.fontPath).build())
 
         val context = applicationContext
-        if(mobileManager == null) {
-            mobileManager = dEngageMobileManager.createInstance(integrationKey, context)
-            mobileManager.register()
-        }
+        DengageManager.setLogStatus(true)
+        DengageManager.setConfig(integrationKey, context)
+
+
+        SegmentifyManager.config(this, segmentifyAppKey, segmentifyDataCenterUrl, segmentifysubDomain)
+
     }
 
     override fun attachBaseContext(base: Context) {

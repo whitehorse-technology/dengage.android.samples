@@ -24,7 +24,7 @@
         </activity>
 
         <service
-            android:name="com.dengage.sdk.notification.services.MessagingService">
+            android:name="com.dengage.sdk.MessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>

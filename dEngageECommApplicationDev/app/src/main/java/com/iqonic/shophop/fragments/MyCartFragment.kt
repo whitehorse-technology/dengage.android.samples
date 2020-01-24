@@ -38,11 +38,11 @@ class MyCartFragment : BaseFragment() {
                     dataBinding.tvOriginalPrice.applyStrike()
                     if (model.sale_price.isNotEmpty()) {
                         dataBinding.tvPrice.text =
-                                (model.sale_price.toInt() * model.quantity).toString().currencyFormat()
+                                (model.sale_price.toDouble() * model.quantity).toString().currencyFormat()
                     }
                     if (model.product_price.isNotEmpty()) {
                         dataBinding.tvOriginalPrice.text =
-                                (model.product_price.toInt() * model.quantity).toString().currencyFormat()
+                                (model.product_price.toDouble() * model.quantity).toString().currencyFormat()
                     }
                     if (model.product_color.isNotEmpty()) {
                         dataBinding.ivChecked.changeBackgroundTint(
@@ -120,6 +120,9 @@ class MyCartFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
+
+        // TODO: send card view event (basket)
+
         rvCart.setVerticalLayout()
         rvNextTimeBuy.setVerticalLayout()
         rvCart.adapter = mCartAdapter
@@ -198,6 +201,7 @@ class MyCartFragment : BaseFragment() {
                 getString(R.string.msg_confirmation),
                 onPositiveClick = { _, _ ->
                     val key = Key()
+                    // TODO: event remove cart
                     key.product_id = model.product_id
                     (activity as AppBaseActivity).removeItem(key)
                     snackBar(activity!!.getString(R.string.success))

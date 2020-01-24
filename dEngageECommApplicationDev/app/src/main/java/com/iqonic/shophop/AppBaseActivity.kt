@@ -18,10 +18,6 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 import android.widget.RelativeLayout
 import androidx.core.content.ContextCompat
 import com.google.android.gms.ads.*
-import com.dengage.sdk.notification.dEngageMobileManager
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 
 
 
@@ -29,6 +25,7 @@ import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 open class AppBaseActivity : AppCompatActivity() {
     private var mAdView: AdView? = null
     private var progressDialog: Dialog? = null
+
 
 
     fun disableHardwareRendering(v: View) {
@@ -52,6 +49,7 @@ open class AppBaseActivity : AppCompatActivity() {
             progressDialog!!.window!!.setBackgroundDrawable(ColorDrawable(0))
             progressDialog!!.setContentView(R.layout.custom_dialog)
         }
+
     }
 
     private fun setStatusBarGradient(activity: Activity) {

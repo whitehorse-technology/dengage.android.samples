@@ -1,92 +1,53 @@
 [
   {
-    "count": 16,
+    "count": 1,
     "description": "",
     "id": 100,
     "isSelected": false,
     "menu_order": 0,
-    "name": "Men",
+    "name": "electronics",
     "parent": 0,
-    "slug": "men"
+    "slug": "electronics"
   },
   {
-    "count": 6,
+    "count": 2,
     "description": "",
-    "id": 101,
+    "id": 100,
     "isSelected": false,
     "menu_order": 0,
-    "name": "Women",
-    "parent": 16,
-    "slug": "women"
+    "name": "mobile",
+    "parent": 0,
+    "slug": "mobile"
   },
   {
-    "count": 1,
+    "count": 3,
     "description": "",
-    "id": 102,
+    "id": 100,
     "isSelected": false,
     "menu_order": 0,
-    "name": "Kids",
+    "name": "fashion",
     "parent": 0,
-    "slug": "Kids"
-  },
-  {
-    "count": 14,
-    "description": "",
-    "id": 103,
-    "isSelected": false,
-    "menu_order": 0,
-    "name": "Bags",
-    "parent": 0,
-    "slug": "Bags"
-  },
-  {
-    "count": 14,
-    "description": "",
-    "id": 104,
-    "isSelected": false,
-    "menu_order": 0,
-    "name": "Watches",
-    "parent": 0,
-    "slug": "Watches"
+    "slug": "fashion"
   },
   {
     "count": 4,
     "description": "",
-    "id": 105,
+    "id": 100,
     "isSelected": false,
     "menu_order": 0,
-    "name": "Decor",
-    "parent": 45,
-    "slug": "decor"
+    "name": "games",
+    "parent": 0,
+    "slug": "games"
   },
   {
-    "count": 14,
+    "count": 5,
     "description": "",
-    "id": 106,
+    "id": 100,
     "isSelected": false,
     "menu_order": 0,
-    "name": "Optics",
+    "name": "sports",
     "parent": 0,
-    "slug": "Optics"
-  },
-  {
-    "count": 14,
-    "description": "",
-    "id": 107,
-    "isSelected": false,
-    "menu_order": 0,
-    "name": "Footwear",
-    "parent": 0,
-    "slug": "Footwear"
-  },
-  {
-    "count": 1,
-    "description": "",
-    "id": 20,
-    "isSelected": false,
-    "menu_order": 0,
-    "name": "Sport",
-    "parent": 0,
-    "slug": "Sport"
+    "slug": "sports"
   }
 ]
+

@@ -2,9 +2,11 @@ package com.iqonic.shophop.activity
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
+import com.dengage.sdk.DengageManager
 import com.iqonic.shophop.AppBaseActivity
 import com.iqonic.shophop.R
 import com.iqonic.shophop.adapter.ProductImageAdapter
@@ -20,7 +22,13 @@ import com.iqonic.shophop.utils.Constants.KeyIntent.DATA
 import com.iqonic.shophop.utils.Constants.KeyIntent.IS_ADDED_TO_CART
 import com.iqonic.shophop.utils.extensions.*
 import com.google.android.material.tabs.TabLayout
+import com.segmentify.segmentifyandroidsdk.SegmentifyManager
+import com.segmentify.segmentifyandroidsdk.model.PageModel
+import com.segmentify.segmentifyandroidsdk.model.RecommendationModel
+import com.segmentify.segmentifyandroidsdk.utils.SegmentifyCallback
 import kotlinx.android.synthetic.main.activity_product_detail.*
+
+
 
 class ProductDetailActivity : AppBaseActivity() {
 
@@ -41,6 +49,7 @@ class ProductDetailActivity : AppBaseActivity() {
             finish()
             return
         }
+        // TODO: event product details
         mMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_product_detail)
         setToolbar(mMainBinding.toolbar)
 
@@ -62,8 +71,81 @@ class ProductDetailActivity : AppBaseActivity() {
         toolbar_layout.setExpandedTitleTypeface(fontSemiBold())
         toolbar_layout.title = mProductModel.name
 
-        intHeaderView()
+        val details = java.util.HashMap<String, Any>()
+        details.put("event_type", "page_view")
+        details.put("page_type", "product")
+        details.put("page_url","")
+        details.put("page_title", mProductModel.name)
+        details.put("product_id", mProductModel.id)
+        details.put("quantity ","")
 
+        DengageManager.sendDeviceEvent("user_events", details)
+
+        val model = PageModel()
+        model.category = "Product Page"
+        SegmentifyManager.sendPageView(
+        model,
+        object : SegmentifyCallback<ArrayList<RecommendationModel>> {
+            override fun onDataLoaded(data: ArrayList<RecommendationModel>) {
+                data.forEach {
+                    Log.d("Product Page View: ", it.notificationTitle + " "+ it.actionId + " "+ it.errorString + " "+ it.instanceId)
+                }
+            }
+        })
+
+        val pModel = com.segmentify.segmentifyandroidsdk.model.ProductModel()
+        val categories = ArrayList<String>()
+
+        mProductModel.categories.forEach {
+            categories.add(it.name)
+        }
+
+        pModel.productId =  mProductModel.id.toString()
+        pModel.categories = categories
+        pModel.price = mProductModel.price.toDouble()
+        pModel.title = mProductModel.name
+        pModel.image = mProductModel.images.get(0).src
+        pModel.url = mProductModel.external_url
+
+        val colors = ArrayList<String>()
+        val sizes = ArrayList<String>()
+        val brands = ArrayList<String>()
+
+        mProductModel.attributes.forEach {
+            if(it.name=="Color") {
+                it.options.forEach { itColor: String ->
+                    colors.add(itColor)
+                }
+            }
+            if(it.name=="Size") {
+                it.options.forEach { itSize: String ->
+                    sizes.add(itSize)
+                }
+            }
+            if(it.name=="Brand") {
+                it.options.forEach { itBrand: String ->
+                    brands.add(itBrand)
+                }
+            }
+        }
+
+        pModel.sizes = sizes
+        pModel.colors = colors
+        pModel.brand = brands[0]
+        SegmentifyManager.sendProductView(
+        pModel,
+        object : SegmentifyCallback<ArrayList<RecommendationModel>> {
+            override fun onDataLoaded(data: ArrayList<RecommendationModel>) {
+                data.forEach {
+                    Log.d("Product Page Detail: ", it.notificationTitle + " "+ it.actionId + " "+ it.errorString + " "+ it.instanceId)
+                }
+
+            }
+        })
+
+
+
+        intHeaderView()
         tvItemProductOriginalPrice.applyStrike()
         setCustomFont()
         if (isLoggedIn()) {
@@ -184,6 +266,19 @@ class ProductDetailActivity : AppBaseActivity() {
                 return
             }
         }
+
+        val details = java.util.HashMap<String, Any>()
+        details.put("event_type", "add_basket")
+        details.put("page_type", "basket")
+        details.put("page_url","")
+        details.put("page_title", mProductModel.name)
+        details.put("product_id", mProductModel.id)
+        details.put("quantity ",1)
+
+        DengageManager.sendDeviceEvent("user_events", details)
+
+        SegmentifyManager.sendAddOrRemoveBasket("add", mProductModel.id.toString(),1,mProductModel.price.toDouble());
+
         addCart(getCartObject(mProductModel, mSelectedColors, size))
         btnAddCard.text = getString(R.string.lbl_remove_cart)
         isAddedTocart = true
@@ -202,6 +297,21 @@ class ProductDetailActivity : AppBaseActivity() {
             snackBar(getString(R.string.success))
             btnAddCard.text = getString(R.string.lbl_add_to_cart)
             isAddedTocart = false
+
+
+            val details = java.util.HashMap<String, Any>()
+            details.put("event_type", "remove_basket")
+            details.put("page_type", "mycart")
+            details.put("page_url","")
+            details.put("page_title", mProductModel.name)
+            details.put("product_id", mProductModel.id)
+            details.put("quantity ","")
+
+            DengageManager.sendDeviceEvent("user_events", details)
+
+
+
+            SegmentifyManager.sendAddOrRemoveBasket("remove",mProductModel.id.toString(),1,mProductModel.price.toDouble());
 
         }, onNegativeClick = { dialog, _ ->
             dialog.dismiss()

@@ -31,6 +31,9 @@ import kotlinx.android.synthetic.main.item_navigation_category.view.*
 import kotlinx.android.synthetic.main.layout_sidebar.*
 import kotlinx.android.synthetic.main.menu_cart.*
 import kotlinx.android.synthetic.main.toolbar.*
+import com.dengage.sdk.DengageManager
+
+
 
 class DashBoardActivity : AppBaseActivity() {
 
@@ -65,7 +68,7 @@ class DashBoardActivity : AppBaseActivity() {
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_dashboard)
+        setContentView(com.iqonic.shophop.R.layout.activity_dashboard)
 
         registerCartCountChangeReceiver(mCartItemChangedReceiver)
         registerOrderCountChangeReceiver(mCartItemChangedReceiver)
@@ -267,11 +270,27 @@ class DashBoardActivity : AppBaseActivity() {
     }
 
     private fun loadFragment(aFragment: Fragment) {
+
+        // TODO: Send page view event by fragment type
         when {
             mSearchFragment.isVisible -> {
                 removeFragment(mSearchFragment)
             }
         }
+
+        val name = aFragment.javaClass.name
+        val validname = name.replace("com.iqonic.shophop.fragments.", "").replace("Fragment", "").replace("MyCart", "basket")
+        val details = HashMap<String, Any>()
+        details.put("event_type", "page_view")
+        details.put("page_type", validname.toLowerCase())
+        details.put("page_url","")
+        details.put("page_title","")
+        details.put("product_id ","")
+        details.put("quantity ","")
+
+        DengageManager.sendDeviceEvent("user_events", details)
+
+
         if (selectedFragment != null) {
             if (selectedFragment == aFragment) {
                 return
@@ -281,6 +300,7 @@ class DashBoardActivity : AppBaseActivity() {
         if (aFragment.isAdded) {
             showFragment(aFragment)
         } else {
+            // TODO: send page view event
             addFragment(aFragment, R.id.container)
         }
         selectedFragment = aFragment

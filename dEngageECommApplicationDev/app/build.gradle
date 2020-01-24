@@ -1,12 +1,14 @@
 buildscript {
     repositories {
         maven { url 'https://plugins.gradle.org/m2/' }
+        mavenCentral()
     }
 
 }
 
 repositories {
     maven { url 'https://maven.google.com' }
+    mavenCentral()
 }
 
 apply plugin: 'com.android.application'
@@ -51,16 +53,17 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'com.google.android.material:material:1.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    implementation 'com.google.android.material:material:1.0.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.multidex:multidex:2.0.1'
-    implementation 'androidx.browser:browser:1.0.0'
+    implementation 'androidx.browser:browser:1.2.0'
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     kapt 'com.github.bumptech.glide:compiler:4.9.0'
     implementation 'com.google.code.gson:gson:2.8.5'
@@ -68,10 +71,12 @@ dependencies {
     implementation 'com.beloo.widget:ChipsLayoutManager:0.3.7@aar'
     implementation 'com.airbnb.android:lottie:3.0.0'
     implementation 'nl.dionsegijn:konfetti:1.1.3'
-    implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'com.google.firebase:firebase-ads:18.3.0'
     implementation 'com.google.firebase:firebase-analytics:17.2.1'
-    implementation 'com.google.firebase:firebase-messaging:20.0.1'
+    implementation 'com.google.firebase:firebase-messaging:20.1.0'
+    implementation 'io.github.inflationx:viewpump:2.0.3'
+    implementation 'io.github.inflationx:calligraphy3:3.1.1'
+    implementation 'com.segmentify.sdk:android:2.0.0'
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation files('libs/com.dengage.sdk.jar')
 }

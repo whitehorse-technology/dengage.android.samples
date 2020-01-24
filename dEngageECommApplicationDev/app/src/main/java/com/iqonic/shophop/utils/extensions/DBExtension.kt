@@ -28,6 +28,7 @@ fun productsFromAssets(onApiSuccess: (ArrayList<ProductModel>) -> Unit) =
         )
     )
 
+
 fun categoryFromAssets(onApiSuccess: (ArrayList<CategoryData>) -> Unit) =
     onApiSuccess(
         Gson().fromJson(
@@ -121,20 +122,15 @@ fun getUserReview(id: Int): ProductReviewData? {
     return null
 }
 
-//fun getJsonString(file: String): String =
-//   ShopHopApp.getAppInstance().assets.open(file).bufferedReader().use {
-//      it.readText()
-//  }
+fun getJsonString(file: String): String =
+   ShopHopApp.getAppInstance().assets.open(file).bufferedReader().use {
+      it.readText()
+ }
 
-fun getJsonString(url: String) : String {
-    GlobalScope.
-   }
-
-
-fun getJsonString(url: String) : String =
-    URL(url).openConnection().getInputStream().bufferedReader(  ).use {
-        it.readText()
-    }
+fun getJsonData(url: String) : String =
+  URL(url).openConnection().getInputStream().bufferedReader(  ).use {
+              it.readText()
+        }
 
 
 fun getWishlist(): ArrayList<WishList> {

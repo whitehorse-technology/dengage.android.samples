@@ -2,10 +2,12 @@ package com.iqonic.shophop.activity
 
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.LinearLayout
+import com.dengage.sdk.DengageManager
 import com.iqonic.shophop.AppBaseActivity
 import com.iqonic.shophop.R
 import com.iqonic.shophop.base.BaseRecyclerAdapter
@@ -17,6 +19,10 @@ import com.iqonic.shophop.models.ProductModel
 import com.iqonic.shophop.utils.Constants
 import com.iqonic.shophop.utils.Constants.KeyIntent.DATA
 import com.iqonic.shophop.utils.extensions.*
+import com.segmentify.segmentifyandroidsdk.SegmentifyManager
+import com.segmentify.segmentifyandroidsdk.model.PageModel
+import com.segmentify.segmentifyandroidsdk.model.RecommendationModel
+import com.segmentify.segmentifyandroidsdk.utils.SegmentifyCallback
 import kotlinx.android.synthetic.main.activity_sub_category.*
 import kotlinx.android.synthetic.main.activity_sub_category.viewPopular
 import kotlinx.android.synthetic.main.toolbar.*
@@ -38,6 +44,10 @@ class SubCategoryActivity : AppBaseActivity() {
         setContentView(R.layout.activity_sub_category)
         loadBannerAd(R.id.adView)
 
+
+
+
+
         if (intent.getSerializableExtra(DATA) == null) {
             toast(R.string.error_something_went_wrong)
             finish()
@@ -54,6 +64,33 @@ class SubCategoryActivity : AppBaseActivity() {
         rcvPopular.adapter = mPopularAdapter
         mNewArrivalAdapter.setModelSize(5)
         mPopularAdapter.setModelSize(5)
+
+
+
+
+        val details = java.util.HashMap<String, Any>()
+        details.put("event_type", "page_view")
+        details.put("page_type", "category")
+        details.put("page_url","")
+        details.put("page_title", title.toString().toLowerCase())
+        details.put("product_id ","")
+        details.put("quantity ", "")
+
+        DengageManager.sendDeviceEvent("user_events", details)
+
+
+        val model = PageModel()
+        model.category = "Category Page"
+        model.subCategory = title.toString().toLowerCase()
+
+        SegmentifyManager.sendPageView(
+            model,
+            object : SegmentifyCallback<ArrayList<RecommendationModel>> {
+                override fun onDataLoaded(data: ArrayList<RecommendationModel>) {
+                    Log.d("Segmentify: ", data.toString())
+                }
+            })
+
 
         viewNewArrival.onClick {
             launchActivity<ViewAllProductActivity> {

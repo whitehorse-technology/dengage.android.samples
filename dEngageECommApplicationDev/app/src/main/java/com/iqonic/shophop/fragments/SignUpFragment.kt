@@ -50,6 +50,8 @@ class SignUpFragment : BaseFragment() {
         requestModel.firstName = edtFirstName.textToString()
         requestModel.lastName = edtLastName.textToString()
         requestModel.password = edtPassword.textToString()
+
+
         (activity as AppBaseActivity).registerUser(requestModel, false)
         activity!!.launchActivity<OTPActivity>()
         (activity as SignInUpActivity).loadSignInFragment()

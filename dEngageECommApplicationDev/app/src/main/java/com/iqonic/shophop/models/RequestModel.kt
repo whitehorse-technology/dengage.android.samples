@@ -81,6 +81,10 @@ class RequestModel {
     @Expose
     var userEmail:String?=null
 
+    @SerializedName("gender")
+    @Expose
+    var gender:String?=null
+
     @SerializedName("profile_image")
     @Expose
     var image:String?=null

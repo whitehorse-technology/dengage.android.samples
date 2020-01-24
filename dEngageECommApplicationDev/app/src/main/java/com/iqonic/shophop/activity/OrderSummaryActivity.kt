@@ -21,6 +21,14 @@ import kotlinx.android.synthetic.main.dialog_change_address.*
 import kotlinx.android.synthetic.main.item_address.*
 import kotlinx.android.synthetic.main.toolbar.*
 import java.util.*
+import com.segmentify.segmentifyandroidsdk.model.RecommendationModel
+import com.segmentify.segmentifyandroidsdk.utils.SegmentifyCallback
+import com.segmentify.segmentifyandroidsdk.SegmentifyManager
+import com.segmentify.segmentifyandroidsdk.model.CheckoutModel
+
+import android.util.Log
+import com.dengage.sdk.DengageManager
+
 
 class OrderSummaryActivity : AppBaseActivity() {
 
@@ -70,11 +78,11 @@ class OrderSummaryActivity : AppBaseActivity() {
                 dataBinding.tvOriginalPrice.applyStrike()
                 if (model.sale_price.isNotEmpty()) {
                     dataBinding.tvPrice.text =
-                        (model.sale_price.toInt() * model.quantity).toString().currencyFormat()
+                        (model.sale_price.toDouble() * model.quantity).toString().currencyFormat()
                 }
                 if (model.product_price.isNotEmpty()) {
                     dataBinding.tvOriginalPrice.text =
-                        (model.product_price.toInt() * model.quantity).toString().currencyFormat()
+                        (model.product_price.toDouble() * model.quantity).toString().currencyFormat()
                 }
                 dataBinding.ivProduct.loadImageFromUrl(model.product_image)
             }
@@ -92,7 +100,7 @@ class OrderSummaryActivity : AppBaseActivity() {
             }
         }
     private val mImg = ArrayList<String>()
-    private var total = 0
+    private var total = 0.0
 
     private fun setDefaultAddress(position: Int) {
         mAddressAdapter.mModelList.forEachIndexed { i: Int, address: Address ->
@@ -219,6 +227,10 @@ class OrderSummaryActivity : AppBaseActivity() {
         val requestModel = MyOrderData()
         val mData = ArrayList<LineItem>()
 
+        var quantity = 0
+
+        val productList = kotlin.collections.ArrayList< com.segmentify.segmentifyandroidsdk.model.ProductModel>()
+
         getCartList().forEach {
             val mlineitem = LineItem()
             mlineitem.product_id = it.product_id
@@ -230,7 +242,17 @@ class OrderSummaryActivity : AppBaseActivity() {
             mlineitem.quantity = it.quantity
             mlineitem.size = it.product_size
             mlineitem.color = it.product_color
+
+            quantity += it.quantity
+
             mData.add(mlineitem)
+
+            val pModel = com.segmentify.segmentifyandroidsdk.model.ProductModel()
+            pModel.price = it.product_price.toDouble()
+            pModel.quantity = it.quantity
+            pModel.productId = it.product_id.toString()
+
+            productList.add(pModel)
         }
         requestModel.line_items = mData
         mAddressAdapter.mModelList.forEach {
@@ -253,6 +275,30 @@ class OrderSummaryActivity : AppBaseActivity() {
         requestModel.total = total.toDouble()
         requestModel.date_created = Constants.FULL_DATE_FORMATTER.format(Date())
         dialog.dismiss()
+
+        val details = HashMap<String, Any>()
+        details.put("event_type", "order")
+        details.put("page_type", "order")
+        details.put("page_url","")
+        details.put("page_title","")
+        details.put("product_id ","")
+        details.put("quantity ",quantity)
+
+        DengageManager.sendDeviceEvent("user_events", details)
+
+        val checkoutModel = CheckoutModel()
+        checkoutModel.productList = productList
+        checkoutModel.totalPrice = total.toDouble()
+
+        SegmentifyManager.sendViewBasket(
+            checkoutModel,
+            object : SegmentifyCallback<ArrayList<RecommendationModel>> {
+                override fun onDataLoaded(data: ArrayList<RecommendationModel>) {
+                    Log.d("Segmentify: ", data.toString())
+                }
+            })
+
+
         launchActivity<PaymentActivity>(Constants.RequestCode.PAYMENT) {
             putExtra(Constants.KeyIntent.DATA, requestModel)
         }

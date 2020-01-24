@@ -157,6 +157,8 @@ class ProfileFragment : BaseFragment() {
         requestModel.userEmail = edtEmail.textToString()
         requestModel.firstName = edtFirstName.textToString()
         requestModel.lastName = edtLastName.textToString()
+        requestModel.gender = spnGender.selectedItem.toString()
+
         if (uri != null) {
             requestModel.image = uri.toString()
         }

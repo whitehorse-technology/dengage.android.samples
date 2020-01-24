@@ -57,6 +57,7 @@ class HomeFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
 
+        // TODO: send home page view event
         imgLayoutParams = activity?.productLayoutParams()
 
 

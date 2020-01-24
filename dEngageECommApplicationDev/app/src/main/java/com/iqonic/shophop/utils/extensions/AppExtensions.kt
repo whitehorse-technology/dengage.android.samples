@@ -6,6 +6,7 @@ import android.graphics.Typeface
 import android.net.Uri
 import android.os.Build
 import android.os.CountDownTimer
+import android.text.TextUtils
 import android.view.WindowManager
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
@@ -15,6 +16,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.dengage.sdk.DengageManager
 import com.iqonic.shophop.AppBaseActivity
 import com.iqonic.shophop.R
 import com.iqonic.shophop.ShopHopApp
@@ -79,16 +81,16 @@ fun getProfile(): String = getSharedPrefInstance().getStringValue(USER_PROFILE)
 
 fun getCartCount(): String = getSharedPrefInstance().getIntValue(KEY_CART_COUNT, 0).toString()
 
-fun AppBaseActivity.getCartTotal(): Int {
+fun AppBaseActivity.getCartTotal(): Double {
 
     val list = getCartList()
-    var count = 0
+    var count = 0.0
     list.forEach {
         if (it.sale_price.isNotEmpty()) {
-            count += it.sale_price.toInt() * it.quantity
+            count += it.sale_price.toDouble() * it.quantity
         } else {
             if (it.product_price.isNotEmpty()) {
-                count += it.product_price.toInt() * it.quantity
+                count += it.product_price.toDouble() * it.quantity
             }
         }
     }
@@ -214,7 +216,7 @@ fun RecyclerView.rvItemAnimation() {
 fun ImageView.loadImageFromUrl(aImageUrl: String, aPlaceHolderImage: Int = R.drawable.placeholder, aErrorImage: Int = R.drawable.placeholder) {
     if (!aImageUrl.checkIsEmpty()) {
         Glide.with(getAppInstance())
-                .load(Uri.parse("https://showcase.dengage.com/android/products$aImageUrl"))
+                .load(Uri.parse("$aImageUrl"))
                 .placeholder(aPlaceHolderImage)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .error(aErrorImage)
@@ -436,6 +438,14 @@ fun AppBaseActivity.registerUser(requestModel: RequestModel, isUpdate: Boolean) 
             getSharedPrefInstance().setValue(USER_PROFILE, requestModel.image)
         }
     }
+
+    if(requestModel.lastName != null && !TextUtils.isEmpty(requestModel.lastName)) {
+        DengageManager.setContactKey(requestModel.lastName)
+        //DengageManager.setContactProperty("surname", requestModel.lastName)
+    }
+
+    DengageManager.syncSubscription()
+
     sendProfileUpdateBroadcast()
 }
 
