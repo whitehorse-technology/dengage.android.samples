@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/tb"
+        layout="@layout/toolbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tb"
+        android:layout_marginStart="@dimen/spacing_standard_new"
+        android:layout_marginEnd="@dimen/spacing_standard_new"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_standard_new">
+
+            <TextView
+                android:id="@+id/text"
+                style="@style/Heading"
+                android:text="@string/lbl_push_notification" />
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:theme="@style/SwitchTheme"
+                android:thumbTint="@color/colorPrimary" />
+
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_control_half"
+            android:text="@string/lbl_notification_arrive_on_order_status"
+            android:textColor="@color/textColorSecondary"
+            android:textSize="@dimen/font_size_micro" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:background="@color/view_color" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_standard_new">
+
+            <TextView
+                style="@style/Heading"
+                android:text="@string/lbl_sms_notification" />
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:theme="@style/SwitchTheme"
+                android:thumbTint="@color/colorPrimary" />
+
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_control_half"
+            android:text="@string/refer_number"
+            android:textColor="@color/textColorSecondary"
+            android:textSize="@dimen/font_size_micro" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:background="@color/view_color" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_standard_new">
+
+            <TextView
+                style="@style/Heading"
+                android:text="@string/lbl_email_notification" />
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:theme="@style/SwitchTheme"
+                android:thumbTint="@color/colorPrimary" />
+
+
+        </RelativeLayout>
+
+        <TextView
+                android:id="@+id/tvEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_control_half"
+                android:textColor="@color/textColorSecondary"
+                android:textSize="@dimen/font_size_micro" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:background="@color/view_color" />
+
+        <TextView
+            style="@style/Heading"
+            android:layout_marginTop="@dimen/spacing_standard_new"
+            android:text="@string/lbl_language" />
+
+        <Spinner
+            android:id="@+id/sLanguage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_control"
+        />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:background="@color/view_color" />
+    </LinearLayout>
+</RelativeLayout>

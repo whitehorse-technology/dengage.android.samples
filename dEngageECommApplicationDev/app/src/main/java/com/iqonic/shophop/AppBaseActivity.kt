@@ -23,7 +23,6 @@ import com.google.android.gms.ads.*
 
 
 open class AppBaseActivity : AppCompatActivity() {
-    private var mAdView: AdView? = null
     private var progressDialog: Dialog? = null
 
 
@@ -101,47 +100,14 @@ open class AppBaseActivity : AppCompatActivity() {
     fun loadBannerAd(id: Int) {
         val adContainer = findViewById<View>(id)
         if (adContainer != null) {
-            mAdView = AdView(this)
-            mAdView!!.adSize = AdSize.BANNER
-            mAdView!!.adUnitId = getString(R.string.banner_id)
 
-            (adContainer as RelativeLayout).addView(mAdView)
-
-            mAdView!!.adListener = object : AdListener() {
-                override fun onAdLoaded() {
-                    Log.d("AdMob", "Ad loaded")
-                }
-
-                override fun onAdFailedToLoad(i: Int) {
-                    super.onAdFailedToLoad(i)
-                    Log.d("AdMob", "Ad failed to loaded$i")
-                }
-            }
-            mAdView!!.loadAd(AdRequest.Builder().build())
         }
 
     }
 
     fun loadInterstialAd(onFinished:(Int)->Unit) {
 
-        val mInterstitialAd = InterstitialAd(this)
-        mInterstitialAd.adUnitId = getString(R.string.interstitial_id)
-        mInterstitialAd.loadAd(AdRequest.Builder().build())
-        mInterstitialAd.adListener=object :AdListener(){
-            override fun onAdLoaded() {
-                super.onAdLoaded()
-                mInterstitialAd.show()
-            }
-            override fun onAdFailedToLoad(p0: Int) {
-                super.onAdFailedToLoad(p0)
-                onFinished(0)
-            }
 
-            override fun onAdClosed() {
-                super.onAdClosed()
-                onFinished(1)
-            }
-        }
     }
 
     override fun attachBaseContext(newBase: Context) {

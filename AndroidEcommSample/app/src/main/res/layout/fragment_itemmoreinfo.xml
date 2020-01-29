@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.iqonic.shophop.models.ProductModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:ignore="MissingPrefix">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_standard_new"
+            android:layout_marginTop="@dimen/spacing_standard_new"
+            android:layout_marginEnd="@dimen/spacing_standard_new"
+        android:visibility="gone"
+            android:orientation="horizontal">
+
+        <TextView
+                style="@style/MoreInfo_heading"
+                android:text="@string/lbl_brand"/>
+
+        <TextView
+                android:id="@+id/tvBrand"
+                style="@style/MoreInfoSubheading"
+                android:text="@string/text_airmix"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_standard_new"
+            android:layout_marginTop="@dimen/spacing_standard"
+            android:layout_marginEnd="@dimen/spacing_standard_new"
+            android:orientation="horizontal">
+
+        <TextView
+                style="@style/MoreInfo_heading"
+                android:text="@string/lbl_colour"/>
+
+        <TextView
+                android:id="@+id/tvColour"
+                style="@style/MoreInfoSubheading"
+                android:text="@string/text_black_colour"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_standard_new"
+            android:layout_marginTop="@dimen/spacing_standard"
+            android:layout_marginEnd="@dimen/spacing_standard_new"
+            android:orientation="horizontal">
+
+        <TextView
+                style="@style/MoreInfo_heading"
+            android:text="@string/lbl_length" />
+
+        <TextView
+                android:id="@+id/tvLength"
+                style="@style/MoreInfoSubheading"/>
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_standard_new"
+            android:layout_marginTop="@dimen/spacing_standard"
+            android:layout_marginEnd="@dimen/spacing_standard_new"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/MoreInfo_heading"
+                android:text="@string/lbl_height" />
+
+            <TextView
+                    android:id="@+id/tvHeight"
+                    style="@style/MoreInfoSubheading"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_standard_new"
+            android:layout_marginTop="@dimen/spacing_standard"
+            android:layout_marginEnd="@dimen/spacing_standard_new"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/MoreInfo_heading"
+                android:text="@string/lbl_width" />
+
+            <TextView
+                    android:id="@+id/tvWidth"
+                    style="@style/MoreInfoSubheading"/>
+        </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+        android:visibility="gone"
+            android:layout_marginStart="@dimen/spacing_standard_new"
+            android:layout_marginTop="@dimen/spacing_standard"
+            android:layout_marginEnd="@dimen/spacing_standard_new"
+            android:orientation="horizontal">
+
+        <TextView
+                style="@style/MoreInfo_heading"
+                android:text="@string/lbl_clouser"/>
+
+        <TextView
+                android:id="@+id/tvClouser"
+                style="@style/MoreInfoSubheading"
+                android:text="@string/lbl_lace_ups"/>
+    </LinearLayout>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_standard_new"
+                android:layout_marginTop="@dimen/spacing_standard"
+                android:layout_marginEnd="@dimen/spacing_standard_new"
+                android:orientation="horizontal">
+
+            <TextView
+                    style="@style/MoreInfo_heading"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="@string/lbl_brand"/>
+
+            <TextView
+                    android:id="@+id/tvBrandName"
+                    style="@style/MoreInfoSubheading"
+                    android:text="@string/text_solid"
+                    android:singleLine="false"/>
+        </LinearLayout>
+    <LinearLayout
+        android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_standard_new"
+            android:layout_marginTop="@dimen/spacing_standard"
+            android:layout_marginEnd="@dimen/spacing_standard_new"
+            android:orientation="horizontal">
+
+        <TextView
+                style="@style/MoreInfo_heading"
+                android:text="@string/lbl_pattern"/>
+
+        <TextView
+                android:id="@+id/tvSolid"
+                style="@style/MoreInfoSubheading"
+                android:text="@string/text_solid"/>
+    </LinearLayout>
+</LinearLayout>
+</layout>

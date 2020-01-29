@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/spacing_standard_new"
+    android:layout_marginEnd="@dimen/spacing_standard_new"
+    android:layout_marginBottom="@dimen/spacing_standard_new"
+    android:background="@drawable/bg_rectangle_order"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/Heading"
+        android:paddingTop="@dimen/spacing_standard"
+        android:paddingBottom="@dimen/spacing_standard"
+        android:paddingStart="@dimen/spacing_standard_new"
+        android:paddingEnd="@dimen/spacing_standard_new"
+        android:text="@string/lbl_payment_details"
+        android:textColor="@color/textColorPrimary" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_width"
+        android:background="@color/view_color" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_standard">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_standard"
+            android:layout_marginEnd="@dimen/spacing_standard"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/OrderTextView"
+                android:text="@string/lbl_offer" />
+
+            <TextView
+                android:id="@+id/tvOffer"
+                style="@style/OrderTextView"
+                android:layout_marginStart="@dimen/spacing_control"
+                android:textColor="@color/textColorPrimary" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_standard"
+            android:layout_marginTop="@dimen/spacing_control"
+            android:layout_marginEnd="@dimen/spacing_standard"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/OrderTextView"
+                android:text="@string/lbl_shipping_charge" />
+
+            <TextView
+                android:id="@+id/tvShippingCharge"
+                style="@style/OrderTextView"
+                android:layout_marginStart="@dimen/spacing_control"
+                android:textColor="@color/green" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_standard"
+            android:layout_marginTop="@dimen/spacing_control"
+            android:layout_marginEnd="@dimen/spacing_standard"
+            android:layout_marginBottom="@dimen/spacing_control"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/OrderTextView"
+                android:text="@string/lbl_total_amount" />
+
+            <TextView
+                android:id="@+id/tvTotalAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_control"
+                android:textSize="@dimen/font_size_medium"
+                android:textAppearance="@style/FontSemiBold"
+                android:layout_marginStart="@dimen/spacing_control"
+                android:textColor="@color/colorPrimary" />
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
+

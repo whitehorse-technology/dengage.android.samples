@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/white"
+              android:orientation="vertical"
+              tools:context=".activity.RewardActivity"
+              tools:ignore="MissingPrefix">
+
+    <include layout="@layout/toolbar"/>
+
+
+    <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:descendantFocusability="blocksDescendants"
+                android:orientation="vertical">
+
+            <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_200sdp"
+                    android:id="@+id/mCardReward"
+                    app:cardElevation="@dimen/_6sdp"
+                    android:layout_margin="@dimen/spacing_standard_new">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <include layout="@layout/layout_background"/>
+
+                    <RelativeLayout android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+                        <TextView
+                                android:id="@+id/lbl"
+                                android:textAppearance="@style/FontSemiBold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:text="@string/text_499"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="70sp"/>
+
+                        <TextView
+                                android:textAppearance="@style/FontMedium"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/lbl"
+                                android:gravity="center"
+                                android:text="@string/lbl_your_rewards"
+                                android:layout_centerHorizontal="true"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="@dimen/font_size_xlarge"/>
+                    </RelativeLayout>
+                    <nl.dionsegijn.konfetti.KonfettiView
+                        android:id="@+id/viewKonfetti"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </RelativeLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_standard_new"
+                    android:layout_marginEnd="@dimen/spacing_standard_new"
+                    android:text="@string/text_reward"
+                    android:textColor="@color/textColorPrimary"
+                    android:textSize="@dimen/font_size_medium"/>
+
+            <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnInvite"
+                    style="@style/MaterialButtonStyle.Filled"
+                    android:textAppearance="@style/FontMedium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_xlarge"
+                    android:layout_marginTop="@dimen/spacing_standard_new"
+                    android:layout_marginEnd="@dimen/spacing_xlarge"
+                    android:shadowColor="@color/colorPrimary"
+                    android:text="@string/lbl_invite_now"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvReward"
+                    style="@style/RecycleView"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:nestedScrollingEnabled="false"
+                    android:paddingStart="@dimen/spacing_standard_new"
+                    android:paddingEnd="@dimen/spacing_control_half"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:spanCount="2"/>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>
