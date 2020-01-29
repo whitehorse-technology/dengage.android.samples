@@ -18,17 +18,20 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <service
-            android:name="com.dengage.sdk.notification.services.MessagingService">
+        <service android:name="com.dengage.sdk.MessagingService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action  android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
         </service>
+        <activity android:name="com.dengage.sdk.OpenerActivity">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
     </application>
 

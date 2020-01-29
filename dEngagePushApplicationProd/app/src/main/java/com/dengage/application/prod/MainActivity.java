@@ -3,36 +3,18 @@ package com.dengage.application.prod;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 
-import com.dengage.sdk.notification.dEngageMobileManager;
-import com.dengage.sdk.notification.logging.Logger;
-import com.dengage.sdk.notification.models.Message;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
-
-import androidx.annotation.NonNull;
+import com.dengage.sdk.DengageManager;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
-import android.util.Log;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static dEngageMobileManager mobileManager;
-    final String integrationKey = "230KMVJ1aWZvK0YdtD5KnYSGfVoM1E7t9x2eA7UXINLh9u9MZUtP8IYGnmEu2wXD_p_l_7Nuj0RtRvnfv_p_l_S4wArXgRdFSa43KpA_p_l_CudLiATtPueo4IoQ_p_l_CRbSyoR3DVjM7RT";
-
-    //final String integrationKey = "SSiv15iaBRzARtaihANeNdsVIE96doc7w8vkB_s_l_DyOc8RKcwnEn3Nv326tU1ehRQYEr3xa3tvuMk_p_l_lTbbeKeoQYpMAcRnDgVesMxVRSLdCUwdn1OUunkuBHaEPNGkv6gc";
+    final String integrationKey = "x9V_p_l_TEhVz_s_l_2Bho_s_l_lsfjMIsjEjGECyDzoldLHF7G3gi1GiUJBSJujlUqmeWN9dcOiTgpVSqlCybo83sNQVeTUbMo559FIeyL5XXOj_p_l_p4XidRgb2KA_s_l_3t_p_l_jcMpo_s_l_2aKrgG";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,40 +23,29 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        Context context = getApplicationContext();
+        DengageManager.setLogStatus(true);
+        DengageManager.setConfig(integrationKey, context);
 
-        final Context context = getApplicationContext();
-        mobileManager = dEngageMobileManager.createInstance(integrationKey, context);
-        mobileManager.register();
-
-        TextView txtEnvironment = (TextView)findViewById(R.id.txtEnvironment);
-        TextView txtIntegrationKey = (TextView)findViewById(R.id.txtIntegrationKey);
         TextView txtDeviceId = (TextView)findViewById(R.id.txtDeviceId);
         TextView txtAdvertisingId = (TextView)findViewById(R.id.txtAdvertisingId);
         TextView txtToken = (TextView)findViewById(R.id.txtToken);
         TextView txtContactKey = (TextView)findViewById(R.id.txtContactKey);
-        TextView txtSdkVersion = (TextView)findViewById(R.id.txtSdkVersion);
-        //TextView txtAppVersion = (TextView)findViewById(R.id.txtAppVersion);
 
-        txtEnvironment.setText(mobileManager.getEnvironment());
-        txtIntegrationKey.setText(mobileManager.subscription.getIntegrationKey());
-        txtDeviceId.setText(mobileManager.subscription.getUdid());
-        txtAdvertisingId.setText(mobileManager.subscription.getAdid());
-        txtToken.setText(mobileManager.subscription.getToken());
-        txtContactKey.setText(mobileManager.subscription.getContactKey());
-        txtSdkVersion.setText(mobileManager.getSdkVersion());
-        //txtAppVersion.setText(mobileManager.getAppVersion());
+        txtDeviceId.setText(DengageManager.getDeviceId());
+        txtAdvertisingId.setText(DengageManager.getAdvertisingId());
+        txtToken.setText(DengageManager.getToken());
+        txtContactKey.setText(DengageManager.getContactKey());
 
         Button btnContactKey = (Button) findViewById(R.id.btnContactKey);
         btnContactKey.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Logger.Debug("Retrieving contactkey...");
                 TextView txtContactKey = (TextView)findViewById(R.id.txtContactKey);
                 String contactkey = txtContactKey.getText().toString();
-                mobileManager.setContactKey(contactkey);
-                mobileManager.sync();
+                DengageManager.setContactKey(contactkey);
+                DengageManager.syncSubscription();
                 showMessage("Contact key has been successfully set.");
-                Logger.Debug("Retrieved contactkey: "+ contactkey);
             }
         });
 
@@ -82,16 +53,14 @@ public class MainActivity extends AppCompatActivity {
         btnDeviceId.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Logger.Debug("Retrieving udid...");
                 TextView txtDeviceId = (TextView)findViewById(R.id.txtDeviceId);
                 txtDeviceId.setText("Retrieving...");
-                String udid = mobileManager.subscription.getUdid();
+                String udid = DengageManager.getDeviceId();
                 if(udid != "") {
                     txtDeviceId.setText(udid);
                 } else {
                     txtDeviceId.setText("Not available yet. try again later.");
                 }
-                Logger.Debug("Retrieved udid: "+ udid);
             }
         });
 
@@ -99,16 +68,14 @@ public class MainActivity extends AppCompatActivity {
         btnToken.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Logger.Debug("Retrieving token...");
                 TextView txtToken = (TextView)findViewById(R.id.txtToken);
                 txtToken.setText("Retrieving...");
-                String token = mobileManager.subscription.getToken();
+                String token = DengageManager.getToken();
                 if(token != "") {
                     txtToken.setText(token);
                 } else {
                     txtToken.setText("Not available yet. try again later.");
                 }
-                Logger.Debug("Retrieved token: "+ token);
             }
         });
 
@@ -116,26 +83,16 @@ public class MainActivity extends AppCompatActivity {
         btnAdvertisingId.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Logger.Debug("Retrieving adid...");
                 TextView txtAdvertisingId = (TextView)findViewById(R.id.txtAdvertisingId);
                 txtAdvertisingId.setText("Retrieving...");
-                String adid = mobileManager.subscription.getAdid();
+                String adid = DengageManager.getAdvertisingId();
                 if(adid != "") {
                     txtAdvertisingId.setText(adid);
                 } else {
                     txtAdvertisingId.setText("Not available yet. try again later.");
                 }
-                Logger.Debug("Retrieved adid: "+ adid);
             }
         });
-    }
-
-    @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-
-        if(intent.getExtras() != null)
-            dEngageMobileManager.getInstance().open(new Message(intent.getExtras()));
     }
 
     private void showMessage(String message) {
