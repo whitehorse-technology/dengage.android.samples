@@ -21,13 +21,13 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     // PROD
-    final String integrationKey = "x9V_p_l_TEhVz_s_l_2Bho_s_l_lsfjMIsjEjGECyDzoldLHF7G3gi1GiUJBSJujlUqmeWN9dcOiTgpVSqlCybo83sNQVeTUbMo559FIeyL5XXOj_p_l_p4XidRgb2KA_s_l_3t_p_l_jcMpo_s_l_2aKrgG";
+    //final String integrationKey = "x9V_p_l_TEhVz_s_l_2Bho_s_l_lsfjMIsjEjGECyDzoldLHF7G3gi1GiUJBSJujlUqmeWN9dcOiTgpVSqlCybo83sNQVeTUbMo559FIeyL5XXOj_p_l_p4XidRgb2KA_s_l_3t_p_l_jcMpo_s_l_2aKrgG";
 
     // DEV
     //final String integrationKey = "x9V_p_l_TEhVz_s_l_2Bho_s_l_lsfjMIsjEjGECyDzoldLHF7G3gi1GiUJBSJujlUqmeWN9dcOiTgpVSqlCybo83sNQVeTUbMo559FIeyL5XXOj_p_l_p4XidRgb2KA_s_l_3t_p_l_jcMpo_s_l_2aKrgG";
 
     // TEST
-    //final String integrationKey = "Evke8NhhgLX6Gwo5QeggzCMFVloTnGjUSf0oWPUQM7mQxsia4pRkSuqCqhPtu_s_l_q7Ye9PemJYerIjEmd8qbEVNQL2_s_l__s_l_gN6vmS25Aj2EMk_s_l_2k1us1JkrjFgT3kbEDjuZqq";
+    final String integrationKey = "Evke8NhhgLX6Gwo5QeggzCMFVloTnGjUSf0oWPUQM7mQxsia4pRkSuqCqhPtu_s_l_q7Ye9PemJYerIjEmd8qbEVNQL2_s_l__s_l_gN6vmS25Aj2EMk_s_l_2k1us1JkrjFgT3kbEDjuZqq";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
