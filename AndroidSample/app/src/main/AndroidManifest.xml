@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="true"
@@ -11,7 +12,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
 
         <activity
             android:name=".DeepLinkActivity"
@@ -45,6 +47,16 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <receiver android:name="com.dengage.sdk.NotificationReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.dengage.push.intent.RECEIVE" />
+                <action android:name="com.dengage.push.intent.OPEN" />
+                <action android:name="com.dengage.push.intent.DELETE" />
+                <action android:name="com.dengage.push.intent.ACTION_CLICK" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
