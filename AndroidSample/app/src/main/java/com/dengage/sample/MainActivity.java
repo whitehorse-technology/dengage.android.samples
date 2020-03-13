@@ -123,8 +123,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Intent intent = getIntent();
-        sendOpen(intent);
     }
 
     @Override
@@ -162,17 +160,4 @@ public class MainActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
-    @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        sendOpen(intent);
-    }
-
-    private void sendOpen(Intent intent) {
-        Bundle extras = intent.getExtras();
-
-        if (extras != null) {
-            DengageManager.sendOpenEvent(new Message(extras));
-        }
-    }
 }
