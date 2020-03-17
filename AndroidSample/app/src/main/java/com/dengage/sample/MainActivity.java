@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -51,8 +52,11 @@ public class MainActivity extends AppCompatActivity {
 
 
         Context context = getApplicationContext();
-        DengageManager.setLogStatus(true);
-        DengageManager.setConfig(integrationKey, context);
+        final DengageManager manager =  DengageManager
+                .getInstance(context)
+                .setLogStatus(true)
+                .setIntegrationKey(integrationKey)
+                .init();
 
         TextView txtIntegrationKey = (TextView)findViewById(R.id.txtIntegrationKey);
         TextView txtDeviceId = (TextView)findViewById(R.id.txtDeviceId);
@@ -61,10 +65,10 @@ public class MainActivity extends AppCompatActivity {
         TextView txtContactKey = (TextView)findViewById(R.id.txtContactKey);
 
         txtIntegrationKey.setText(integrationKey);
-        txtDeviceId.setText(DengageManager.getDeviceId());
-        txtAdvertisingId.setText(DengageManager.getAdvertisingId());
-        txtToken.setText(DengageManager.getToken());
-        txtContactKey.setText(DengageManager.getContactKey());
+        txtDeviceId.setText(manager.getDeviceId());
+        txtAdvertisingId.setText(manager.getAdvertisingId());
+        txtToken.setText(manager.getToken());
+        txtContactKey.setText(manager.getContactKey());
 
         Button btnContactKey = (Button) findViewById(R.id.btnContactKey);
         btnContactKey.setOnClickListener(new View.OnClickListener() {
@@ -72,8 +76,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 TextView txtContactKey = (TextView)findViewById(R.id.txtContactKey);
                 String contactkey = txtContactKey.getText().toString();
-                DengageManager.setContactKey(contactkey);
-                DengageManager.syncSubscription();
+                manager.setContactKey(contactkey);
+                manager.syncSubscription();
                 showMessage("Contact key has been successfully set.");
             }
         });
@@ -84,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 TextView txtDeviceId = (TextView)findViewById(R.id.txtDeviceId);
                 txtDeviceId.setText("Retrieving...");
-                String udid = DengageManager.getDeviceId();
+                String udid = manager.getDeviceId();
                 if(udid != "") {
                     txtDeviceId.setText(udid);
                 } else {
@@ -99,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 TextView txtToken = (TextView)findViewById(R.id.txtToken);
                 txtToken.setText("Retrieving...");
-                String token = DengageManager.getToken();
+                String token = manager.getToken();
                 if(token != "") {
                     txtToken.setText(token);
                 } else {
@@ -114,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 TextView txtAdvertisingId = (TextView)findViewById(R.id.txtAdvertisingId);
                 txtAdvertisingId.setText("Retrieving...");
-                String adid = DengageManager.getAdvertisingId();
+                String adid = manager.getAdvertisingId();
                 if(adid != "") {
                     txtAdvertisingId.setText(adid);
                 } else {

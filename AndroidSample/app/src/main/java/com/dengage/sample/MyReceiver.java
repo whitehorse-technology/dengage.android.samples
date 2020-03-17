@@ -21,8 +21,14 @@ public class MyReceiver extends NotificationReceiver {
         Message message = new Message(extras);
         Log.v("DenPush", message.toJson());
 
-        DengageManager.setLogStatus(true);
+        DengageManager.getInstance(context).setLogStatus(true);
 
         super.onPushOpen(context, intent);
+    }
+
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        Log.v("DenPush", "onReceive tetiklendi.");
+        super.onReceive(context, intent);
     }
 }
