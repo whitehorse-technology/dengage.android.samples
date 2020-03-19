@@ -2,7 +2,9 @@ package com.dengage.sample;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.dengage.sdk.NotificationReceiver;
@@ -29,6 +31,24 @@ public class MyReceiver extends NotificationReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.v("DenPush", "onReceive tetiklendi.");
+
         super.onReceive(context, intent);
+    }
+
+    @Override
+    protected void onActionClick(Context context, Intent intent) {
+        Log.v("DenPush", "onActionClick tetiklendi.");
+
+        super.onActionClick(context, intent);
+
+        Bundle extras = intent.getExtras();
+
+        String buttonId = extras.getString("id");
+        String buttonUrl = extras.getString("targetUrl");
+
+        Log.d("DenPush", buttonId);
+        Log.d("DenPush", buttonUrl);
+
+
     }
 }
