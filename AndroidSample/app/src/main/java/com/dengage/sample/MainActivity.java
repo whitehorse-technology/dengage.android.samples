@@ -7,6 +7,9 @@ import android.os.Bundle;
 import com.dengage.sdk.DengageManager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.view.View;
@@ -15,9 +18,14 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
 public class MainActivity extends AppCompatActivity {
 
-    final String integrationKey = "YOUR_INTEGRATION_KEY";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +47,9 @@ public class MainActivity extends AppCompatActivity {
         final DengageManager manager =  DengageManager
                 .getInstance(context)
                 .setLogStatus(true)
-                .setIntegrationKey(integrationKey)
-                .init();
+                .setSubscriptionUri(null)
+                .setIntegrationKey(Constants.INTEGRATION_KEY)
+                .init(); 
 
         TextView txtIntegrationKey = (TextView)findViewById(R.id.txtIntegrationKey);
         TextView txtDeviceId = (TextView)findViewById(R.id.txtDeviceId);
@@ -48,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         TextView txtToken = (TextView)findViewById(R.id.txtToken);
         TextView txtContactKey = (TextView)findViewById(R.id.txtContactKey);
 
-        txtIntegrationKey.setText(integrationKey);
+        txtIntegrationKey.setText(Constants.INTEGRATION_KEY);
         txtDeviceId.setText(manager.getDeviceId());
         txtAdvertisingId.setText(manager.getAdvertisingId());
         txtToken.setText(manager.getToken());
@@ -70,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
         btnDeviceId.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                manager.sendPageView(null);
                 TextView txtDeviceId = (TextView)findViewById(R.id.txtDeviceId);
                 txtDeviceId.setText("Retrieving...");
                 String udid = manager.getDeviceId();
