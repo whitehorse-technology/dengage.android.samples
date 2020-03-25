@@ -284,7 +284,7 @@ class OrderSummaryActivity : AppBaseActivity() {
         details.put("product_id ","")
         details.put("quantity ",quantity)
 
-        DengageManager.sendDeviceEvent("user_events", details)
+        DengageManager.getInstance(applicationContext).sendDeviceEvent("user_events", details)
 
         val checkoutModel = CheckoutModel()
         checkoutModel.productList = productList

@@ -288,8 +288,8 @@ class DashBoardActivity : AppBaseActivity() {
         details.put("product_id ","")
         details.put("quantity ","")
 
-        DengageManager.sendDeviceEvent("user_events", details)
-
+        DengageManager.getInstance(applicationContext).sendDeviceEvent("user_events", details);
+        DengageManager.getInstance(applicationContext).sendPageView(details);
 
         if (selectedFragment != null) {
             if (selectedFragment == aFragment) {

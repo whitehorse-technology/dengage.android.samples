@@ -74,11 +74,14 @@ dependencies {
     implementation 'io.github.inflationx:viewpump:2.0.3'
     implementation 'io.github.inflationx:calligraphy3:3.1.1'
     implementation 'com.segmentify.sdk:android:2.0.0'
-    implementation 'com.google.firebase:firebase-core:17.2.2'  // Add this line
-    implementation 'com.google.firebase:firebase-messaging:20.1.0'  // Add this line
-    implementation 'com.google.firebase:firebase-analytics:17.2.2' // Add this line
-    implementation 'com.github.whitehorse-technology:dengage.android.sdk:1.0.3' // Add this line and set your prefered version.
+    implementation 'com.google.firebase:firebase-core:17.2.2'
+    // Add this line
+    implementation 'com.google.firebase:firebase-messaging:20.1.0'
+    // Add this line
+    implementation 'com.google.firebase:firebase-analytics:17.2.2'
+    // Add this line and set your prefered version.
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation files('libs/com.dengage.sdk.jar')
 }
 
 apply plugin: 'com.google.gms.google-services'

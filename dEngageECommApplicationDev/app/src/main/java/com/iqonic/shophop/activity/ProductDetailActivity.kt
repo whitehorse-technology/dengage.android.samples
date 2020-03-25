@@ -79,7 +79,8 @@ class ProductDetailActivity : AppBaseActivity() {
         details.put("product_id", mProductModel.id)
         details.put("quantity ","")
 
-        DengageManager.sendDeviceEvent("user_events", details)
+        DengageManager.getInstance(applicationContext).sendDeviceEvent("user_events", details)
+        DengageManager.getInstance(applicationContext).sendPageView(details);
 
         val model = PageModel()
         model.category = "Product Page"
@@ -275,7 +276,7 @@ class ProductDetailActivity : AppBaseActivity() {
         details.put("product_id", mProductModel.id)
         details.put("quantity ",1)
 
-        DengageManager.sendDeviceEvent("user_events", details)
+        DengageManager.getInstance(applicationContext).sendDeviceEvent("user_events", details)
 
         SegmentifyManager.sendAddOrRemoveBasket("add", mProductModel.id.toString(),1,mProductModel.price.toDouble());
 
@@ -307,7 +308,7 @@ class ProductDetailActivity : AppBaseActivity() {
             details.put("product_id", mProductModel.id)
             details.put("quantity ","")
 
-            DengageManager.sendDeviceEvent("user_events", details)
+            DengageManager.getInstance(applicationContext).sendDeviceEvent("user_events", details)
 
 
 

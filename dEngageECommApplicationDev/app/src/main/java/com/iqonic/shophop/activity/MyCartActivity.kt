@@ -43,7 +43,8 @@ class MyCartActivity : AppBaseActivity() {
         details.put("product_id ","")
         details.put("quantity ","")
 
-        DengageManager.sendDeviceEvent("user_events", details)
+        DengageManager.getInstance(applicationContext).sendDeviceEvent("user_events", details)
+        DengageManager.getInstance(applicationContext).sendPageView(details);
 
         val model = PageModel()
         model.category = "Basket Page"

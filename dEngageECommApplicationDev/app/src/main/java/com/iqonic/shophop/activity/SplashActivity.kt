@@ -34,9 +34,6 @@ class SplashActivity : AppBaseActivity() {
     override fun onResume(){
         super.onResume()
         val bundle : Bundle? = intent.extras
-        if (bundle != null){
-            Log.d("Push", "Hello from the message");
-            DengageManager.sendOpenEvent(Message(bundle))
-        }
+
     }
 }

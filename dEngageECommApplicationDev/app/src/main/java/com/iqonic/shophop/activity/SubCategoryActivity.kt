@@ -76,8 +76,8 @@ class SubCategoryActivity : AppBaseActivity() {
         details.put("product_id ","")
         details.put("quantity ", "")
 
-        DengageManager.sendDeviceEvent("user_events", details)
-
+        DengageManager.getInstance(applicationContext).sendDeviceEvent("user_events", details)
+        DengageManager.getInstance(applicationContext).sendPageView(details);
 
         val model = PageModel()
         model.category = "Category Page"
@@ -90,6 +90,8 @@ class SubCategoryActivity : AppBaseActivity() {
                     Log.d("Segmentify: ", data.toString())
                 }
             })
+
+
 
 
         viewNewArrival.onClick {

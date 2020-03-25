@@ -440,11 +440,11 @@ fun AppBaseActivity.registerUser(requestModel: RequestModel, isUpdate: Boolean) 
     }
 
     if(requestModel.lastName != null && !TextUtils.isEmpty(requestModel.lastName)) {
-        DengageManager.setContactKey(requestModel.lastName)
+        DengageManager.getInstance(applicationContext).setContactKey(requestModel.lastName)
         //DengageManager.setContactProperty("surname", requestModel.lastName)
     }
 
-    DengageManager.syncSubscription()
+    DengageManager.getInstance(applicationContext).syncSubscription()
 
     sendProfileUpdateBroadcast()
 }

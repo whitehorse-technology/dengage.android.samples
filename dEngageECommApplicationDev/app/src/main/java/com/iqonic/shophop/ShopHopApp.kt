@@ -19,9 +19,6 @@ class dEngageClass {
 
 class ShopHopApp : MultiDexApplication() {
 
-
-    private var integrationKey = "_s_l_wQqEEnqUalNohrj8B28x11uwf5okHqxXlzFvpN_p_l_p7emc5WJIFw1sggDky3L2jk_p_l_S4visydAwHNK1tjyDMnWit5FI01C0DykqcEadt1xDbe9yIl1DZgZKuN8nTHUr7Xv"
-
     private var segmentifyAppKey = "fb98df24-db87-485d-9180-98752bdef516"
     private var segmentifyDataCenterUrl = "https://gandalf.segmentify.com"
     private var segmentifysubDomain= "showcase.dengage.com"
@@ -34,8 +31,11 @@ class ShopHopApp : MultiDexApplication() {
         CalligraphyConfig.initDefault(CalligraphyConfig.Builder().setDefaultFontPath("fonts/Montserrat-Regular.ttf").setFontAttrId(R.attr.fontPath).build())
 
         val context = applicationContext
-        DengageManager.setLogStatus(true)
-        DengageManager.setConfig(integrationKey, context)
+        val manager = DengageManager
+                .getInstance(context)
+                .setLogStatus(true)
+                .setIntegrationKey(IntegrationKeys.INTEGRATION_KEY)
+                .init()
 
 
         SegmentifyManager.config(this, segmentifyAppKey, segmentifyDataCenterUrl, segmentifysubDomain)
