@@ -13,6 +13,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
+import com.dengage.sdk.DengageEvent
 import com.iqonic.shophop.AppBaseActivity
 import com.iqonic.shophop.R
 import com.iqonic.shophop.fragments.*
@@ -280,16 +281,18 @@ class DashBoardActivity : AppBaseActivity() {
 
         val name = aFragment.javaClass.name
         val validname = name.replace("com.iqonic.shophop.fragments.", "").replace("Fragment", "").replace("MyCart", "basket")
-        val details = HashMap<String, Any>()
-        details.put("event_type", "page_view")
-        details.put("page_type", validname.toLowerCase())
-        details.put("page_url","")
-        details.put("page_title","")
-        details.put("product_id ","")
-        details.put("quantity ","")
 
-        DengageManager.getInstance(applicationContext).sendDeviceEvent("user_events", details);
-        DengageManager.getInstance(applicationContext).sendPageView(details);
+        //val details = HashMap<String, Any>()
+        //details.put("event_type", "page_view")
+        //details.put("page_type", validname.toLowerCase())
+        //details.put("page_url","")
+        //details.put("page_title","")
+        //details.put("product_id ","")
+        //details.put("quantity ","")
+
+        val event = DengageEvent(applicationContext);
+        // event.sendDeviceEvent("user_events", details);
+        event.homePage();
 
         if (selectedFragment != null) {
             if (selectedFragment == aFragment) {

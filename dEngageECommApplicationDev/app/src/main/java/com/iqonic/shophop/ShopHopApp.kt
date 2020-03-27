@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.content.Context
 import androidx.multidex.MultiDex
 import androidx.multidex.MultiDexApplication
+import com.dengage.sdk.DengageEvent
 import com.dengage.sdk.DengageManager
 import com.iqonic.shophop.utils.SharedPrefUtils
 import com.segmentify.segmentifyandroidsdk.SegmentifyManager
@@ -19,9 +20,9 @@ class dEngageClass {
 
 class ShopHopApp : MultiDexApplication() {
 
-    private var segmentifyAppKey = "fb98df24-db87-485d-9180-98752bdef516"
-    private var segmentifyDataCenterUrl = "https://gandalf.segmentify.com"
-    private var segmentifysubDomain= "showcase.dengage.com"
+    //private var segmentifyAppKey = "fb98df24-db87-485d-9180-98752bdef516"
+    //private var segmentifyDataCenterUrl = "https://gandalf.segmentify.com"
+    //private var segmentifysubDomain= "showcase.dengage.com"
 
     override fun onCreate() {
         super.onCreate()
@@ -37,8 +38,9 @@ class ShopHopApp : MultiDexApplication() {
                 .setIntegrationKey(IntegrationKeys.INTEGRATION_KEY)
                 .init()
 
+        val event = DengageEvent(applicationContext);
 
-        SegmentifyManager.config(this, segmentifyAppKey, segmentifyDataCenterUrl, segmentifysubDomain)
+        //SegmentifyManager.config(this, segmentifyAppKey, segmentifyDataCenterUrl, segmentifysubDomain)
 
     }
 

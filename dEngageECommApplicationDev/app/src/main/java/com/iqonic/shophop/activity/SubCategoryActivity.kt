@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.LinearLayout
+import com.dengage.sdk.DengageEvent
 import com.dengage.sdk.DengageManager
 import com.iqonic.shophop.AppBaseActivity
 import com.iqonic.shophop.R
@@ -44,10 +45,6 @@ class SubCategoryActivity : AppBaseActivity() {
         setContentView(R.layout.activity_sub_category)
         loadBannerAd(R.id.adView)
 
-
-
-
-
         if (intent.getSerializableExtra(DATA) == null) {
             toast(R.string.error_something_went_wrong)
             finish()
@@ -66,30 +63,29 @@ class SubCategoryActivity : AppBaseActivity() {
         mPopularAdapter.setModelSize(5)
 
 
+        //val details = java.util.HashMap<String, Any>()
+        //details.put("event_type", "page_view")
+        //details.put("page_type", "category")
+        //details.put("page_url","")
+        //details.put("page_title", title.toString().toLowerCase())
+        //details.put("product_id ","")
+        //details.put("quantity ", "")
 
-
-        val details = java.util.HashMap<String, Any>()
-        details.put("event_type", "page_view")
-        details.put("page_type", "category")
-        details.put("page_url","")
-        details.put("page_title", title.toString().toLowerCase())
-        details.put("product_id ","")
-        details.put("quantity ", "")
-
-        DengageManager.getInstance(applicationContext).sendDeviceEvent("user_events", details)
-        DengageManager.getInstance(applicationContext).sendPageView(details);
+        val event = DengageEvent(applicationContext);
+        //event.sendDeviceEvent("user_events", details)
+        event.categoryPage(mCategoryData.id.toString(), "");
 
         val model = PageModel()
         model.category = "Category Page"
         model.subCategory = title.toString().toLowerCase()
 
-        SegmentifyManager.sendPageView(
-            model,
-            object : SegmentifyCallback<ArrayList<RecommendationModel>> {
-                override fun onDataLoaded(data: ArrayList<RecommendationModel>) {
-                    Log.d("Segmentify: ", data.toString())
-                }
-            })
+        //SegmentifyManager.sendPageView(
+        //    model,
+        //    object : SegmentifyCallback<ArrayList<RecommendationModel>> {
+        //       override fun onDataLoaded(data: ArrayList<RecommendationModel>) {
+        //           Log.d("Segmentify: ", data.toString())
+        //        }
+        //   })
 
 
 

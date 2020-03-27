@@ -27,7 +27,9 @@ import com.segmentify.segmentifyandroidsdk.SegmentifyManager
 import com.segmentify.segmentifyandroidsdk.model.CheckoutModel
 
 import android.util.Log
+import com.dengage.sdk.DengageEvent
 import com.dengage.sdk.DengageManager
+import com.dengage.sdk.models.CardItem
 
 
 class OrderSummaryActivity : AppBaseActivity() {
@@ -231,6 +233,7 @@ class OrderSummaryActivity : AppBaseActivity() {
 
         val productList = kotlin.collections.ArrayList< com.segmentify.segmentifyandroidsdk.model.ProductModel>()
 
+
         getCartList().forEach {
             val mlineitem = LineItem()
             mlineitem.product_id = it.product_id
@@ -254,6 +257,7 @@ class OrderSummaryActivity : AppBaseActivity() {
 
             productList.add(pModel)
         }
+
         requestModel.line_items = mData
         mAddressAdapter.mModelList.forEach {
             if (it.isDefault!!) {
@@ -276,27 +280,48 @@ class OrderSummaryActivity : AppBaseActivity() {
         requestModel.date_created = Constants.FULL_DATE_FORMATTER.format(Date())
         dialog.dismiss()
 
-        val details = HashMap<String, Any>()
-        details.put("event_type", "order")
-        details.put("page_type", "order")
-        details.put("page_url","")
-        details.put("page_title","")
-        details.put("product_id ","")
-        details.put("quantity ",quantity)
+        //val details = HashMap<String, Any>()
+        //details.put("event_type", "order")
+        //details.put("page_type", "order")
+        //details.put("page_url","")
+        //details.put("page_title","")
+        //details.put("product_id ","")
+        //details.put("quantity ",quantity)
 
-        DengageManager.getInstance(applicationContext).sendDeviceEvent("user_events", details)
+        //DengageManager.getInstance(applicationContext).sendDeviceEvent("user_events", details)
 
-        val checkoutModel = CheckoutModel()
-        checkoutModel.productList = productList
-        checkoutModel.totalPrice = total.toDouble()
+        //val checkoutModel = CheckoutModel()
+        //checkoutModel.productList = productList
+        //checkoutModel.totalPrice = total.toDouble()
 
-        SegmentifyManager.sendViewBasket(
-            checkoutModel,
-            object : SegmentifyCallback<ArrayList<RecommendationModel>> {
-                override fun onDataLoaded(data: ArrayList<RecommendationModel>) {
-                    Log.d("Segmentify: ", data.toString())
-                }
-            })
+        //SegmentifyManager.sendViewBasket(
+        //   checkoutModel,
+        //   object : SegmentifyCallback<ArrayList<RecommendationModel>> {
+        //       override fun onDataLoaded(data: ArrayList<RecommendationModel>) {
+        //           Log.d("Segmentify: ", data.toString())
+        //        }
+        //    })
+
+        val basketId = requestModel.id.toString()
+        val orderId = requestModel.transaction_id
+        val totalPrice = total.toDouble();
+        val paymentMethod = requestModel.payment_method
+
+        val cardItems = ArrayList<CardItem>()
+
+
+        requestModel.line_items.forEach {
+            val ci = CardItem()
+            ci.price =  it.total.toDouble()
+            ci.discountedPrice = it.price.toDouble()
+            ci.currency = "dolar"
+            ci.productId = it.product_id.toString()
+            ci.quantity = it.quantity
+            ci.variantId = it.variation_id.toString()
+        }
+
+        val event = DengageEvent(applicationContext)
+        event.orderSummary(cardItems.toTypedArray(),basketId,totalPrice,orderId,paymentMethod)
 
 
         launchActivity<PaymentActivity>(Constants.RequestCode.PAYMENT) {

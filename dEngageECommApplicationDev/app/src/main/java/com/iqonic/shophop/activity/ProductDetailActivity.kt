@@ -6,7 +6,9 @@ import android.util.Log
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
+import com.dengage.sdk.DengageEvent
 import com.dengage.sdk.DengageManager
+import com.dengage.sdk.models.CardItem
 import com.iqonic.shophop.AppBaseActivity
 import com.iqonic.shophop.R
 import com.iqonic.shophop.adapter.ProductImageAdapter
@@ -71,42 +73,42 @@ class ProductDetailActivity : AppBaseActivity() {
         toolbar_layout.setExpandedTitleTypeface(fontSemiBold())
         toolbar_layout.title = mProductModel.name
 
-        val details = java.util.HashMap<String, Any>()
-        details.put("event_type", "page_view")
-        details.put("page_type", "product")
-        details.put("page_url","")
-        details.put("page_title", mProductModel.name)
-        details.put("product_id", mProductModel.id)
-        details.put("quantity ","")
+        //val details = java.util.HashMap<String, Any>()
+        //details.put("event_type", "page_view")
+        //details.put("page_type", "product")
+        //details.put("page_url","")
+        //details.put("page_title", mProductModel.name)
+        //details.put("product_id", mProductModel.id)
+        //details.put("quantity ","")
 
-        DengageManager.getInstance(applicationContext).sendDeviceEvent("user_events", details)
-        DengageManager.getInstance(applicationContext).sendPageView(details);
+        //DengageManager.getInstance(applicationContext).sendDeviceEvent("user_events", details)
+        //DengageManager.getInstance(applicationContext).sendPageView(details);
 
-        val model = PageModel()
-        model.category = "Product Page"
-        SegmentifyManager.sendPageView(
-        model,
-        object : SegmentifyCallback<ArrayList<RecommendationModel>> {
-            override fun onDataLoaded(data: ArrayList<RecommendationModel>) {
-                data.forEach {
-                    Log.d("Product Page View: ", it.notificationTitle + " "+ it.actionId + " "+ it.errorString + " "+ it.instanceId)
-                }
-            }
-        })
+        //val model = PageModel()
+        //model.category = "Product Page"
+        //SegmentifyManager.sendPageView(
+        //model,
+        //object : SegmentifyCallback<ArrayList<RecommendationModel>> {
+        //    override fun onDataLoaded(data: ArrayList<RecommendationModel>) {
+        //        data.forEach {
+        //            Log.d("Product Page View: ", it.notificationTitle + " "+ it.actionId + " "+ it.errorString + " "+ it.instanceId)
+        //        }
+        //    }
+        //})
 
-        val pModel = com.segmentify.segmentifyandroidsdk.model.ProductModel()
-        val categories = ArrayList<String>()
+        //val pModel = com.segmentify.segmentifyandroidsdk.model.ProductModel()
+        //val categories = ArrayList<String>()
 
-        mProductModel.categories.forEach {
-            categories.add(it.name)
-        }
+        //mProductModel.categories.forEach {
+        //    categories.add(it.name)
+        //}
 
-        pModel.productId =  mProductModel.id.toString()
-        pModel.categories = categories
-        pModel.price = mProductModel.price.toDouble()
-        pModel.title = mProductModel.name
-        pModel.image = mProductModel.images.get(0).src
-        pModel.url = mProductModel.external_url
+        //pModel.productId =  mProductModel.id.toString()
+        //pModel.categories = categories
+        //pModel.price = mProductModel.price.toDouble()
+        //pModel.title = mProductModel.name
+        //pModel.image = mProductModel.images.get(0).src
+        //pModel.url = mProductModel.external_url
 
         val colors = ArrayList<String>()
         val sizes = ArrayList<String>()
@@ -130,21 +132,22 @@ class ProductDetailActivity : AppBaseActivity() {
             }
         }
 
-        pModel.sizes = sizes
-        pModel.colors = colors
-        pModel.brand = brands[0]
-        SegmentifyManager.sendProductView(
-        pModel,
-        object : SegmentifyCallback<ArrayList<RecommendationModel>> {
-            override fun onDataLoaded(data: ArrayList<RecommendationModel>) {
-                data.forEach {
-                    Log.d("Product Page Detail: ", it.notificationTitle + " "+ it.actionId + " "+ it.errorString + " "+ it.instanceId)
-                }
+        //pModel.sizes = sizes
+        //pModel.colors = colors
+        //pModel.brand = brands[0]
+        //SegmentifyManager.sendProductView(
+            //pModel,
+            //object : SegmentifyCallback<ArrayList<RecommendationModel>> {
+            //    override fun onDataLoaded(data: ArrayList<RecommendationModel>) {
+            //        data.forEach {
+            //           Log.d("Product Page Detail: ", it.notificationTitle + " "+ it.actionId + " "+ it.errorString + " "+ it.instanceId)
+            //       }
+            //   }
+            //})
 
-            }
-        })
-
-
+        val event = DengageEvent(applicationContext)
+        event.productDetail(mProductModel.id.toString(),mProductModel.price.toDouble(), mProductModel.sale_price.toDouble(), "dolar",
+            "");
 
         intHeaderView()
         tvItemProductOriginalPrice.applyStrike()
@@ -268,17 +271,27 @@ class ProductDetailActivity : AppBaseActivity() {
             }
         }
 
-        val details = java.util.HashMap<String, Any>()
-        details.put("event_type", "add_basket")
-        details.put("page_type", "basket")
-        details.put("page_url","")
-        details.put("page_title", mProductModel.name)
-        details.put("product_id", mProductModel.id)
-        details.put("quantity ",1)
+        //val details = java.util.HashMap<String, Any>()
+        //details.put("event_type", "add_basket")
+        // details.put("page_type", "basket")
+        //details.put("page_url","")
+        //details.put("page_title", mProductModel.name)
+        //details.put("product_id", mProductModel.id)
+        //details.put("quantity ",1)
 
-        DengageManager.getInstance(applicationContext).sendDeviceEvent("user_events", details)
+        //DengageManager.getInstance(applicationContext).sendDeviceEvent("user_events", details)
 
-        SegmentifyManager.sendAddOrRemoveBasket("add", mProductModel.id.toString(),1,mProductModel.price.toDouble());
+        //SegmentifyManager.sendAddOrRemoveBasket("add", mProductModel.id.toString(),1,mProductModel.price.toDouble());
+
+        val event = DengageEvent(applicationContext)
+        val item = CardItem()
+        item.currency = "dolar"
+        item.discountedPrice = mProductModel.sale_price.toDouble()
+        item.price = mProductModel.price.toDouble()
+        item.productId = mProductModel.id.toString()
+        item.quantity = 1
+        item.variantId = "1"
+        event.addToBasket(item, "", "")
 
         addCart(getCartObject(mProductModel, mSelectedColors, size))
         btnAddCard.text = getString(R.string.lbl_remove_cart)
@@ -300,19 +313,20 @@ class ProductDetailActivity : AppBaseActivity() {
             isAddedTocart = false
 
 
-            val details = java.util.HashMap<String, Any>()
-            details.put("event_type", "remove_basket")
-            details.put("page_type", "mycart")
-            details.put("page_url","")
-            details.put("page_title", mProductModel.name)
-            details.put("product_id", mProductModel.id)
-            details.put("quantity ","")
+            //val details = java.util.HashMap<String, Any>()
+            //details.put("event_type", "remove_basket")
+            //details.put("page_type", "mycart")
+            //details.put("page_url","")
+            //details.put("page_title", mProductModel.name)
+            //details.put("product_id", mProductModel.id)
+            //details.put("quantity ","")
 
-            DengageManager.getInstance(applicationContext).sendDeviceEvent("user_events", details)
+            //DengageManager.getInstance(applicationContext).sendDeviceEvent("user_events", details)
 
+            //SegmentifyManager.sendAddOrRemoveBasket("remove",mProductModel.id.toString(),1,mProductModel.price.toDouble());
 
-
-            SegmentifyManager.sendAddOrRemoveBasket("remove",mProductModel.id.toString(),1,mProductModel.price.toDouble());
+            val event = DengageEvent(applicationContext)
+            event.removeFromBasket(mProductModel.id.toString(), "", 1, "")
 
         }, onNegativeClick = { dialog, _ ->
             dialog.dismiss()
@@ -348,7 +362,7 @@ class ProductDetailActivity : AppBaseActivity() {
         tvItemProductRating.text = mAvgRating.toString()
     }
 
-    fun setReviews(it: java.util.ArrayList<ProductReviewData>) {
+-    fun setReviews(it: java.util.ArrayList<ProductReviewData>) {
         val mReview: ArrayList<String> = ArrayList()
         it.forEach { review ->
             if (!mReview.contains(review.email)) {

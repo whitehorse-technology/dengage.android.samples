@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import com.dengage.sdk.DengageEvent
 import com.dengage.sdk.DengageManager
 import com.iqonic.shophop.AppBaseActivity
 import com.iqonic.shophop.R
@@ -34,17 +35,19 @@ class MyCartActivity : AppBaseActivity() {
         setContentView(R.layout.activity_my_cart)
         setToolbar(toolbar)
 
+        //val details = HashMap<String, Any>()
+        //details.put("event_type", "page_view")
+        //details.put("page_type", "basket")
+        //details.put("page_url","")
+        //details.put("page_title","")
+        //details.put("product_id ","")
+        //details.put("quantity ","")
 
-        val details = HashMap<String, Any>()
-        details.put("event_type", "page_view")
-        details.put("page_type", "basket")
-        details.put("page_url","")
-        details.put("page_title","")
-        details.put("product_id ","")
-        details.put("quantity ","")
+        val event = DengageEvent(applicationContext);
+        //event.basketPage();
 
-        DengageManager.getInstance(applicationContext).sendDeviceEvent("user_events", details)
-        DengageManager.getInstance(applicationContext).sendPageView(details);
+        //DengageManager.getInstance(applicationContext).sendDeviceEvent("user_events", details)
+        //DengageManager.getInstance(applicationContext).sendPageView(details);
 
         val model = PageModel()
         model.category = "Basket Page"

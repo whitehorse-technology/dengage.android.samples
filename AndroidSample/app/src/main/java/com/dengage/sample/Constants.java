@@ -11,8 +11,8 @@ public class Constants {
     //final static String INTEGRATION_KEY = "x9V_p_l_TEhVz_s_l_2Bho_s_l_lsfjMIsjEjGECyDzoldLHF7G3gi1GiUJBSJujlUqmeWN9dcOiTgpVSqlCybo83sNQVeTUbMo559FIeyL5XXOj_p_l_p4XidRgb2KA_s_l_3t_p_l_jcMpo_s_l_2aKrgG";
 
     // TEST
-    //final static String INTEGRATION_KEY = "Evke8NhhgLX6Gwo5QeggzCMFVloTnGjUSf0oWPUQM7mQxsia4pRkSuqCqhPtu_s_l_q7Ye9PemJYerIjEmd8qbEVNQL2_s_l__s_l_gN6vmS25Aj2EMk_s_l_2k1us1JkrjFgT3kbEDjuZqq";
+    final static String INTEGRATION_KEY = "Evke8NhhgLX6Gwo5QeggzCMFVloTnGjUSf0oWPUQM7mQxsia4pRkSuqCqhPtu_s_l_q7Ye9PemJYerIjEmd8qbEVNQL2_s_l__s_l_gN6vmS25Aj2EMk_s_l_2k1us1JkrjFgT3kbEDjuZqq";
 
     // PREPROD
-    final static String INTEGRATION_KEY = "ovoklhOER8JpdF5fB7vqe86T_p_l_iNDdU9C4veOIb0hCvbTB3RW7ZijhqERdbY7_s_l_mY6OIimKlyA2FqBfH3El3KCZ0Z_s_l_zcex_s_l_0pGfKEcs10MRbKbLdCdnF4r5n_p_l_8b8QAmlJI";
+    //final static String INTEGRATION_KEY = "ovoklhOER8JpdF5fB7vqe86T_p_l_iNDdU9C4veOIb0hCvbTB3RW7ZijhqERdbY7_s_l_mY6OIimKlyA2FqBfH3El3KCZ0Z_s_l_zcex_s_l_0pGfKEcs10MRbKbLdCdnF4r5n_p_l_8b8QAmlJI";
 }
