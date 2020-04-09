@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.RelativeLayout
+import com.dengage.sdk.DengageEvent
 import com.iqonic.shophop.R
 import com.iqonic.shophop.activity.DashBoardActivity
 import com.iqonic.shophop.activity.SignInUpActivity
@@ -15,6 +16,11 @@ import com.iqonic.shophop.utils.OTPEditText
 import com.iqonic.shophop.utils.extensions.*
 import kotlinx.android.synthetic.main.dialog_change_password.*
 import kotlinx.android.synthetic.main.fragment_sign_in.*
+import kotlinx.android.synthetic.main.fragment_sign_in.btnSignIn
+import kotlinx.android.synthetic.main.fragment_sign_in.btnSignUp
+import kotlinx.android.synthetic.main.fragment_sign_in.edtEmail
+import kotlinx.android.synthetic.main.fragment_sign_in.edtPassword
+import kotlinx.android.synthetic.main.fragment_sign_up.*
 import kotlinx.android.synthetic.main.layout_otp.*
 
 class SignInFragment : BaseFragment() {
@@ -73,9 +79,12 @@ class SignInFragment : BaseFragment() {
     private fun doLogin() {
         signIn(onResult = {
             if (it) {
+                DengageEvent.getInstance(activity?.applicationContext, activity?.intent).loginAction(edtEmail.textToString(), true, "form")
                 if (activity != null) {
                     activity!!.launchActivityWithNewTask<DashBoardActivity>()
                 }
+            } else {
+                DengageEvent.getInstance(activity?.applicationContext, activity?.intent).loginAction(edtEmail.textToString(), false, "form")
             }
         })
     }

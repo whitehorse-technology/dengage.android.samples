@@ -145,8 +145,8 @@ class ProductDetailActivity : AppBaseActivity() {
             //   }
             //})
 
-        val event = DengageEvent(applicationContext)
-        event.productDetail(mProductModel.id.toString(),mProductModel.price.toDouble(), mProductModel.sale_price.toDouble(), "dolar",
+        DengageEvent.getInstance(applicationContext, intent)
+            .productDetail(mProductModel.id.toString(), mProductModel.price.toDouble(), mProductModel.sale_price.toDouble(), "dolar",
             "");
 
         intHeaderView()
@@ -283,15 +283,6 @@ class ProductDetailActivity : AppBaseActivity() {
 
         //SegmentifyManager.sendAddOrRemoveBasket("add", mProductModel.id.toString(),1,mProductModel.price.toDouble());
 
-        val event = DengageEvent(applicationContext)
-        val item = CardItem()
-        item.currency = "dolar"
-        item.discountedPrice = mProductModel.sale_price.toDouble()
-        item.price = mProductModel.price.toDouble()
-        item.productId = mProductModel.id.toString()
-        item.quantity = 1
-        item.variantId = "1"
-        event.addToBasket(item, "", "")
 
         addCart(getCartObject(mProductModel, mSelectedColors, size))
         btnAddCard.text = getString(R.string.lbl_remove_cart)
@@ -325,8 +316,6 @@ class ProductDetailActivity : AppBaseActivity() {
 
             //SegmentifyManager.sendAddOrRemoveBasket("remove",mProductModel.id.toString(),1,mProductModel.price.toDouble());
 
-            val event = DengageEvent(applicationContext)
-            event.removeFromBasket(mProductModel.id.toString(), "", 1, "")
 
         }, onNegativeClick = { dialog, _ ->
             dialog.dismiss()
@@ -362,7 +351,7 @@ class ProductDetailActivity : AppBaseActivity() {
         tvItemProductRating.text = mAvgRating.toString()
     }
 
--    fun setReviews(it: java.util.ArrayList<ProductReviewData>) {
+    fun setReviews(it: java.util.ArrayList<ProductReviewData>) {
         val mReview: ArrayList<String> = ArrayList()
         it.forEach { review ->
             if (!mReview.contains(review.email)) {

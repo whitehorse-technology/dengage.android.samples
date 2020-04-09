@@ -6,6 +6,8 @@ import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.dengage.sdk.DengageEvent
+import com.dengage.sdk.models.CardItem
 import com.iqonic.shophop.AppBaseActivity
 import com.iqonic.shophop.R
 import com.iqonic.shophop.activity.DashBoardActivity
@@ -121,7 +123,29 @@ class MyCartFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
 
-        // TODO: send card view event (basket)
+        var items = ArrayList<CardItem>()
+        val list = getCartList()
+        var totalPrice = 0.0
+        list.forEach {
+            val item = CardItem()
+            item.variantId = it.variation_id.toString()
+            item.quantity = it.quantity
+            item.productId = it.product_id.toString()
+            item.currency = "usd"
+            item.price = it.product_price.toDouble()
+            item.discountedPrice = it.sale_price.toDouble()
+            items.add(item)
+
+            if (it.sale_price.isNotEmpty()) {
+                totalPrice += it.sale_price.toDouble() * it.quantity
+            } else {
+                if (it.product_price.isNotEmpty()) {
+                    totalPrice += it.product_price.toDouble() * it.quantity
+                }
+            }
+        };
+
+        DengageEvent.getInstance(activity?.applicationContext, activity?.intent).basketPage(items.toTypedArray(), totalPrice, "")
 
         rvCart.setVerticalLayout()
         rvNextTimeBuy.setVerticalLayout()

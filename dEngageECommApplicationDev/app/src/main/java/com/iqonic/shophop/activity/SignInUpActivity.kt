@@ -4,6 +4,7 @@ import android.os.Bundle
 import com.iqonic.shophop.AppBaseActivity
 import com.iqonic.shophop.R
 import android.widget.FrameLayout
+import com.dengage.sdk.DengageEvent
 import com.iqonic.shophop.fragments.SignInFragment
 import com.iqonic.shophop.fragments.SignUpFragment
 import com.iqonic.shophop.utils.extensions.addFragment
@@ -28,6 +29,7 @@ class SignInUpActivity : AppBaseActivity() {
     }
 
     fun loadSignUpFragment() {
+        DengageEvent.getInstance(applicationContext, intent).registerPage()
         if (mSignUpFragment.isAdded) {
             replaceFragment(mSignUpFragment, R.id.fragmentContainer)
             findViewById<FrameLayout>(R.id.fragmentContainer).fadeIn(500)
@@ -37,6 +39,7 @@ class SignInUpActivity : AppBaseActivity() {
     }
 
     fun loadSignInFragment() {
+        DengageEvent.getInstance(applicationContext, intent).loginPage()
         if (mSignInFragment.isAdded) {
             replaceFragment(mSignInFragment, R.id.fragmentContainer)
             findViewById<FrameLayout>(R.id.fragmentContainer).fadeIn(500)

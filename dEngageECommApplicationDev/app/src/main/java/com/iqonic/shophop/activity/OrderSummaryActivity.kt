@@ -318,11 +318,10 @@ class OrderSummaryActivity : AppBaseActivity() {
             ci.productId = it.product_id.toString()
             ci.quantity = it.quantity
             ci.variantId = it.variation_id.toString()
+            cardItems.add(ci)
         }
 
-        val event = DengageEvent(applicationContext)
-        event.orderSummary(cardItems.toTypedArray(),basketId,totalPrice,orderId,paymentMethod)
-
+        DengageEvent.getInstance(applicationContext, intent).orderSummary(cardItems.toTypedArray(),totalPrice, basketId,orderId,paymentMethod)
 
         launchActivity<PaymentActivity>(Constants.RequestCode.PAYMENT) {
             putExtra(Constants.KeyIntent.DATA, requestModel)

@@ -7,11 +7,14 @@ import android.os.Bundle
 import android.util.Log
 import com.dengage.sdk.DengageEvent
 import com.dengage.sdk.DengageManager
+import com.dengage.sdk.models.CardItem
 import com.iqonic.shophop.AppBaseActivity
 import com.iqonic.shophop.R
 import com.iqonic.shophop.fragments.MyCartFragment
 import com.iqonic.shophop.utils.Constants
 import com.iqonic.shophop.utils.extensions.addFragment
+import com.iqonic.shophop.utils.extensions.getCartList
+import com.iqonic.shophop.utils.extensions.getCartTotal
 import com.iqonic.shophop.utils.extensions.registerCartReceiver
 import com.segmentify.segmentifyandroidsdk.SegmentifyManager
 import com.segmentify.segmentifyandroidsdk.model.PageModel
@@ -43,22 +46,24 @@ class MyCartActivity : AppBaseActivity() {
         //details.put("product_id ","")
         //details.put("quantity ","")
 
-        val event = DengageEvent(applicationContext);
+        //DengageEvent.getInstance(applicationContext, intent)
         //event.basketPage();
 
         //DengageManager.getInstance(applicationContext).sendDeviceEvent("user_events", details)
         //DengageManager.getInstance(applicationContext).sendPageView(details);
 
-        val model = PageModel()
-        model.category = "Basket Page"
+        //val model = PageModel()
+        //model.category = "Basket Page"
 
-        SegmentifyManager.sendPageView(
-            model,
-            object : SegmentifyCallback<ArrayList<RecommendationModel>> {
-                override fun onDataLoaded(data: ArrayList<RecommendationModel>) {
-                    Log.d("Segmentify: ", data.toString())
-                }
-            })
+        //SegmentifyManager.sendPageView(
+        //    model,
+        //   object : SegmentifyCallback<ArrayList<RecommendationModel>> {
+        //       override fun onDataLoaded(data: ArrayList<RecommendationModel>) {
+        //           Log.d("Segmentify: ", data.toString())
+        //       }
+        //   })
+
+
 
         title = getString(R.string.menu_my_cart)
         registerCartReceiver(mCartItemChangedReceiver)

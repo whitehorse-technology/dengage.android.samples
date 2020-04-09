@@ -16,7 +16,9 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.dengage.sdk.DengageEvent
 import com.dengage.sdk.DengageManager
+import com.dengage.sdk.models.CardItem
 import com.iqonic.shophop.AppBaseActivity
 import com.iqonic.shophop.R
 import com.iqonic.shophop.ShopHopApp
@@ -132,6 +134,17 @@ fun AppBaseActivity.addCart(cartData: Key) {
         list.removeAt(pos)
     }
     list.add(cartData)
+
+    val item = CardItem()
+    item.currency = "dolar"
+    item.discountedPrice = cartData.sale_price.toDouble()
+    item.price = cartData.product_price.toDouble()
+    item.productId = cartData.product_id.toString()
+    item.quantity = cartData.quantity
+    item.variantId = cartData.variation_id.toString()
+
+    DengageEvent.getInstance(applicationContext, intent).addToBasket(item, "", "")
+
     getSharedPrefInstance().setValue(KEY_USER_CART, Gson().toJson(list))
     getSharedPrefInstance().setValue(KEY_CART_COUNT, list.size)
     //  sendMyCartBroadcast()
@@ -182,6 +195,8 @@ fun AppBaseActivity.removeItem(product: Key) {
     if (pos != -1) {
         list.removeAt(pos)
     }
+    DengageEvent.getInstance(applicationContext, intent).removeFromBasket(product.product_id.toString(), product.variation_id.toString(), product.quantity, "");
+
     getSharedPrefInstance().setValue(KEY_USER_CART, Gson().toJson(list))
     getSharedPrefInstance().setValue(KEY_CART_COUNT, list.size)
     sendCartCountChangeBroadcast()
@@ -439,11 +454,8 @@ fun AppBaseActivity.registerUser(requestModel: RequestModel, isUpdate: Boolean) 
         }
     }
 
-    if(requestModel.lastName != null && !TextUtils.isEmpty(requestModel.lastName)) {
-        DengageManager.getInstance(applicationContext).setContactKey(requestModel.lastName)
-        //DengageManager.setContactProperty("surname", requestModel.lastName)
-    }
-
+    DengageEvent.getInstance(applicationContext, intent).registerAction(requestModel.userEmail, true, "form")
+    DengageManager.getInstance(applicationContext).setContactKey(requestModel.userEmail)
     DengageManager.getInstance(applicationContext).syncSubscription()
 
     sendProfileUpdateBroadcast()

@@ -12,9 +12,6 @@ import android.view.MenuItem;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.dengage.sdk.DengageEvent;
-import com.dengage.sdk.models.CardItem;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,49 +26,6 @@ public class DeepLinkActivity extends AppCompatActivity {
 
 
         Context context = getApplicationContext();
-
-        DengageEvent.getInstance(context, getIntent()).homePage();
-        DengageEvent.getInstance(context, getIntent()).productDetail("12", 1.99, 0.99,
-                "usd", "1");
-        DengageEvent.getInstance(context, getIntent()).promotionPage("1");
-        DengageEvent.getInstance(context, getIntent()).categoryPage("1", "");
-        DengageEvent.getInstance(context, getIntent()).searchPage("adidas", 10);
-
-        HashMap<String, List<String>> bundle = new HashMap<>();
-
-        ArrayList<String> brand = new ArrayList<>();
-        brand.add("adidas");
-        brand.add("puma");
-        bundle.put("brand", brand);
-
-        ArrayList<String> color = new ArrayList<>();
-        color.add("black");
-        color.add("white");
-        bundle.put("color", color);
-
-        DengageEvent.getInstance(context, getIntent()).refinement(bundle,10);
-
-        DengageEvent.getInstance(context, getIntent()).loginPage();
-        DengageEvent.getInstance(context, getIntent()).loginAction("112", true, "form");
-
-        CardItem ci = new CardItem();
-        ci.setCurrency("usd");
-        ci.setDiscountedPrice(0.99);
-        ci.setPrice(1.99);
-        ci.setProductId("1");
-        ci.setQuantity(1);
-        ci.setVariantId("2");
-        DengageEvent.getInstance(context, getIntent()).addToBasket(ci, "Product Detail Page", "1");
-
-        DengageEvent.getInstance(context, getIntent()).removeFromBasket("1", "2", 1, "2");
-
-        DengageEvent.getInstance(context, getIntent()).addToBasket(ci, "Product Detail Page", "1");
-
-        ArrayList<CardItem> cis = new ArrayList<>();
-        cis.add(ci);
-        DengageEvent.getInstance(context, getIntent()).basketPage(cis.toArray(new CardItem[cis.size()]), 0.99, "1");
-
-        DengageEvent.getInstance(context, getIntent()).orderSummary(cis.toArray(new CardItem[cis.size()]), "1", 0.99, "1", "paypal");
 
 
         if (getIntent().getAction() == Intent.ACTION_VIEW) {

@@ -71,9 +71,8 @@ class SubCategoryActivity : AppBaseActivity() {
         //details.put("product_id ","")
         //details.put("quantity ", "")
 
-        val event = DengageEvent(applicationContext);
+        DengageEvent.getInstance(applicationContext, intent).categoryPage(mCategoryData.id.toString(), "");
         //event.sendDeviceEvent("user_events", details)
-        event.categoryPage(mCategoryData.id.toString(), "");
 
         val model = PageModel()
         model.category = "Category Page"

@@ -5,9 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
-import com.dengage.sdk.DengageEvent;
 import com.dengage.sdk.DengageManager;
-import com.dengage.sdk.models.CardItem;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -46,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
         final DengageManager manager =  DengageManager
                 .getInstance(context)
                 .setLogStatus(true)
-                .useCloudSubscription(true)
                 .setIntegrationKey(Constants.INTEGRATION_KEY)
                 .init();
 
@@ -57,10 +54,10 @@ public class MainActivity extends AppCompatActivity {
         TextView txtContactKey = (TextView)findViewById(R.id.txtContactKey);
 
         txtIntegrationKey.setText(Constants.INTEGRATION_KEY);
-        txtDeviceId.setText(manager.getSubscription().getDeviceId());
-        txtAdvertisingId.setText(manager.getSubscription().getAdvertisingId());
-        txtToken.setText(manager.getSubscription().getToken());
-        txtContactKey.setText(manager.getSubscription().getContactKey());
+        txtDeviceId.setText(manager.getDeviceId());
+        txtAdvertisingId.setText(manager.getAdvertisingId());
+        txtToken.setText(manager.getToken());
+        txtContactKey.setText(manager.getContactKey());
 
         Button btnContactKey = (Button) findViewById(R.id.btnContactKey);
         btnContactKey.setOnClickListener(new View.OnClickListener() {
@@ -80,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 TextView txtDeviceId = (TextView)findViewById(R.id.txtDeviceId);
                 txtDeviceId.setText("Retrieving...");
-                String udid = manager.getSubscription().getDeviceId();
+                String udid = manager.getDeviceId();
                 if(udid != "") {
                     txtDeviceId.setText(udid);
                 } else {
@@ -95,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 TextView txtToken = (TextView)findViewById(R.id.txtToken);
                 txtToken.setText("Retrieving...");
-                String token = manager.getSubscription().getToken();
+                String token = manager.getToken();
                 if(token != "") {
                     txtToken.setText(token);
                     Log.d("DenPush", "Token: "+ token);
@@ -111,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 TextView txtAdvertisingId = (TextView)findViewById(R.id.txtAdvertisingId);
                 txtAdvertisingId.setText("Retrieving...");
-                String adid = manager.getSubscription().getAdvertisingId();
+                String adid = manager.getAdvertisingId();
                 if(adid != "") {
                     txtAdvertisingId.setText(adid);
                 } else {

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.dengage.sdk.DengageEvent
 import com.iqonic.shophop.AppBaseActivity
 import com.iqonic.shophop.R
 import com.iqonic.shophop.activity.OTPActivity
@@ -50,7 +51,6 @@ class SignUpFragment : BaseFragment() {
         requestModel.firstName = edtFirstName.textToString()
         requestModel.lastName = edtLastName.textToString()
         requestModel.password = edtPassword.textToString()
-
 
         (activity as AppBaseActivity).registerUser(requestModel, false)
         activity!!.launchActivity<OTPActivity>()

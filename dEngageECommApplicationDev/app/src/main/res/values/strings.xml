@@ -205,7 +205,7 @@
     <string name="lbl_change_pswd">Change Password</string>
     <string name="lbl_edit_profile">Edit Profile</string>
     <string name="hint_first_name">First Name</string>
-    <string name="hint_last_name">ContactKey</string>
+    <string name="hint_last_name">Last Name</string>
     <string name="hint_new_password">New Password</string>
     <string name="lbl_change_now">Change Now</string>
     <string name="hint_enter_your_contact_number">Enter your contact number</string>

@@ -35,10 +35,9 @@ class ShopHopApp : MultiDexApplication() {
         val manager = DengageManager
                 .getInstance(context)
                 .setLogStatus(true)
+                .useCloudSubscription(true)
                 .setIntegrationKey(IntegrationKeys.INTEGRATION_KEY)
                 .init()
-
-        val event = DengageEvent(applicationContext);
 
         //SegmentifyManager.config(this, segmentifyAppKey, segmentifyDataCenterUrl, segmentifysubDomain)
 

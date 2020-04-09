@@ -279,8 +279,8 @@ class DashBoardActivity : AppBaseActivity() {
             }
         }
 
-        val name = aFragment.javaClass.name
-        val validname = name.replace("com.iqonic.shophop.fragments.", "").replace("Fragment", "").replace("MyCart", "basket")
+        //val name = aFragment.javaClass.name
+        //val validname = name.replace("com.iqonic.shophop.fragments.", "").replace("Fragment", "").replace("MyCart", "basket")
 
         //val details = HashMap<String, Any>()
         //details.put("event_type", "page_view")
@@ -289,10 +289,8 @@ class DashBoardActivity : AppBaseActivity() {
         //details.put("page_title","")
         //details.put("product_id ","")
         //details.put("quantity ","")
-
-        val event = DengageEvent(applicationContext);
         // event.sendDeviceEvent("user_events", details);
-        event.homePage();
+
 
         if (selectedFragment != null) {
             if (selectedFragment == aFragment) {

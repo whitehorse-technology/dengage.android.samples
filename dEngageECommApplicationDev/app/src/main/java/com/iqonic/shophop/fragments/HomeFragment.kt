@@ -5,6 +5,7 @@ import android.view.*
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.dengage.sdk.DengageEvent
 import com.iqonic.shophop.AppBaseActivity
 import com.iqonic.shophop.R
 import com.iqonic.shophop.activity.DashBoardActivity
@@ -60,6 +61,7 @@ class HomeFragment : BaseFragment() {
         // TODO: send home page view event
         imgLayoutParams = activity?.productLayoutParams()
 
+        DengageEvent.getInstance(activity?.applicationContext, activity?.intent).homePage();
 
         setRecyclerView(rcvRecentSearch)
         setRecyclerView(rcvNewestProduct)

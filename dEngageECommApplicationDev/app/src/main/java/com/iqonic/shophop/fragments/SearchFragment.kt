@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
+import com.dengage.sdk.DengageEvent
 import com.iqonic.shophop.AppBaseActivity
 import com.iqonic.shophop.R
 import com.iqonic.shophop.base.BaseRecyclerAdapter
@@ -66,6 +67,8 @@ class SearchFragment : BaseFragment() {
     }
 
     private fun searchProducts(query: String) {
+
+
         filterList.clear()
         list.forEach {
             if (it.name.toLowerCase(Locale.getDefault()).contains(query)){
@@ -81,6 +84,8 @@ class SearchFragment : BaseFragment() {
             pbLoader.hide()
             adapter.addItems(filterList)
         }
+
+        DengageEvent.getInstance(activity?.applicationContext, activity?.intent).searchPage(query, filterList.size.toLong())
     }
 
     private fun getAdapter(): BaseRecyclerAdapter<ProductModel, ItemNewestProductBinding> {
