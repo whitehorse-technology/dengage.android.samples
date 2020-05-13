@@ -24,11 +24,9 @@ public class DeepLinkActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
         Context context = getApplicationContext();
 
-
-        if (getIntent().getAction() == Intent.ACTION_VIEW) {
+        if (getIntent().getAction().equals(Intent.ACTION_VIEW)) {
             Uri data = getIntent().getData();
 
             if (data != null) {
