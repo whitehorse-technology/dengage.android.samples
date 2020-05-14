@@ -21,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Log.i(Constants.LOG_TAG, "activity started.");
+
         btnToken = findViewById(R.id.btn_get_token);
         btnToken.setOnClickListener(new View.OnClickListener() {
             @Override
