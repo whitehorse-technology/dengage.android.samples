@@ -30,6 +30,8 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui:2.0.0'
 
     // Add this line
+    implementation 'com.google.code.gson:gson:2.8.6'
+    // Add this line
     implementation 'com.google.firebase:firebase-core:17.2.2'
     // Add this line
     implementation 'com.google.firebase:firebase-messaging:20.1.0'

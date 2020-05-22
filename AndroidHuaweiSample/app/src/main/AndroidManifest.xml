@@ -21,14 +21,14 @@
         </activity>
 
         <service
-            android:name="dengage.android.push.huawei.MessagingService"
+            android:name=".MyMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.huawei.push.action.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
-        <receiver android:name="dengage.android.push.NotificationReceiver"
+        <receiver android:name=".MyNotificationReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.dengage.push.intent.RECEIVE" />

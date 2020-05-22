@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
-import dengage.android.push.NotificationReceiver;
+public class MyNotificationReceiver extends BroadcastReceiver {
 
-public class MyNotificationReceiver extends NotificationReceiver {
-
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        Log.d(Constants.LOG_TAG, "onReceive method called.");
+    }
 }

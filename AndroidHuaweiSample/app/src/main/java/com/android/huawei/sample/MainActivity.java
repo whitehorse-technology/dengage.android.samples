@@ -2,6 +2,7 @@ package com.android.huawei.sample;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -15,19 +16,21 @@ import com.huawei.hms.aaid.HmsInstanceId;
 
 public class MainActivity extends AppCompatActivity {
     private Button btnToken;
-    private String pushtoken;
+    private String deviceToken;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Log.i(Constants.LOG_TAG, "activity started.");
+        Log.d(Constants.LOG_TAG, "Main Activity Created.");
 
+        getToken();
         btnToken = findViewById(R.id.btn_get_token);
         btnToken.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i(Constants.LOG_TAG, "button clicked.");
+                Log.d(Constants.LOG_TAG, "Button Clicked.");
                 getToken();
             }
         });
@@ -38,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
      * get token
      */
     private void getToken() {
-        Log.i(Constants.LOG_TAG, "get token: begin");
+        Log.d(Constants.LOG_TAG, "Getting Token.");
 
         // get token
         new Thread() {
@@ -47,14 +50,13 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     // read from agconnect-services.json
                     String appId = AGConnectServicesConfig.fromContext(MainActivity.this).getString("client/app_id");
-                    pushtoken = HmsInstanceId.getInstance(MainActivity.this).getToken(appId, "HCM");
-                    if(!TextUtils.isEmpty(pushtoken)) {
-                        Log.i(Constants.LOG_TAG, "get token:" + pushtoken);
-                        showLog(pushtoken);
+                    deviceToken = HmsInstanceId.getInstance(MainActivity.this).getToken(appId, "HCM");
+                    if(!TextUtils.isEmpty(deviceToken)) {
+                        Log.d(Constants.LOG_TAG, "Token: "+ deviceToken);
+                        showLog(deviceToken);
                     }
                 } catch (Exception e) {
-                    Log.i(Constants.LOG_TAG,"getToken failed, " + e);
-
+                    Log.d(Constants.LOG_TAG, "Token: "+ deviceToken);
                 }
             }
         }.start();
@@ -67,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 View tvView = findViewById(R.id.txt_log);
                 if (tvView instanceof TextView) {
                     ((TextView) tvView).setText(log);
-                    Toast.makeText(MainActivity.this, pushtoken, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, deviceToken, Toast.LENGTH_SHORT).show();
                 }
             }
         });

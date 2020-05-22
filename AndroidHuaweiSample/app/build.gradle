@@ -6,7 +6,7 @@ android {
     buildToolsVersion "29.0.2"
 
     defaultConfig {
-        applicationId "com.android.huawei.sample"
+        applicationId "dengage.android.push.huawei.sample"
         minSdkVersion 17
         targetSdkVersion 29
         versionCode 1
@@ -46,6 +46,4 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    implementation files('libs/dengage.android.push.jar')
-    implementation files('libs/dengage.android.push.huawei.jar')
 }

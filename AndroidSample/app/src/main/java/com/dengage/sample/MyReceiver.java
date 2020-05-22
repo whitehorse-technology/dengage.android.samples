@@ -18,23 +18,17 @@ import com.dengage.sdk.models.CarouselItem;
 import com.dengage.sdk.models.Message;
 
 public class MyReceiver extends NotificationReceiver {
-
     @Override
     protected void onCarouselRender(Context context, Intent intent, Message message) {
+        // accessing to carousel items with its own images.
         CarouselItem[] items = message.getCarouselContent();
-        int size = items.length;
-        int current = 0;
-        int left = (current - 1 + size) % size;
-        int right = (current + 1) % size;
 
-        Bitmap imgLeft = Utils.loadImageFromStorage(items[left].getMediaFileLocation(), items[left].getMediaFileName());
-        Bitmap imgCurrent = Utils.loadImageFromStorage(items[current].getMediaFileLocation(), items[current].getMediaFileName());
-        Bitmap imgRight = Utils.loadImageFromStorage(items[right].getMediaFileLocation(), items[right].getMediaFileName());
+        // show first image
+        Bitmap img = Utils.loadImageFromStorage(items[0].getMediaFileLocation(), items[0].getMediaFileName());
+        String itemTitle = items[0].getTitle();
+        String itemDesc = items[0].getDescription();
 
-        String itemTitle = items[current].getTitle();
-        String itemDesc = items[current].getDescription();
-
-        // set intets (right button, left button, item click)
+        // set intents (right button, left button, item click)
         Intent itemIntent = getItemClickIntent(intent.getExtras(), context.getPackageName());
         Intent leftIntent = getLeftItemIntent(intent.getExtras(), context.getPackageName());
         Intent rightIntent = getRightItemIntent(intent.getExtras(), context.getPackageName());
@@ -51,31 +45,31 @@ public class MyReceiver extends NotificationReceiver {
         PendingIntent contentPendingIntent = PendingIntent.getBroadcast(context, 5,
                 contentIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        // set views for the layout
-        RemoteViews collapsedView = new RemoteViews(context.getPackageName(), R.layout.den_carousel_collapsed);
+        // set views for layout. please notice that we use den_carousel_landscape.xml file.
+        RemoteViews collapsedView = new RemoteViews(context.getPackageName(), 		R.layout.den_carousel_collapsed);
         collapsedView.setTextViewText(R.id.den_carousel_title, message.getTitle());
         collapsedView.setTextViewText(R.id.den_carousel_message, message.getMessage());
-        RemoteViews carouselView = new RemoteViews(context.getPackageName(), R.layout.den_carousel_portrait);
+        RemoteViews carouselView = new RemoteViews(context.getPackageName(), R.layout.den_carousel_landscape);
         carouselView.setTextViewText(R.id.den_carousel_title, message.getTitle());
         carouselView.setTextViewText(R.id.den_carousel_message, message.getMessage());
         carouselView.setTextViewText(R.id.den_carousel_item_title, itemTitle);
         carouselView.setTextViewText(R.id.den_carousel_item_description, itemDesc);
-        carouselView.setImageViewBitmap(R.id.den_carousel_portrait_left_image, imgLeft);
-        carouselView.setImageViewBitmap(R.id.den_carousel_portrait_current_image, imgCurrent);
-        carouselView.setImageViewBitmap(R.id.den_carousel_portrait_right_image, imgRight);
-        carouselView.setOnClickPendingIntent(R.id.den_carousel_left_arrow, carouselLeftIntent);
-        carouselView.setOnClickPendingIntent(R.id.den_carousel_portrait_current_image, carouseItemIntent);
+        carouselView.setImageViewBitmap(R.id.den_carousel_landscape_image, img);
+        carouselView.setOnClickPendingIntent(R.id.den_carousel_landscape_image, carouseItemIntent);
         carouselView.setOnClickPendingIntent(R.id.den_carousel_item_title, carouseItemIntent);
         carouselView.setOnClickPendingIntent(R.id.den_carousel_item_description, carouseItemIntent);
-        carouselView.setOnClickPendingIntent(R.id.den_carousel_right_arrow, carouselRightIntent);
-        // create channelId
+        carouselView.setOnClickPendingIntent(R.id.den_carousel_left_image, carouselLeftIntent);
+        carouselView.setOnClickPendingIntent(R.id.den_carousel_right_image, carouselRightIntent);
+
+        // create channel
         String channelId = null;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel notificationChannel = getNotificationChannel();
             createNotificationChannel(context, notificationChannel);
             channelId = notificationChannel.getId();
         }
-        // set views for the notification
+
+        // build notification with the layout.
         Notification notification = new NotificationCompat.Builder(context, channelId)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setCustomContentView(collapsedView)
@@ -83,36 +77,35 @@ public class MyReceiver extends NotificationReceiver {
                 .setContentIntent(contentPendingIntent)
                 .setDeleteIntent(deletePendingIntent)
                 .build();
-        // show message
+
+        // show notification
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
         notificationManager.notify(message.getMessageSource(), message.getMessageId(), notification);
     }
 
     @Override
     protected void onCarouselReRender(Context context, Intent intent, Message message) {
+        // accessing the carousel items with thei90r own images.
         CarouselItem[] items = message.getCarouselContent();
+        // find current item to show prev/next items.
         Bundle bundle = intent.getExtras();
-        int prevIndex = bundle.getInt("current");
+        int size = message.getCarouselContent().length;
         String navigation = bundle.getString("navigation", "right");
-        int size = items.length;
-        int current = 0;
+        int current = bundle.getInt("current", 0);
+        int newIndex = 0;
         if (navigation.equals("right")) {
-            current = (prevIndex + 1) % size;
+            newIndex = (current + 1) % size;
         } else {
-            current = (prevIndex - 1 + size) % size;
+            newIndex = (current - 1 + size) % size;
         }
-        int right = (current + 1) % size;
-        int left = (current - 1 + size) % size;
-        intent.putExtra("current", current);
+        intent.putExtra("current", newIndex);
 
-        Bitmap imgLeft = Utils.loadImageFromStorage(items[left].getMediaFileLocation(), items[left].getMediaFileName());
-        Bitmap imgCurrent = Utils.loadImageFromStorage(items[current].getMediaFileLocation(), items[current].getMediaFileName());
-        Bitmap imgRight = Utils.loadImageFromStorage(items[right].getMediaFileLocation(), items[right].getMediaFileName());
+        // accessing the current item.
+        Bitmap img = Utils.loadImageFromStorage(items[newIndex].getMediaFileLocation(), items[newIndex].getMediaFileName());
+        String itemTitle = items[newIndex].getTitle();
+        String itemDesc = items[newIndex].getDescription();
 
-        String itemTitle = items[current].getTitle();
-        String itemDesc = items[current].getDescription();
-
-        // set intents (next button, rigth button and item click)
+        // set intents (right/left button, item click)
         Intent itemIntent = getItemClickIntent(intent.getExtras(), context.getPackageName());
         Intent leftIntent = getLeftItemIntent(intent.getExtras(), context.getPackageName());
         Intent rightIntent = getRightItemIntent(intent.getExtras(), context.getPackageName());
@@ -133,27 +126,27 @@ public class MyReceiver extends NotificationReceiver {
         RemoteViews collapsedView = new RemoteViews(context.getPackageName(), R.layout.den_carousel_collapsed);
         collapsedView.setTextViewText(R.id.den_carousel_title, message.getTitle());
         collapsedView.setTextViewText(R.id.den_carousel_message, message.getMessage());
-        RemoteViews carouselView = new RemoteViews(context.getPackageName(), R.layout.den_carousel_portrait);
+        RemoteViews carouselView = new RemoteViews(context.getPackageName(), R.layout.den_carousel_landscape);
         carouselView.setTextViewText(R.id.den_carousel_title, message.getTitle());
         carouselView.setTextViewText(R.id.den_carousel_message, message.getMessage());
         carouselView.setTextViewText(R.id.den_carousel_item_title, itemTitle);
         carouselView.setTextViewText(R.id.den_carousel_item_description, itemDesc);
-        carouselView.setImageViewBitmap(R.id.den_carousel_portrait_left_image, imgLeft);
-        carouselView.setImageViewBitmap(R.id.den_carousel_portrait_current_image, imgCurrent);
-        carouselView.setImageViewBitmap(R.id.den_carousel_portrait_right_image, imgRight);
-        carouselView.setOnClickPendingIntent(R.id.den_carousel_left_arrow, carouselLeftIntent);
-        carouselView.setOnClickPendingIntent(R.id.den_carousel_portrait_current_image, carouseItemIntent);
+        carouselView.setImageViewBitmap(R.id.den_carousel_landscape_image, img);
+        carouselView.setOnClickPendingIntent(R.id.den_carousel_landscape_image, carouseItemIntent);
         carouselView.setOnClickPendingIntent(R.id.den_carousel_item_title, carouseItemIntent);
         carouselView.setOnClickPendingIntent(R.id.den_carousel_item_description, carouseItemIntent);
-        carouselView.setOnClickPendingIntent(R.id.den_carousel_right_arrow, carouselRightIntent);
-        // create a channel id.
+        carouselView.setOnClickPendingIntent(R.id.den_carousel_left_image, carouselLeftIntent);
+        carouselView.setOnClickPendingIntent(R.id.den_carousel_right_image, carouselRightIntent);
+
+        // create channel
         String channelId = null;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel notificationChannel = getNotificationChannel();
             createNotificationChannel(context, notificationChannel);
             channelId = notificationChannel.getId();
         }
-        // set your views for the notification
+
+        // build notification with the layout.
         Notification notification = new NotificationCompat.Builder(context, channelId)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setCustomContentView(collapsedView)
@@ -161,7 +154,8 @@ public class MyReceiver extends NotificationReceiver {
                 .setContentIntent(contentPendingIntent)
                 .setDeleteIntent(deletePendingIntent)
                 .build();
-        // show message again silently with next,prev and current item.
+
+        // show notification silently with curent item.
         notification.flags |= Notification.FLAG_AUTO_CANCEL;
         notification.flags |= Notification.FLAG_ONLY_ALERT_ONCE;
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
