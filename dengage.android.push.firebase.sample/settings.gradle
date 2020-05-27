@@ -1,0 +1,2 @@
+rootProject.name='dengage.android.push.firebase.sample'
+include ':app'
