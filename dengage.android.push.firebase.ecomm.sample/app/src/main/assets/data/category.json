@@ -1,0 +1,53 @@
+[
+  {
+    "count": 1,
+    "description": "",
+    "id": 100,
+    "isSelected": false,
+    "menu_order": 0,
+    "name": "electronics",
+    "parent": 0,
+    "slug": "electronics"
+  },
+  {
+    "count": 2,
+    "description": "",
+    "id": 100,
+    "isSelected": false,
+    "menu_order": 0,
+    "name": "mobile",
+    "parent": 0,
+    "slug": "mobile"
+  },
+  {
+    "count": 3,
+    "description": "",
+    "id": 100,
+    "isSelected": false,
+    "menu_order": 0,
+    "name": "fashion",
+    "parent": 0,
+    "slug": "fashion"
+  },
+  {
+    "count": 4,
+    "description": "",
+    "id": 100,
+    "isSelected": false,
+    "menu_order": 0,
+    "name": "games",
+    "parent": 0,
+    "slug": "games"
+  },
+  {
+    "count": 5,
+    "description": "",
+    "id": 100,
+    "isSelected": false,
+    "menu_order": 0,
+    "name": "sports",
+    "parent": 0,
+    "slug": "sports"
+  }
+]
+

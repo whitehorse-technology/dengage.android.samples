@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+                name="model"
+                type="com.iqonic.shophop.models.Key"/>
+        <variable
+            name="callback"
+            type="com.iqonic.shophop.base.BaseRecyclerAdapter.OnClickListener" />
+    </data>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:baselineAligned="false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{(view) -> callback.onClick(view,model)}"
+        android:layout_marginStart="@dimen/spacing_standard_new"
+        android:layout_marginEnd="@dimen/spacing_standard_new"
+        android:layout_marginBottom="@dimen/spacing_standard_new"
+        android:background="@color/itemText_background">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/_1sdp"
+            android:background="@drawable/bg_ractangal_stroked"
+            android:layout_weight="1.5"
+            >
+
+            <ImageView
+                android:id="@+id/ivProduct"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:contentDescription="@string/text_todo"
+                android:src="@drawable/ic_product1" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/rl_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                    android:id="@+id/tvProductName"
+                    android:textAppearance="@style/FontSemiBold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_control"
+                    android:paddingStart="@dimen/spacing_standard_new"
+                    android:paddingEnd="@dimen/spacing_control"
+                    android:text="@{model.product_name}"
+                    android:textColor="@color/textColorPrimary"
+                    android:textSize="@dimen/font_size_medium"
+                    tools:ignore="MissingPrefix"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/spacing_standard_new"
+                android:paddingEnd="@dimen/spacing_control">
+
+                <ImageView
+                    android:id="@+id/ivChecked"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:contentDescription="@string/text_todo"
+                    android:background="@drawable/bg_circle_color"
+                    android:padding="@dimen/spacing_control_half"
+                    android:src="@drawable/ic_check"
+                    android:tint="@color/white" />
+
+                <TextView
+                        android:id="@+id/tvSize"
+                        android:textAppearance="@style/FontMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_middle"
+                        android:text="@{model.product_size}"
+                        android:textColor="@color/textColorPrimary"
+                        android:textSize="@dimen/font_size_small"
+                        tools:ignore="MissingPrefix"/>
+
+                <LinearLayout
+                    android:id="@+id/ll_qty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_standard_new"
+                    android:background="@drawable/bg_ractangal_stroked"
+                    android:gravity="center_vertical"
+                    android:paddingStart="@dimen/spacing_medium"
+                    android:paddingTop="@dimen/spacing_control_half"
+                    android:paddingEnd="@dimen/spacing_control"
+                    android:paddingBottom="@dimen/spacing_control_half"
+                    android:onClick="@{(view) -> callback.onClick(view,model)}"
+                    android:visibility="visible">
+
+                    <TextView
+                            android:textAppearance="@style/FontMedium"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/lbl_qty"
+                            android:textColor="@color/textColorPrimary"
+                            android:textSize="@dimen/font_size_small"
+                            tools:ignore="MissingPrefix"/>
+
+                    <TextView
+                        android:id="@+id/qty_spinner"
+                        android:textAppearance="@style/FontMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_control"
+                        android:entries="@array/qty_array"
+                        android:textColor="@color/textColorPrimary"
+                        android:textSize="@dimen/font_size_small"
+                        tools:ignore="MissingPrefix" />
+
+                    <ImageView
+                        android:id="@+id/ivDropDown"
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_gravity="center_vertical"
+                        android:padding="@dimen/_3sdp"
+                        android:contentDescription="@string/text_todo"
+                        android:src="@drawable/ic_drop_down" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:paddingStart="@dimen/spacing_standard_new"
+                android:paddingEnd="@dimen/spacing_control">
+
+                <TextView
+                        android:id="@+id/tvPrice"
+                        android:textAppearance="@style/FontSemiBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/font_size_medium"
+                        tools:ignore="MissingPrefix"/>
+
+                <TextView
+                        android:id="@+id/tvOriginalPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_control"
+                        android:textColor="@color/textColorSecondary"
+                        android:textSize="@dimen/font_size_micro"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_control"
+                android:layout_marginBottom="@dimen/spacing_control"
+                android:paddingStart="@dimen/spacing_standard_new"
+                android:paddingEnd="@dimen/spacing_control">
+
+                <TextView
+                    android:textAppearance="@style/FontMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lbl_delivered_by"
+                    android:textColor="@color/textColorSecondary"
+                    android:textSize="@dimen/font_size_nano"
+                    tools:ignore="MissingPrefix" />
+
+                <TextView
+                        android:id="@+id/tvDeliveryDate"
+                        android:textAppearance="@style/FontMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_control_half"
+                        android:text="@string/text_date"
+                        android:textColor="@color/textColorPrimary"
+                        android:textSize="@dimen/font_size_nano"/>
+
+                <View
+                    android:layout_width="@dimen/spacing_control_half"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/spacing_control_half"
+                    android:layout_marginTop="@dimen/spacing_control_half"
+                    android:layout_marginBottom="@dimen/spacing_control_half"
+                    android:background="@color/view_color" />
+
+                <TextView
+                    android:id="@+id/tvDeliveryCost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_control_half"
+                    android:text="@string/lbl_free"
+                    android:textColor="@color/green"
+                    android:textSize="@dimen/font_size_nano" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_width"
+                android:layout_marginTop="@dimen/spacing_control"
+                android:background="@color/view_color" />
+
+            <LinearLayout
+                android:id="@+id/llButton"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:id="@+id/llMoveTocart"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:visibility="gone"
+                    android:onClick="@{(view) -> callback.onClick(view,model)}"
+                    android:paddingTop="@dimen/spacing_standard"
+                    android:paddingBottom="@dimen/spacing_standard"
+                    android:gravity="center">
+
+                    <TextView
+                        style="@style/CartButton"
+                        android:textSize="@dimen/font_size_nano"
+                        android:drawableStart="@drawable/move_4"
+                        android:text="@string/lbl_move_to_cart" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llNextTimeBuy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="@{(view) -> callback.onClick(view,model)}"
+
+                    android:paddingTop="@dimen/spacing_standard"
+                    android:paddingBottom="@dimen/spacing_standard"
+                    android:gravity="center">
+
+                    <TextView
+                        style="@style/CartButton"
+                        android:textSize="@dimen/font_size_nano"
+                        android:drawableStart="@drawable/move_4"
+                        android:text="@string/lbl_next_time_buy" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="@dimen/_1sdp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/spacing_control_half"
+                    android:layout_marginTop="@dimen/spacing_control_half"
+                    android:layout_marginBottom="@dimen/spacing_control_half"
+                    android:background="@color/view_color" />
+
+                <LinearLayout
+                    android:id="@+id/llRemove"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.3"
+                    android:onClick="@{(view) -> callback.onClick(view,model)}"
+                    android:paddingTop="@dimen/spacing_standard"
+                    android:paddingBottom="@dimen/spacing_standard"
+                    android:gravity="center">
+
+                    <TextView
+                        style="@style/CartButton"
+                        android:textSize="@dimen/font_size_nano"
+                        android:drawableStart="@drawable/ic_delete"
+                        android:text="@string/lbl_remove" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
+</layout>

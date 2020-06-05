@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.iqonic.shophop.models.CategoryData" />
+
+        <variable
+            name="callback"
+            type="com.iqonic.shophop.base.BaseRecyclerAdapter.OnClickListener" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/llMen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:onClick="@{(view) -> callback.onClick(view,model)}"
+        android:orientation="vertical"
+        android:layout_marginStart="@dimen/spacing_standard_new"
+        android:layout_marginTop="@dimen/spacing_standard"
+        android:layout_marginBottom="@dimen/spacing_standard">
+
+        <ImageView
+            android:id="@+id/ivCategory"
+            style="@style/CatIcon"
+            android:background="@drawable/bg_circle_category"
+            android:src="@drawable/ic_home"
+            android:tint="@color/white"
+            android:contentDescription="@string/text_todo"
+            app:srcCompat="@drawable/ic_home" />
+
+        <TextView
+            android:id="@+id/tvCatName"
+            style="@style/CatText"
+            android:paddingStart="@dimen/spacing_standard"
+            android:paddingTop="@dimen/spacing_control"
+            android:paddingEnd="@dimen/spacing_standard"
+            android:paddingBottom="@dimen/spacing_control"
+            android:text="@{model.name}"
+            android:textColor="@color/colorPrimary"
+            tools:text="Clothes" />
+
+    </LinearLayout>
+</layout>

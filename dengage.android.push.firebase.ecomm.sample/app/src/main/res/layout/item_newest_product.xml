@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.iqonic.shophop.models.ProductModel" />
+
+        <variable
+            name="callback"
+            type="com.iqonic.shophop.base.BaseRecyclerAdapter.OnClickListener" />
+    </data>
+    <com.google.android.material.card.MaterialCardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_marginStart="@dimen/spacing_control"
+        android:layout_marginEnd="@dimen/spacing_control"
+        android:layout_marginBottom="@dimen/spacing_standard"
+        app:cardCornerRadius="@dimen/spacing_control_half"
+        app:cardElevation="0dp"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:id="@+id/listProductRaw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/itemText_background"
+            android:onClick="@{(view) -> callback.onClick(view,model)}">
+
+            <ImageView
+                android:id="@+id/ivProduct"
+                android:layout_width="@dimen/_105sdp"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_alignBottom="@id/llContent"
+                android:scaleType="fitXY"
+                android:contentDescription="@string/text_todo" />
+
+            <LinearLayout
+                android:id="@+id/llContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/ivProduct"
+                android:orientation="vertical"
+                android:paddingStart="@dimen/spacing_standard"
+                android:paddingEnd="@dimen/spacing_standard">
+
+                <TextView
+                    android:id="@+id/tvProductName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_control"
+                    android:singleLine="true"
+                    android:text="@{model.name}"
+                    android:textAppearance="@style/FontSemiBold"
+                    android:textColor="@color/textColorPrimary"
+                    android:textSize="@dimen/font_size_medium" />
+
+                <LinearLayout
+                    android:id="@+id/llProductColor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_standard"
+                    android:orientation="horizontal">
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llProductSize"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_standard"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvSize"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/spacing_control"
+                        android:textAppearance="@style/FontSemiBold"
+                        android:textColor="@color/textColorPrimary"
+                        android:textSize="@dimen/font_size_small" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvProductRate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_standard"
+                    android:drawableEnd="@drawable/ic_star_black"
+                    android:drawablePadding="@dimen/spacing_control"
+                    android:text="@{model.average_rating}"
+                    android:textColor="@color/textColorPrimary"
+                    android:textSize="@dimen/font_size_micro" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/spacing_standard"
+                    android:paddingBottom="@dimen/spacing_control">
+
+                    <TextView
+                        android:id="@+id/tvProductPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/FontSemiBold"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/font_size_medium"
+                        tools:text="$100" />
+
+                    <TextView
+                        android:id="@+id/tvProductActualPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_control"
+                        android:layout_marginTop="@dimen/spacing_control_half"
+                        android:layout_marginEnd="@dimen/spacing_control"
+                        android:layout_toStartOf="@id/ivDislike"
+                        android:layout_toEndOf="@id/tvProductPrice"
+                        android:textAppearance="@style/FontSemiBold"
+                        android:textColor="@color/dots_color"
+                        android:textSize="@dimen/font_size_micro"
+                        tools:text="$100" />
+
+                    <ImageView
+                        android:id="@+id/ivDislike"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="@dimen/spacing_control"
+                        android:background="@drawable/bg_circle"
+                        android:contentDescription="@string/text_todo"
+                        android:onClick="@{(view) -> callback.onClick(view,model)}"
+                        android:padding="@dimen/spacing_control"
+                        android:src="@drawable/ic_heart"
+                        android:visibility="visible" />
+
+                    <ImageView
+                        android:id="@+id/ivlike"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="@dimen/spacing_control"
+                        android:background="@drawable/bg_circle"
+                        android:backgroundTint="@color/favourite_backround"
+                        android:contentDescription="@string/text_todo"
+                        android:onClick="@{(view) -> callback.onClick(view,model)}"
+                        android:padding="@dimen/spacing_control"
+                        android:src="@drawable/ic_heart_fill"
+                        android:visibility="gone" />
+
+                </RelativeLayout>
+            </LinearLayout>
+        </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>
