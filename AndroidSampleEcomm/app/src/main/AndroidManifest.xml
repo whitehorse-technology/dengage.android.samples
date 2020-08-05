@@ -25,7 +25,7 @@
 
         <activity
             android:name=".activity.SplashActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -72,54 +72,54 @@
             android:screenOrientation="fullSensor" />
         <activity
             android:name=".activity.PaymentActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor" />
         <activity
             android:name=".activity.AccountActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".activity.MyCartActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor" />
         <activity
             android:name=".activity.SearchActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor" />
         <activity
             android:name=".activity.ViewAllProductActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor" />
         <activity
             android:name=".activity.RewardActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor" />
         <activity
             android:name=".activity.AddressManagerActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor" />
         <activity
             android:name=".activity.EditProfileActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".activity.EmailActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor" />
         <activity
             android:name=".activity.ContactUsActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor" />
         <activity
             android:name=".activity.FAQActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor" />
         <activity
             android:name=".activity.SettingActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor" />
         <activity
             android:name=".activity.CardActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor" />
         <activity
             android:name=".activity.HelpActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor" />
         <activity
             android:name=".activity.OfferActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor" />
         <activity
             android:name=".activity.QuickPayActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -132,14 +132,14 @@
         </provider>
 
         <service
-            android:name="dengage.android.push.firebase.MessagingService"
+            android:name="com.dengage.sdk.FcmMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
-        <receiver android:name="dengage.android.push.firebase.NotificationReceiver"
+        <receiver android:name="com.dengage.sdk.NotificationReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.dengage.push.intent.RECEIVE" />
@@ -148,6 +148,8 @@
                 <action android:name="com.dengage.push.intent.ACTION_CLICK" />
             </intent-filter>
         </receiver>
+
+        <meta-data android:name="den_event_api_endpoint" android:value="https://eventdev.dengage.com/api/event"/>
 
     </application>
 

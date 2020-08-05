@@ -17,7 +17,6 @@ import com.segmentify.segmentifyandroidsdk.SegmentifyManager
 import com.segmentify.segmentifyandroidsdk.model.PageModel
 import com.segmentify.segmentifyandroidsdk.model.RecommendationModel
 import com.segmentify.segmentifyandroidsdk.utils.SegmentifyCallback
-import dengage.android.push.firebase.DengageEvent
 import kotlinx.android.synthetic.main.toolbar.*
 
 class MyCartActivity : AppBaseActivity() {

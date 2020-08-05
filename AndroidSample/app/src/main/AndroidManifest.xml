@@ -7,8 +7,10 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:usesCleartextTraffic="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".StoryActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -16,17 +18,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".DeepLinkActivity"
-            android:label="A deeplink!" >
+            android:label="A deeplink!">
             <intent-filter android:label="inAppReceiver">
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <!-- Accepts URIs of type "pinpoint://deeplink" -->
-                <data android:scheme="dengage"
-                    android:host="deeplink" />
+                <data
+                    android:host="deeplink"
+                    android:scheme="dengage" />
             </intent-filter>
         </activity>
 
@@ -37,7 +40,6 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
         <service
             android:name="com.dengage.sdk.HmsMessagingService"
             android:exported="false">
@@ -46,7 +48,8 @@
             </intent-filter>
         </service>
 
-        <receiver android:name=".MyReceiver"
+        <receiver
+            android:name=".MyReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.dengage.push.intent.RECEIVE" />
@@ -58,6 +61,9 @@
             </intent-filter>
         </receiver>
 
+        <meta-data
+            android:name="den_event_api_endpoint"
+            android:value="https://eventdev.dengage.com/api/device/event" />
     </application>
 
 </manifest>

@@ -26,8 +26,8 @@ import com.segmentify.segmentifyandroidsdk.utils.SegmentifyCallback
 import com.segmentify.segmentifyandroidsdk.SegmentifyManager
 import com.segmentify.segmentifyandroidsdk.model.CheckoutModel
 import android.util.Log
-import dengage.android.push.firebase.DengageEvent
-import dengage.android.push.models.CardItem
+import com.dengage.sdk.DengageEvent
+import com.dengage.sdk.models.CardItem
 
 class OrderSummaryActivity : AppBaseActivity() {
 
@@ -346,7 +346,7 @@ class OrderSummaryActivity : AppBaseActivity() {
 
         data.put("cartItems", cartItems.toTypedArray());
 
-        DengageEvent.getInstance(applicationContext, intent).order(data)
+        DengageEvent.getInstance(applicationContext).order(data)
 
         launchActivity<PaymentActivity>(Constants.RequestCode.PAYMENT) {
             putExtra(Constants.KeyIntent.DATA, requestModel)

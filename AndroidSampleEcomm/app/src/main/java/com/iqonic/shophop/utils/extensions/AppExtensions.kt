@@ -16,6 +16,8 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.dengage.sdk.DengageEvent
+import com.dengage.sdk.models.CardItem
 import com.iqonic.shophop.AppBaseActivity
 import com.iqonic.shophop.R
 import com.iqonic.shophop.ShopHopApp
@@ -46,8 +48,6 @@ import com.iqonic.shophop.utils.Constants.SharedPref.USER_PROFILE
 import com.iqonic.shophop.utils.SharedPrefUtils
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import dengage.android.push.firebase.DengageEvent
-import dengage.android.push.models.CardItem
 import kotlinx.android.synthetic.main.layout_paymentdetail.*
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -169,7 +169,7 @@ fun AppBaseActivity.addCart(cartData: Key) {
     data.put("discounted_price", cartData.sale_price.toDouble());
     data.put("cartItems", cartItems.toTypedArray());
 
-    DengageEvent.getInstance(applicationContext, intent).addToCart(data)
+    DengageEvent.getInstance(applicationContext).addToCart(data)
 
     getSharedPrefInstance().setValue(KEY_USER_CART, Gson().toJson(list))
     getSharedPrefInstance().setValue(KEY_CART_COUNT, list.size)
@@ -250,7 +250,7 @@ fun AppBaseActivity.removeItem(product: Key) {
     data.put("discounted_price", product.sale_price.toDouble());
     data.put("cartItems", cartItems.toTypedArray());
 
-    DengageEvent.getInstance(applicationContext, intent).removeFromCart(data)
+    DengageEvent.getInstance(applicationContext).removeFromCart(data)
 
     getSharedPrefInstance().setValue(KEY_USER_CART, Gson().toJson(list))
     getSharedPrefInstance().setValue(KEY_CART_COUNT, list.size)
@@ -512,7 +512,7 @@ fun AppBaseActivity.registerUser(requestModel: RequestModel, isUpdate: Boolean) 
     var data : HashMap<String, Any>
             = HashMap<String, Any> ();
     data.put("page_type", "register_action");
-    DengageEvent.getInstance(applicationContext, intent).pageView(data)
+    DengageEvent.getInstance(applicationContext).pageView(data)
 
     sendProfileUpdateBroadcast()
 }

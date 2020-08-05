@@ -4,8 +4,8 @@ import android.app.Dialog
 import android.content.Context
 import androidx.multidex.MultiDex
 import androidx.multidex.MultiDexApplication
+import com.dengage.sdk.DengageManager
 import com.iqonic.shophop.utils.SharedPrefUtils
-import dengage.android.push.firebase.DengageManager
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig
 
 class dEngageClass {
@@ -29,7 +29,7 @@ class ShopHopApp : MultiDexApplication() {
         val manager = DengageManager
                 .getInstance(context)
                 .setLogStatus(true)
-                .setIntegrationKey(Constants.INTEGRATION_KEY)
+                .setFirebaseIntegrationKey(Constants.INTEGRATION_KEY)
                 .init()
 
         manager.syncSubscription();

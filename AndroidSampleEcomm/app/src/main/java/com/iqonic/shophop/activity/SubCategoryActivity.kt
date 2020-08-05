@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.LinearLayout
+import com.dengage.sdk.DengageEvent
 import com.iqonic.shophop.AppBaseActivity
 import com.iqonic.shophop.R
 import com.iqonic.shophop.base.BaseRecyclerAdapter
@@ -22,7 +23,6 @@ import com.segmentify.segmentifyandroidsdk.SegmentifyManager
 import com.segmentify.segmentifyandroidsdk.model.PageModel
 import com.segmentify.segmentifyandroidsdk.model.RecommendationModel
 import com.segmentify.segmentifyandroidsdk.utils.SegmentifyCallback
-import dengage.android.push.firebase.DengageEvent
 import kotlinx.android.synthetic.main.activity_sub_category.*
 import kotlinx.android.synthetic.main.activity_sub_category.viewPopular
 import kotlinx.android.synthetic.main.toolbar.*
@@ -75,7 +75,7 @@ class SubCategoryActivity : AppBaseActivity() {
         data.put("page_type", "category");
         data.put("category_id", mCategoryData.id.toString());
 
-        DengageEvent.getInstance(applicationContext, intent).pageView(data);
+        DengageEvent.getInstance(applicationContext).pageView(data);
         //event.sendDeviceEvent("user_events", details)
 
         val model = PageModel()

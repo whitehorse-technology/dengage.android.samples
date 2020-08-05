@@ -6,6 +6,8 @@ import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.dengage.sdk.DengageEvent
+import com.dengage.sdk.models.CardItem
 import com.iqonic.shophop.AppBaseActivity
 import com.iqonic.shophop.R
 import com.iqonic.shophop.activity.DashBoardActivity
@@ -14,8 +16,6 @@ import com.iqonic.shophop.base.BaseRecyclerAdapter
 import com.iqonic.shophop.databinding.ItemCartBinding
 import com.iqonic.shophop.models.Key
 import com.iqonic.shophop.utils.extensions.*
-import dengage.android.push.firebase.DengageEvent
-import dengage.android.push.models.CardItem
 import kotlinx.android.synthetic.main.fragment_cart.*
 import java.util.HashMap
 
@@ -166,7 +166,7 @@ class MyCartFragment : BaseFragment() {
         }
         data.put("cartItems", cartItems.toTypedArray());
 
-        DengageEvent.getInstance(activity?.applicationContext, activity?.intent).viewCart(data);
+        DengageEvent.getInstance(activity?.applicationContext).viewCart(data);
 
         rvCart.setVerticalLayout()
         rvNextTimeBuy.setVerticalLayout()

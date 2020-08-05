@@ -13,6 +13,7 @@ import android.widget.RemoteViews;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import com.dengage.sdk.DengageEvent;
 import com.dengage.sdk.DengageManager;
 import com.dengage.sdk.NotificationReceiver;
 import com.dengage.sdk.Utils;
@@ -20,6 +21,11 @@ import com.dengage.sdk.models.CarouselItem;
 import com.dengage.sdk.models.Message;
 
 public class MyReceiver extends NotificationReceiver {
+
+    @Override
+    protected void onPushOpen(Context context, Intent intent) {
+        super.onPushOpen(context, intent);
+    }
 
     @Override
     public void onReceive(Context context, Intent intent) {

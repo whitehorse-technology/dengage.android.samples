@@ -5,6 +5,7 @@ import android.view.*
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.dengage.sdk.DengageEvent
 import com.iqonic.shophop.AppBaseActivity
 import com.iqonic.shophop.R
 import com.iqonic.shophop.activity.DashBoardActivity
@@ -18,7 +19,6 @@ import com.iqonic.shophop.databinding.ItemHomeNewestProductBinding
 import com.iqonic.shophop.models.*
 import com.iqonic.shophop.utils.Constants
 import com.iqonic.shophop.utils.extensions.*
-import dengage.android.push.firebase.DengageEvent
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : BaseFragment() {
@@ -64,7 +64,7 @@ class HomeFragment : BaseFragment() {
         var data : HashMap<String, Any>
                 = HashMap<String, Any> ();
         data.put("page_type", "home");
-        DengageEvent.getInstance(activity?.applicationContext, activity?.intent).pageView(data)
+        DengageEvent.getInstance(activity?.applicationContext).pageView(data)
 
         setRecyclerView(rcvRecentSearch)
         setRecyclerView(rcvNewestProduct)

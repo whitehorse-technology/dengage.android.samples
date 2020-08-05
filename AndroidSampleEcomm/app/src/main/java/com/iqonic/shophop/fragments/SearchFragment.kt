@@ -6,13 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
+import com.dengage.sdk.DengageEvent
 import com.iqonic.shophop.AppBaseActivity
 import com.iqonic.shophop.R
 import com.iqonic.shophop.base.BaseRecyclerAdapter
 import com.iqonic.shophop.databinding.ItemNewestProductBinding
 import com.iqonic.shophop.models.ProductModel
 import com.iqonic.shophop.utils.extensions.*
-import dengage.android.push.firebase.DengageEvent
 import kotlinx.android.synthetic.main.activity_search.*
 import kotlinx.android.synthetic.main.layout_color.view.*
 import kotlinx.android.synthetic.main.layout_nodata.*
@@ -88,7 +88,7 @@ class SearchFragment : BaseFragment() {
         var data : HashMap<String, Any>
                 = HashMap<String, Any> ();
         data.put("page_type", "search");
-        DengageEvent.getInstance(activity?.applicationContext, activity?.intent).pageView(data)
+        DengageEvent.getInstance(activity?.applicationContext).pageView(data)
 
     }
 

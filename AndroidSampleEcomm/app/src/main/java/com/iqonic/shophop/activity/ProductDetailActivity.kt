@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
+import com.dengage.sdk.DengageEvent
 import com.iqonic.shophop.AppBaseActivity
 import com.iqonic.shophop.R
 import com.iqonic.shophop.adapter.ProductImageAdapter
@@ -25,7 +26,6 @@ import com.segmentify.segmentifyandroidsdk.SegmentifyManager
 import com.segmentify.segmentifyandroidsdk.model.PageModel
 import com.segmentify.segmentifyandroidsdk.model.RecommendationModel
 import com.segmentify.segmentifyandroidsdk.utils.SegmentifyCallback
-import dengage.android.push.firebase.DengageEvent
 import kotlinx.android.synthetic.main.activity_product_detail.*
 
 
@@ -148,7 +148,7 @@ class ProductDetailActivity : AppBaseActivity() {
         data.put("page_type", "product");
         data.put("product_id", mProductModel.id.toString());
 
-        DengageEvent.getInstance(applicationContext, intent).pageView(data);
+        DengageEvent.getInstance(applicationContext).pageView(data);
 
         intHeaderView()
         tvItemProductOriginalPrice.applyStrike()

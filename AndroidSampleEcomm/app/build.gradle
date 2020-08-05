@@ -20,7 +20,7 @@ android {
     compileSdkVersion 29
     buildToolsVersion "28.0.3"
     defaultConfig {
-        applicationId "dengage.android.push.firebase.ecomm.sample"
+        applicationId "com.dengage.ecomm.sample"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
@@ -82,8 +82,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:20.1.0'
     implementation 'com.google.firebase:firebase-analytics:17.2.2'
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation files('libs/dengage.android.push.firebase.jar')
-    implementation files('libs/dengage.android.push.jar')
+    implementation files('libs/com.dengage.sdk.jar')
 }
 
 apply plugin: 'com.google.gms.google-services'

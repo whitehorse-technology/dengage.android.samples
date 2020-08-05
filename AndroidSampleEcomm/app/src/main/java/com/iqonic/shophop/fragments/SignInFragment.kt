@@ -8,12 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.RelativeLayout
+import com.dengage.sdk.DengageEvent
 import com.iqonic.shophop.R
 import com.iqonic.shophop.activity.DashBoardActivity
 import com.iqonic.shophop.activity.SignInUpActivity
 import com.iqonic.shophop.utils.OTPEditText
 import com.iqonic.shophop.utils.extensions.*
-import dengage.android.push.firebase.DengageEvent
 import kotlinx.android.synthetic.main.dialog_change_password.*
 import kotlinx.android.synthetic.main.fragment_sign_in.*
 
@@ -76,7 +76,7 @@ class SignInFragment : BaseFragment() {
                 = HashMap<String, Any> ();
 
         data.put("page_type", "login_action");
-        DengageEvent.getInstance(activity?.applicationContext, activity?.intent).pageView(data)
+        DengageEvent.getInstance(activity?.applicationContext).pageView(data)
 
         signIn(onResult = {
             if (it) {

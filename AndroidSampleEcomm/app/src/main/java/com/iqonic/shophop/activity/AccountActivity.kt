@@ -2,10 +2,10 @@ package com.iqonic.shophop.activity
 
 import android.app.Activity
 import android.os.Bundle
+import com.dengage.sdk.DengageEvent
 import com.iqonic.shophop.AppBaseActivity
 import com.iqonic.shophop.R
 import com.iqonic.shophop.utils.extensions.*
-import dengage.android.push.firebase.DengageEvent
 import kotlinx.android.synthetic.main.activity_account.*
 import kotlinx.android.synthetic.main.toolbar.*
 
@@ -26,7 +26,7 @@ class AccountActivity : AppBaseActivity() {
                 var data : HashMap<String, Any>
                         = HashMap<String, Any> ();
                 data.put("page_type", "logout");
-                DengageEvent.getInstance(applicationContext, intent).pageView(data)
+                DengageEvent.getInstance(applicationContext).pageView(data)
 
                 launchActivityWithNewTask<DashBoardActivity> ()
             }, onNegativeClick = { dialog, _ ->

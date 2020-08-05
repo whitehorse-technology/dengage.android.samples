@@ -19,13 +19,8 @@ import android.widget.RelativeLayout
 import androidx.core.content.ContextCompat
 import com.google.android.gms.ads.*
 
-
-
-
 open class AppBaseActivity : AppCompatActivity() {
     private var progressDialog: Dialog? = null
-
-
 
     fun disableHardwareRendering(v: View) {
         v.setLayerType(View.LAYER_TYPE_SOFTWARE, null)

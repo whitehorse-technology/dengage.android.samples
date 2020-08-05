@@ -4,13 +4,13 @@ import android.os.Bundle
 import com.iqonic.shophop.AppBaseActivity
 import com.iqonic.shophop.R
 import android.widget.FrameLayout
+import com.dengage.sdk.DengageEvent
 import com.iqonic.shophop.fragments.SignInFragment
 import com.iqonic.shophop.fragments.SignUpFragment
 import com.iqonic.shophop.utils.extensions.addFragment
 import com.iqonic.shophop.utils.extensions.fadeIn
 import com.iqonic.shophop.utils.extensions.removeFragment
 import com.iqonic.shophop.utils.extensions.replaceFragment
-import dengage.android.push.firebase.DengageEvent
 
 
 class SignInUpActivity : AppBaseActivity() {
@@ -33,7 +33,7 @@ class SignInUpActivity : AppBaseActivity() {
                 = HashMap<String, Any> ();
         data.put("page_type", "register");
 
-        DengageEvent.getInstance(applicationContext, intent).pageView(data)
+        DengageEvent.getInstance(applicationContext).pageView(data)
         if (mSignUpFragment.isAdded) {
             replaceFragment(mSignUpFragment, R.id.fragmentContainer)
             findViewById<FrameLayout>(R.id.fragmentContainer).fadeIn(500)
@@ -47,7 +47,7 @@ class SignInUpActivity : AppBaseActivity() {
         var data : HashMap<String, Any>
                 = HashMap<String, Any> ();
         data.put("page_type", "login");
-        DengageEvent.getInstance(applicationContext, intent).pageView(data)
+        DengageEvent.getInstance(applicationContext).pageView(data)
 
         if (mSignInFragment.isAdded) {
             replaceFragment(mSignInFragment, R.id.fragmentContainer)
