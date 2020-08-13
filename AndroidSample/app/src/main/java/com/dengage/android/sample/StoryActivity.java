@@ -6,42 +6,52 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
 import android.util.Log;
-import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.SurfaceView;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
-import com.bumptech.glide.request.transition.DrawableCrossFadeFactory;
 import com.dengage.sdk.DengageManager;
-import com.google.gson.Gson;
+import com.google.android.exoplayer2.C;
+import com.google.android.exoplayer2.Player;
+import com.google.android.exoplayer2.SimpleExoPlayer;
+import com.google.android.exoplayer2.source.MediaSource;
+import com.google.android.exoplayer2.source.ProgressiveMediaSource;
+import com.google.android.exoplayer2.ui.AspectRatioFrameLayout;
+import com.google.android.exoplayer2.ui.PlayerView;
+import com.google.android.exoplayer2.upstream.DataSource;
+import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
+import com.google.android.exoplayer2.util.Util;
+import com.huawei.hms.utils.IOUtils;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
-import java.io.DataInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -53,8 +63,6 @@ public class StoryActivity extends AppCompatActivity implements StoriesProgressV
     private static StoriesProgressView storiesProgressView;
     private ImageView imageView;
     private ProgressBar progressBar;
-    OnSwipeTouchListener onSwipeTouchListener;
-
     private int counter = 0;
     private StoryMessage[] stories;
 
@@ -81,11 +89,22 @@ public class StoryActivity extends AppCompatActivity implements StoriesProgressV
         }
     };
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getSupportActionBar().hide();
+
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_story);
+
+
+        progressBar = (ProgressBar) findViewById(R.id.progress);
+        imageView = (ImageView) findViewById(R.id.image);
+        playerView = (PlayerView) findViewById(R.id.video_view);
 
         stories = getStories();
 
@@ -97,8 +116,6 @@ public class StoryActivity extends AppCompatActivity implements StoriesProgressV
     }
 
     void load() {
-        progressBar = (ProgressBar) findViewById(R.id.progress);
-        imageView = (ImageView) findViewById(R.id.image);
 
         View reverse = findViewById(R.id.reverse);
         reverse.setOnClickListener(new View.OnClickListener() {
@@ -124,10 +141,11 @@ public class StoryActivity extends AppCompatActivity implements StoriesProgressV
         storiesProgressView.setStoryDuration(storyDuration);
         storiesProgressView.setStoriesListener(this);
 
-        loadImage(stories[counter].mediaUrl);
+        loadStroy(stories[counter].mediaUrl);
 
         storiesProgressView.startStories(counter);
     }
+
 
     void close() {
         Toast
@@ -142,10 +160,24 @@ public class StoryActivity extends AppCompatActivity implements StoriesProgressV
         }, 1000);
     }
 
-    void loadImage(String mediaUrl) {
+    void loadStroy(String mediaUrl) {
         Log.d("DenPush", stories[counter].mediaUrl);
+
         progressBar.setVisibility(View.VISIBLE);
         storiesProgressView.pause();
+
+        if(mediaUrl.lastIndexOf(".mp4") > -1 || mediaUrl.lastIndexOf(".webm") > -1 ) {
+            loadVideo(mediaUrl);
+        } else {
+            loadImage(mediaUrl);
+        }
+
+        Toast.makeText(getApplicationContext(),"Story "+ Integer.toString(counter + 1),Toast.LENGTH_LONG).show();
+    }
+
+    void loadImage(String mediaUrl) {
+        playerView.setVisibility(View.INVISIBLE);
+        imageView.setVisibility(View.VISIBLE);
         Glide.with(getApplicationContext())
                 .load(mediaUrl)
                 .skipMemoryCache(false)
@@ -157,24 +189,45 @@ public class StoryActivity extends AppCompatActivity implements StoriesProgressV
                         progressBar.setVisibility(View.GONE);
                         storiesProgressView.setStoryDuration(storyDuration);
                         Toast
-                            .makeText(getApplicationContext(),"Resource not found. Skipping",Toast.LENGTH_LONG)
-                            .show();
+                                .makeText(getApplicationContext(),"Resource not found. Skipping",Toast.LENGTH_LONG)
+                                .show();
                         storiesProgressView.resume();
                         return false;
                     }
 
                     @Override
-                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, com.bumptech.glide.load.DataSource dataSource, boolean isFirstResource) {
                         progressBar.setVisibility(View.GONE);
                         storiesProgressView.resume();
                         return false;
                     }
                 })
                 .into(imageView);
+    }
 
-        Toast
-                .makeText(getApplicationContext(),"Story "+ Integer.toString(counter + 1),Toast.LENGTH_LONG)
-                .show();
+    void loadVideo(String mediaUrl) {
+        imageView.setVisibility(View.INVISIBLE);
+        playerView.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
+        playerView.hideController();
+        player = new SimpleExoPlayer.Builder(this).build();
+        playerView.setPlayer(player);
+
+        Uri uri = Uri.parse(mediaUrl);
+        MediaSource mediaSource = buildMediaSource(uri);
+
+        player.setPlayWhenReady(playWhenReady);
+        player.seekTo(currentWindow, playbackPosition);
+        player.prepare(mediaSource, false, false);
+        player.addListener(new Player.EventListener() {
+            @Override
+            public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
+                if (playbackState == Player.STATE_READY) {
+                    playerView.setVisibility(View.VISIBLE);
+                    progressBar.setVisibility(View.GONE);
+                }
+            }
+        });
     }
 
     @Override
@@ -183,7 +236,7 @@ public class StoryActivity extends AppCompatActivity implements StoriesProgressV
         if(stories == null || stories.length < 1) return;
         if(counter < stories.length -1)  ++counter; else return;
 
-        loadImage(stories[counter].mediaUrl);
+        loadStroy(stories[counter].mediaUrl);
 
     }
 
@@ -192,7 +245,7 @@ public class StoryActivity extends AppCompatActivity implements StoriesProgressV
         if(stories == null || stories.length < 1) return;
         if(counter > 0) --counter; else return;
 
-        loadImage(stories[counter].mediaUrl);
+        loadStroy(stories[counter].mediaUrl);
     }
 
     @Override
@@ -225,19 +278,19 @@ public class StoryActivity extends AppCompatActivity implements StoriesProgressV
 
             StoryRequest req = new StoryRequest();
             req.setAccountGuid("90db7e2a-5839-53cd-605f-9d3ffc328e21");
-            req.setChannel("app_popup");
+            req.setChannel("in_app_story");
             req.setContactKey(DengageManager.getInstance(getApplicationContext()).getSubscription().getContactKey());
             req.setDeviceId(DengageManager.getInstance(getApplicationContext()).getSubscription().getDeviceId());
 
             Map<String, Object> extraParams = new HashMap<>();
-            extraParams.put("a", "1");
             req.setExtraParams(extraParams);
 
             String json = req.toJson();
             Log.d("DenPush", json);
             String response = sendRequest(url, json);
-            Log.d("DenPush", response);
+            Log.d("DenPush", "REsponse: "+  response);
             StoryResponse[] stories = new StoryResponse().fromJson(response);
+            Log.d("DenPush", Integer.toString(stories.length));
             if(stories != null) {
                 for (StoryResponse story : stories) {
                     messages.add(story.getInnerMessage());
@@ -250,7 +303,7 @@ public class StoryActivity extends AppCompatActivity implements StoriesProgressV
         return messages.toArray(new StoryMessage[messages.size()]);
     }
 
-
+    // TODO: response eksik geliyor.
     private String sendRequest(String url, String data) {
         String responseMessage = "";
         try {
@@ -279,11 +332,14 @@ public class StoryActivity extends AppCompatActivity implements StoriesProgressV
             os.write(data.getBytes());
             os.flush();
 
-            BufferedReader is = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            InputStream in = conn.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 
-            StringBuilder res = new StringBuilder();
-            for (String line; (line = is.readLine()) != null; ) {
-                res.append(line).append('\n');
+            StringBuilder result = new StringBuilder();
+            String line;
+            while((line = reader.readLine()) != null) {
+                Log.d("DenPush", line);
+                result.append(line);
             }
 
             int responseCode = conn.getResponseCode();
@@ -295,7 +351,7 @@ public class StoryActivity extends AppCompatActivity implements StoriesProgressV
                 throw new Exception("The remote server returned an error with the status code: " + responseCode);
             }
 
-            return res.toString();
+            return result.toString();
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -303,7 +359,6 @@ public class StoryActivity extends AppCompatActivity implements StoriesProgressV
         }
         return responseMessage;
     }
-
 
     private void showMessage(String message) {
         AlertDialog alertDialog = new AlertDialog.Builder(StoryActivity.this).create();
@@ -318,71 +373,70 @@ public class StoryActivity extends AppCompatActivity implements StoriesProgressV
         alertDialog.show();
     }
 
-    public class OnSwipeTouchListener implements View.OnTouchListener {
-        private final GestureDetector gestureDetector;
-        Context context;
-        OnSwipeTouchListener(Context ctx, View mainView) {
-            gestureDetector = new GestureDetector(ctx, new GestureListener());
-            mainView.setOnTouchListener(this);
-            context = ctx;
+
+    private boolean playWhenReady = true;
+    private int currentWindow = 0;
+    private long playbackPosition = 0;
+    private PlayerView playerView;
+    private SimpleExoPlayer player;
+
+    private MediaSource buildMediaSource(Uri uri) {
+        DataSource.Factory dataSourceFactory =
+                new DefaultDataSourceFactory(this, "dengage-player");
+        return new ProgressiveMediaSource.Factory(dataSourceFactory)
+                .createMediaSource(uri);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (Util.SDK_INT >= 24) {
+            //initializePlayer();
         }
-        @Override
-        public boolean onTouch(View v, MotionEvent event) {
-            Log.d("DenPush", "onTouch");
-            return gestureDetector.onTouchEvent(event);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        hideSystemUi();
+        if ((Util.SDK_INT < 24 || player == null)) {
+            //initializePlayer();
         }
-        public class GestureListener extends
-                GestureDetector.SimpleOnGestureListener {
-            private static final int SWIPE_THRESHOLD = 100;
-            private static final int SWIPE_VELOCITY_THRESHOLD = 100;
-            @Override
-            public boolean onDown(MotionEvent e) {
-                return true;
-            }
-            @Override
-            public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-                boolean result = false;
-                try {
-                    float diffY = e2.getY() - e1.getY();
-                    float diffX = e2.getX() - e1.getX();
-                    if (Math.abs(diffX) > Math.abs(diffY)) {
-                        if (Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
-                            if (diffX > 0) {
-                                onSwipeRight();
-                            } else {
-                                onSwipeLeft();
-                            }
-                            result = true;
-                        }
-                    }
-                    else if (Math.abs(diffY) > SWIPE_THRESHOLD && Math.abs(velocityY) > SWIPE_VELOCITY_THRESHOLD) {
-                        if (diffY > 0) {
-                            onSwipeBottom();
-                        } else {
-                            onSwipeTop();
-                        }
-                        result = true;
-                    }
-                }
-                catch (Exception exception) {
-                    exception.printStackTrace();
-                }
-                return result;
-            }
+    }
+
+    @SuppressLint("InlinedApi")
+    private void hideSystemUi() {
+        playerView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
+                | View.SYSTEM_UI_FLAG_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (Util.SDK_INT < 24) {
+            releasePlayer();
         }
-        void onSwipeRight() {
-            Toast.makeText(context, "Swiped Right", Toast.LENGTH_SHORT).show();
-            storiesProgressView.resume();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (Util.SDK_INT >= 24) {
+            releasePlayer();
         }
-        void onSwipeLeft() {
-            Toast.makeText(context, "Swiped Left", Toast.LENGTH_SHORT).show();
-            storiesProgressView.reverse();
-        }
-        void onSwipeTop() {
-            Toast.makeText(context, "Swiped Up", Toast.LENGTH_SHORT).show();
-        }
-        void onSwipeBottom() {
-            Toast.makeText(context, "Swiped Down", Toast.LENGTH_SHORT).show();
+    }
+
+    private void releasePlayer() {
+        if (player != null) {
+            playWhenReady = player.getPlayWhenReady();
+            playbackPosition = player.getCurrentPosition();
+            currentWindow = player.getCurrentWindowIndex();
+            player.release();
+            player = null;
         }
     }
 }

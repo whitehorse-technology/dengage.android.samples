@@ -3,10 +3,10 @@ package com.dengage.android.sample;
 public class Constants {
 
     // Dev (Android Firebase)
-    //public static String FIREBASE_INTEGRATION_KEY = "yZaoaj8R59wPRqAbaovrwy9nSY9_s_l_qBLX6c5gLdlR2kKLV0gjoLpXmcJy87tWLSuB42lxr927HygS1mHV6w4n9ggJDN6C_s_l_RgabIhTtL5is_s_l_zJeLnVV3meZ4b_p_l_eG_s_l_N_p_l_lNg4tU4_p_l__p_l_galD3bYTxvJ8kfJA_e_q__e_q_";
+    public static String FIREBASE_INTEGRATION_KEY = "yZaoaj8R59wPRqAbaovrwy9nSY9_s_l_qBLX6c5gLdlR2kKLV0gjoLpXmcJy87tWLSuB42lxr927HygS1mHV6w4n9ggJDN6C_s_l_RgabIhTtL5is_s_l_zJeLnVV3meZ4b_p_l_eG_s_l_N_p_l_lNg4tU4_p_l__p_l_galD3bYTxvJ8kfJA_e_q__e_q_";
 
     // Dev (Android Huawei)
-    //public static String HUAWEI_INTEGRATION_KEY = "2pbEoVmVnyHpLXignxOCu0YkE1dmTnk3sEazDNscfE8dMc5zdC6yz1jgTjG4D57GWp6M7Kfq3odrFBmUWAR4_p_l_4kbpgBVFJmWPOeJGIyngwruU9J9BRkoNO5CrTK7xYIv8YMZR34yDx2Quuj6KOs8JQ_e_q__e_q_";
+    public static String HUAWEI_INTEGRATION_KEY = "2pbEoVmVnyHpLXignxOCu0YkE1dmTnk3sEazDNscfE8dMc5zdC6yz1jgTjG4D57GWp6M7Kfq3odrFBmUWAR4_p_l_4kbpgBVFJmWPOeJGIyngwruU9J9BRkoNO5CrTK7xYIv8YMZR34yDx2Quuj6KOs8JQ_e_q__e_q_";
 
     // Test (Android Firebase)
     //public static String FIREBASE_INTEGRATION_KEY = "7qNpQ5PPiF286O0h8rRBAFQcsTVzRot1edGeV7_p_l_VJdeC59bKk9ayY689raPAuWjvvCacw9CRzT_p_l_rnRgddc5xYNkXcmuaBdiQcKGAFPkr9WiN0JihGQ2FyCFd4o_p_l__s_l_9o29";
@@ -21,9 +21,9 @@ public class Constants {
     // public static String HUAWEI_INTEGRATION_KEY = "WzhbrljiO5eA4ia14JjfTjcd1PTQGvIlSSL76Z1Zyc5RALnmzVoyNriGVvGcR0KLJfTfTbaAql94DYlkrwQD8wV05lzQqimzDlwuN7Nt34WzKNFGFLmw0Yi1Fyk1p5sN";
 
     // Prod Ulus (Android Firebase)
-    public static String FIREBASE_INTEGRATION_KEY = "PlFX5Uj3Fd72_s_l_wuSwkjLEIhlCnmlerVkfQx_s_l_lY1ICQhXVkUdsjILfVgaDlDOcx8XurpJW6LABwKb6nZ9pRVcaX91dbsIEmiTbY7_s_l_3qx_s_l_7D9m1Wv_s_l_MmZJjAPO_s_l_aHU5Ho_p_l_";
+    //public static String FIREBASE_INTEGRATION_KEY = "PlFX5Uj3Fd72_s_l_wuSwkjLEIhlCnmlerVkfQx_s_l_lY1ICQhXVkUdsjILfVgaDlDOcx8XurpJW6LABwKb6nZ9pRVcaX91dbsIEmiTbY7_s_l_3qx_s_l_7D9m1Wv_s_l_MmZJjAPO_s_l_aHU5Ho_p_l_";
 
     // Prod Ulus (Android Huawei)
-    public static String HUAWEI_INTEGRATION_KEY = "6jclBBnGhJQEXLWSoGWKZbF8o22GfeDdIaBkZEs2Qj2LKylp1spnLDrGmNQAImeMPGAmGJdO1OEUJv16OX5oNBEe1_s_l_6BsT01k_s_l_XyS5Z5OAnQNz6UBP_p_l_vmvfrTqDaNZo2";
+    //public static String HUAWEI_INTEGRATION_KEY = "6jclBBnGhJQEXLWSoGWKZbF8o22GfeDdIaBkZEs2Qj2LKylp1spnLDrGmNQAImeMPGAmGJdO1OEUJv16OX5oNBEe1_s_l_6BsT01k_s_l_XyS5Z5OAnQNz6UBP_p_l_vmvfrTqDaNZo2";
 
 }

@@ -39,6 +39,7 @@ public class StoryResponse {
     }
 
     public StoryMessage getInnerMessage() {
+        Log.d("DenPush", "Message: "+  this.message);
         return new Gson().fromJson(this.message, StoryMessage.class);
     }
 
