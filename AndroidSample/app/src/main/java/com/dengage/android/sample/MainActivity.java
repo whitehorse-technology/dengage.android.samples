@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.dengage.sdk.DengageEvent;
 import com.dengage.sdk.DengageManager;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
                 .setFirebaseIntegrationKey(Constants.FIREBASE_INTEGRATION_KEY)
                 .setHuaweiIntegrationKey(Constants.HUAWEI_INTEGRATION_KEY)
                 .init();
+
+        DengageEvent.getInstance(context, "", 0,0);
 
         TextView txtIntegrationKey = (TextView)findViewById(R.id.txtIntegrationKey);
         TextView txtDeviceId = (TextView)findViewById(R.id.txtDeviceId);
@@ -88,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
         btnAdvertisingId.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                DengageEvent.getInstance(getApplicationContext()).sessionStart("", 1, 2);
                 TextView txtAdvertisingId = (TextView)findViewById(R.id.txtAdvertisingId);
                 txtAdvertisingId.setText("Retrieving...");
                 String adid = manager.getSubscription().getAdvertisingId();

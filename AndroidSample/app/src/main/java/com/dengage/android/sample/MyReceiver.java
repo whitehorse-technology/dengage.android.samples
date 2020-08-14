@@ -9,11 +9,8 @@ import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.RemoteViews;
-
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-
-import com.dengage.sdk.DengageEvent;
 import com.dengage.sdk.DengageManager;
 import com.dengage.sdk.NotificationReceiver;
 import com.dengage.sdk.Utils;
@@ -23,18 +20,7 @@ import com.dengage.sdk.models.Message;
 public class MyReceiver extends NotificationReceiver {
 
     @Override
-    protected void onPushOpen(Context context, Intent intent) {
-        super.onPushOpen(context, intent);
-    }
-
-    @Override
-    public void onReceive(Context context, Intent intent) {
-        DengageManager.getInstance(context).setLogStatus(true);
-        super.onReceive(context, intent);
-    }
-
-    @Override
-    protected void onCarouselRender(Context context, Intent intent, Message message) {
+    protected void onCarouselNotificationRender(Context context, Intent intent, Message message) {
         CarouselItem[] items = message.getCarouselContent();
         int size = items.length;
         int current = 0;
@@ -103,7 +89,7 @@ public class MyReceiver extends NotificationReceiver {
     }
 
     @Override
-    protected void onCarouselReRender(Context context, Intent intent, Message message) {
+    protected void onCarouselNotificationReRender(Context context, Intent intent, Message message) {
         CarouselItem[] items = message.getCarouselContent();
         Bundle bundle = intent.getExtras();
         int prevIndex = bundle.getInt("current");
