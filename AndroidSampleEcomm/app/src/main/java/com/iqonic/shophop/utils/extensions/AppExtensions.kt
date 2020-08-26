@@ -152,7 +152,33 @@ fun AppBaseActivity.addCart(cartData: Key) {
     keys.forEach {
         var cartItem : HashMap<String, Any>
                 = HashMap<String, Any> ();
+        var data : HashMap<String, Any>
+                = HashMap<String, Any> ();
 
+        var cartItems : MutableList<HashMap<String, Any>> = emptyList<HashMap<String, Any>>().toMutableList();
+
+        val keys = getCartList()
+        keys.forEach {
+            var cartItem : HashMap<String, Any>
+                    = HashMap<String, Any> ();
+
+            cartItem.put("product_id", it.product_id);
+            cartItem.put("product_variant_id", it.variation_id);
+            cartItem.put("quantity", it.quantity);
+            cartItem.put("unit_price", it.product_price.toDouble());
+            cartItem.put("discounted_price", it.sale_price.toDouble());
+
+            cartItems.add(cartItem);
+        }
+
+        data.put("product_id", cartData.product_id.toString());
+        data.put("product_variant_id", cartData.variation_id.toString());
+        data.put("quantity", cartData.quantity);
+        data.put("unit_price", cartData.product_price.toDouble());
+        data.put("discounted_price", cartData.sale_price.toDouble());
+        data.put("cartItems", cartItems.toTypedArray());
+
+        DengageEvent.getInstance(applicationContext).addToCart(data)
         cartItem.put("product_id", it.product_id);
         cartItem.put("product_variant_id", it.variation_id);
         cartItem.put("quantity", it.quantity);
@@ -218,11 +244,7 @@ fun getCartPositionIfExist(list: ArrayList<Key>, product: Key): Int {
 }
 
 fun AppBaseActivity.removeItem(product: Key) {
-    val list = getCartList()
-    val pos = getCartPositionIfExist(list, product)
-    if (pos != -1) {
-        list.removeAt(pos)
-    }
+
 
     var data : HashMap<String, Any>
             = HashMap<String, Any> ();
@@ -247,11 +269,16 @@ fun AppBaseActivity.removeItem(product: Key) {
     data.put("product_variant_id", product.variation_id.toString());
     data.put("quantity", product.quantity);
     data.put("unit_price", product.product_price.toDouble());
-    data.put("discounted_price", product.sale_price.toDouble());
+    data.put("discounted_price", "0.0".toDouble());
     data.put("cartItems", cartItems.toTypedArray());
 
     DengageEvent.getInstance(applicationContext).removeFromCart(data)
 
+    val list = getCartList()
+    val pos = getCartPositionIfExist(list, product)
+    if (pos != -1) {
+        list.removeAt(pos)
+    }
     getSharedPrefInstance().setValue(KEY_USER_CART, Gson().toJson(list))
     getSharedPrefInstance().setValue(KEY_CART_COUNT, list.size)
     sendCartCountChangeBroadcast()

@@ -79,7 +79,7 @@
 
         <meta-data
             android:name="den_event_api_endpoint"
-            android:value="https://eventdev.dengage.com/api/device/event" />
+            android:value="https://eventdev.dengage.com/api/event" />
 
     </application>
 

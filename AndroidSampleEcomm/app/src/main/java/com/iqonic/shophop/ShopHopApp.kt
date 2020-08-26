@@ -2,6 +2,7 @@ package com.iqonic.shophop
 
 import android.app.Dialog
 import android.content.Context
+import android.util.Log
 import androidx.multidex.MultiDex
 import androidx.multidex.MultiDexApplication
 import com.dengage.sdk.DengageManager
@@ -29,7 +30,8 @@ class ShopHopApp : MultiDexApplication() {
         val manager = DengageManager
                 .getInstance(context)
                 .setLogStatus(true)
-                .setFirebaseIntegrationKey(Constants.INTEGRATION_KEY)
+                .setFirebaseIntegrationKey(Constants.FIREBASE_INTEGRATION_KEY)
+                .setHuaweiIntegrationKey(Constants.HUAWEI_INTEGRATION_KEY)
                 .init()
 
         manager.syncSubscription();

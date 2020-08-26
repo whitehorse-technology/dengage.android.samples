@@ -1,0 +1,12 @@
+{
+	"client":{
+		"cp_id":"5190090000025726737",
+		"product_id":"736430079244601662",
+		"client_id":"429021317757404352",
+		"client_secret":"3F2E2215DED762AB9DEE7EBD080CA153E1BE80B1DFB227473CD049FC6849ADFC",
+		"app_id":"102739449",
+		"package_name":"com.dengage.ecomm.sample",
+		"api_key":"CgB6e3x9UFffXe2E3rlKOPjLKPENCFevsDdHLm/HydNiR7Gj8rIZEsTQH7ly1nFyTQ9zwztSjO/KbwECPe/wdXlP"
+	},
+	"configuration_version":"1.0"
+}

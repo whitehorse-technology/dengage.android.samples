@@ -8,6 +8,8 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.widget.RelativeLayout
+import com.dengage.sdk.DengageEvent
+import com.dengage.sdk.models.CardItem
 import com.iqonic.shophop.AppBaseActivity
 import com.iqonic.shophop.R
 import com.iqonic.shophop.base.BaseRecyclerAdapter
@@ -21,13 +23,6 @@ import kotlinx.android.synthetic.main.dialog_change_address.*
 import kotlinx.android.synthetic.main.item_address.*
 import kotlinx.android.synthetic.main.toolbar.*
 import java.util.*
-import com.segmentify.segmentifyandroidsdk.model.RecommendationModel
-import com.segmentify.segmentifyandroidsdk.utils.SegmentifyCallback
-import com.segmentify.segmentifyandroidsdk.SegmentifyManager
-import com.segmentify.segmentifyandroidsdk.model.CheckoutModel
-import android.util.Log
-import com.dengage.sdk.DengageEvent
-import com.dengage.sdk.models.CardItem
 
 class OrderSummaryActivity : AppBaseActivity() {
 
@@ -332,9 +327,10 @@ class OrderSummaryActivity : AppBaseActivity() {
         }
 
         val basketId = requestModel.id.toString()
-        val orderId = requestModel.transaction_id
+        val orderId =  UUID.randomUUID().toString()
         val totalPrice = total.toDouble();
         val paymentMethod = requestModel.payment_method
+
 
         data.put("order_id", orderId);
         data.put("item_count", cartItems.count());
@@ -346,7 +342,7 @@ class OrderSummaryActivity : AppBaseActivity() {
 
         data.put("cartItems", cartItems.toTypedArray());
 
-        DengageEvent.getInstance(applicationContext).order(data)
+        DengageEvent.getInstance(applicationContext).beginCheckout(data)
 
         launchActivity<PaymentActivity>(Constants.RequestCode.PAYMENT) {
             putExtra(Constants.KeyIntent.DATA, requestModel)

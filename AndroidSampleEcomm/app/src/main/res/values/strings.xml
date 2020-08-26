@@ -280,7 +280,7 @@
     <string name="interstitial_id">ca-app-pub-1678979674460818/5709152719</string>
     <string name="coupon_desc">Click to Scratch</string>
     <string name="lbl_new_pswd">New Password</string>
-    <string name="lbl_oder_placed_successfully">Oder Placed Successfully</string>
+    <string name="lbl_oder_placed_successfully">Order Placed Successfully</string>
 
     <string-array name="category_array">
         <item>Mens</item>
