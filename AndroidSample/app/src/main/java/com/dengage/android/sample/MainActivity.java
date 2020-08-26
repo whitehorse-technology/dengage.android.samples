@@ -33,35 +33,6 @@ public class MainActivity extends AppCompatActivity {
                 .setHuaweiIntegrationKey(Constants.HUAWEI_INTEGRATION_KEY)
                 .init();
 
-
-        HashMap<String,Object> data = new HashMap<>();
-        data.put("product_id", 1);
-        DengageEvent.getInstance(getApplicationContext()).addToWishList(data);
-        DengageEvent.getInstance(getApplicationContext()).removeFromWishList(data);
-
-
-        ArrayList<HashMap<String,Object>> cartItems = new ArrayList<>();
-        HashMap<String,Object> cartItem = new HashMap<>();
-
-        cartItem.put("product_id", 1);
-        cartItem.put("product_variant_id", 2);
-        cartItem.put("quantity", 3);
-        cartItem.put("unit_price", 19.99);
-        cartItem.put("discounted_price", 14.99);
-
-        cartItems.add(cartItem);
-
-        data.put("order_id", 12);
-        data.put("item_count", 1);
-        data.put("total_amount", 19.99);
-        data.put("payment_method", "cash");
-        data.put("shipping", 1);
-        data.put("discounted_price", 0);
-        data.put("coupon_code", "");
-        data.put("cartItems", cartItems.toArray());
-
-        DengageEvent.getInstance(getApplicationContext()).beginCheckout(data);
-
         TextView txtIntegrationKey = (TextView)findViewById(R.id.txtIntegrationKey);
         TextView txtDeviceId = (TextView)findViewById(R.id.txtDeviceId);
         TextView txtAdvertisingId = (TextView)findViewById(R.id.txtAdvertisingId);
