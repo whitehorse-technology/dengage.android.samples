@@ -20,7 +20,7 @@ import com.dengage.sdk.models.Message;
 public class MyReceiver extends NotificationReceiver {
 
     @Override
-    protected void onCarouselNotificationRender(Context context, Intent intent, Message message) {
+    protected void onCarouselRender(Context context, Intent intent, Message message) {
         CarouselItem[] items = message.getCarouselContent();
         int size = items.length;
         int current = 0;
@@ -89,7 +89,7 @@ public class MyReceiver extends NotificationReceiver {
     }
 
     @Override
-    protected void onCarouselNotificationReRender(Context context, Intent intent, Message message) {
+    protected void onCarouselReRender(Context context, Intent intent, Message message) {
         CarouselItem[] items = message.getCarouselContent();
         Bundle bundle = intent.getExtras();
         int prevIndex = bundle.getInt("current");

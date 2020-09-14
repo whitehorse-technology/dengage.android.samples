@@ -21,9 +21,9 @@ public class Constants {
     // public static String HUAWEI_INTEGRATION_KEY = "WzhbrljiO5eA4ia14JjfTjcd1PTQGvIlSSL76Z1Zyc5RALnmzVoyNriGVvGcR0KLJfTfTbaAql94DYlkrwQD8wV05lzQqimzDlwuN7Nt34WzKNFGFLmw0Yi1Fyk1p5sN";
 
     // Prod Ulus (Android Firebase)
-    //public static String FIREBASE_INTEGRATION_KEY = "PlFX5Uj3Fd72_s_l_wuSwkjLEIhlCnmlerVkfQx_s_l_lY1ICQhXVkUdsjILfVgaDlDOcx8XurpJW6LABwKb6nZ9pRVcaX91dbsIEmiTbY7_s_l_3qx_s_l_7D9m1Wv_s_l_MmZJjAPO_s_l_aHU5Ho_p_l_";
+    // public static String FIREBASE_INTEGRATION_KEY = "PlFX5Uj3Fd72_s_l_wuSwkjLEIhlCnmlerVkfQx_s_l_lY1ICQhXVkUdsjILfVgaDlDOcx8XurpJW6LABwKb6nZ9pRVcaX91dbsIEmiTbY7_s_l_3qx_s_l_7D9m1Wv_s_l_MmZJjAPO_s_l_aHU5Ho_p_l_";
 
     // Prod Ulus (Android Huawei)
-    //public static String HUAWEI_INTEGRATION_KEY = "6jclBBnGhJQEXLWSoGWKZbF8o22GfeDdIaBkZEs2Qj2LKylp1spnLDrGmNQAImeMPGAmGJdO1OEUJv16OX5oNBEe1_s_l_6BsT01k_s_l_XyS5Z5OAnQNz6UBP_p_l_vmvfrTqDaNZo2";
+    //  public static String HUAWEI_INTEGRATION_KEY = "6jclBBnGhJQEXLWSoGWKZbF8o22GfeDdIaBkZEs2Qj2LKylp1spnLDrGmNQAImeMPGAmGJdO1OEUJv16OX5oNBEe1_s_l_6BsT01k_s_l_XyS5Z5OAnQNz6UBP_p_l_vmvfrTqDaNZo2";
 
 }

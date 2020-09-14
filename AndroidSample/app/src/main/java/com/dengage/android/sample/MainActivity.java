@@ -31,7 +31,12 @@ public class MainActivity extends AppCompatActivity {
                 .setLogStatus(true)
                 .setFirebaseIntegrationKey(Constants.FIREBASE_INTEGRATION_KEY)
                 .setHuaweiIntegrationKey(Constants.HUAWEI_INTEGRATION_KEY)
+                .setDeviceId("blabla")
                 .init();
+
+        HashMap<String, Object> data = new HashMap<>();
+        data.put("page_type", "home"); 
+        DengageEvent.getInstance(getApplicationContext()).pageView(data);
 
         TextView txtIntegrationKey = (TextView)findViewById(R.id.txtIntegrationKey);
         TextView txtDeviceId = (TextView)findViewById(R.id.txtDeviceId);
