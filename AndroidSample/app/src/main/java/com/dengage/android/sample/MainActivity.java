@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
                 .setLogStatus(true)
                 .setFirebaseIntegrationKey(Constants.FIREBASE_INTEGRATION_KEY)
                 .setHuaweiIntegrationKey(Constants.HUAWEI_INTEGRATION_KEY)
-                .setDeviceId("blabla")
+                //.setDeviceId("blabla")
                 .init();
 
         HashMap<String, Object> data = new HashMap<>();
