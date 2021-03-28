@@ -56,13 +56,28 @@ public class MyReceiver extends NotificationReceiver {
         collapsedView.setTextViewText(R.id.den_carousel_title, message.getTitle());
         collapsedView.setTextViewText(R.id.den_carousel_message, message.getMessage());
         RemoteViews carouselView = new RemoteViews(context.getPackageName(), R.layout.den_carousel_portrait);
+
+
+
         carouselView.setTextViewText(R.id.den_carousel_title, message.getTitle());
         carouselView.setTextViewText(R.id.den_carousel_message, message.getMessage());
         carouselView.setTextViewText(R.id.den_carousel_item_title, itemTitle);
         carouselView.setTextViewText(R.id.den_carousel_item_description, itemDesc);
-        carouselView.setImageViewBitmap(R.id.den_carousel_portrait_left_image, imgLeft);
-        carouselView.setImageViewBitmap(R.id.den_carousel_portrait_current_image, imgCurrent);
-        carouselView.setImageViewBitmap(R.id.den_carousel_portrait_right_image, imgRight);
+        Utils.loadCarouselImageToView(
+                carouselView,
+                R.id.den_carousel_portrait_left_image,
+                items[left]
+        );
+        Utils.loadCarouselImageToView(
+                carouselView,
+                R.id.den_carousel_portrait_current_image,
+                items[current]
+        );
+        Utils.loadCarouselImageToView(
+                carouselView,
+                R.id.den_carousel_portrait_right_image,
+                items[right]
+        );
         carouselView.setOnClickPendingIntent(R.id.den_carousel_left_arrow, carouselLeftIntent);
         carouselView.setOnClickPendingIntent(R.id.den_carousel_portrait_current_image, carouseItemIntent);
         carouselView.setOnClickPendingIntent(R.id.den_carousel_item_title, carouseItemIntent);
@@ -138,9 +153,21 @@ public class MyReceiver extends NotificationReceiver {
         carouselView.setTextViewText(R.id.den_carousel_message, message.getMessage());
         carouselView.setTextViewText(R.id.den_carousel_item_title, itemTitle);
         carouselView.setTextViewText(R.id.den_carousel_item_description, itemDesc);
-        carouselView.setImageViewBitmap(R.id.den_carousel_portrait_left_image, imgLeft);
-        carouselView.setImageViewBitmap(R.id.den_carousel_portrait_current_image, imgCurrent);
-        carouselView.setImageViewBitmap(R.id.den_carousel_portrait_right_image, imgRight);
+        Utils.loadCarouselImageToView(
+                carouselView,
+                R.id.den_carousel_portrait_left_image,
+                items[left]
+        );
+        Utils.loadCarouselImageToView(
+                carouselView,
+                R.id.den_carousel_portrait_current_image,
+                items[current]
+        );
+        Utils.loadCarouselImageToView(
+                carouselView,
+                R.id.den_carousel_portrait_right_image,
+                items[right]
+        );
         carouselView.setOnClickPendingIntent(R.id.den_carousel_left_arrow, carouselLeftIntent);
         carouselView.setOnClickPendingIntent(R.id.den_carousel_portrait_current_image, carouseItemIntent);
         carouselView.setOnClickPendingIntent(R.id.den_carousel_item_title, carouseItemIntent);

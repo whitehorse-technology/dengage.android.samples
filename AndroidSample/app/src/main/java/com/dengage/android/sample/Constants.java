@@ -2,6 +2,8 @@ package com.dengage.android.sample;
 
 public class Constants {
 
+
+
     // Dev (Android Firebase)
     public static String FIREBASE_INTEGRATION_KEY = "yZaoaj8R59wPRqAbaovrwy9nSY9_s_l_qBLX6c5gLdlR2kKLV0gjoLpXmcJy87tWLSuB42lxr927HygS1mHV6w4n9ggJDN6C_s_l_RgabIhTtL5is_s_l_zJeLnVV3meZ4b_p_l_eG_s_l_N_p_l_lNg4tU4_p_l__p_l_galD3bYTxvJ8kfJA_e_q__e_q_";
 
@@ -31,5 +33,11 @@ public class Constants {
 
     // Prod Ecomm (Android Huawei)
     //public static String HUAWEI_INTEGRATION_KEY = "rm66_p_l_xR8Bprw6g3S7O3LHgDUBVChiMeFQRsdGfAX2PLO8qeLdptmS37_p_l_QuBZImMrmkU2Zfso9As8HUsXcgnYvum0jWaDxPuxt11K3C0qTuv2TJQcwoc5qGC_s_l_40WAMqhy";
+
+    // Mindfullness (Android Firebase)
+    //public static String FIREBASE_INTEGRATION_KEY = "xr8Ul59_s_l_QZ4UhMGZr3_p_l_d4Exz574ccFoGc1hFgpwT5VDFFMVSgL1S75v17NtKSKVePO2CGqmNY9QKZy4DPoAfDMEdszlb7btbQURzBNWJv7nirFhPcb0PxyncV8WErrSR";
+
+    // Mindfullness (Android Huawei)
+    //public static String HUAWEI_INTEGRATION_KEY = "";
 
 }

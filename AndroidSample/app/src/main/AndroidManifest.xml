@@ -86,6 +86,9 @@
             android:name="den_push_api_url"
             android:value="https://pushdev.dengage.com" />
 
+        <meta-data
+            android:name="den_push_small_icon"
+            android:value="ic_carousal_left_arrow" />
 
     </application>
 
